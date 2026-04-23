@@ -17,7 +17,7 @@ Repo: `github.com/Crypt0Ninja/RideWithAlex`, branch `main`, working dir `C:\User
 
 Before you start, read:
 - `docs/orchestrator/STATUS.md` — current project state
-- `docs/03-design-direction.md` — visual rules (monochrome, lowercase, Readex Pro)
+- `docs/03-design-direction.md` — visual rules (monochrome, lowercase, Onest)
 - `docs/04-tech-stack.md` — required technologies
 - `docs/orchestrator/tasks/[TASK_ID].md` — this task's full spec
 - Any task-specific docs linked below
@@ -37,7 +37,7 @@ Before you start, read:
 - Background: `bg-black`
 - Text: `text-white`, `text-white/90`, `text-white/70` only
 - **All UI text is lowercase** — no exceptions
-- Font: Readex Pro (weights 300, 400, 500, 600, 700)
+- Font: Onest (weights 300, 400, 500, 600, 700)
 - No color accents (no orange, blue, green)
 - Tailwind CSS v4
 - TypeScript strict mode

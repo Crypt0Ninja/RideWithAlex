@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 48">
   <style>
     .wm {
-      font-family: 'Readex Pro', -apple-system, system-ui, sans-serif;
+      font-family: 'Onest', -apple-system, system-ui, sans-serif;
       font-weight: 500;
       letter-spacing: -1.3px;
     }

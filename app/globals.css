@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Readex Pro", system-ui, sans-serif;
+  --font-sans: "Onest", system-ui, sans-serif;
 }
 
 @utility hero-title {

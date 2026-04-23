@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Readex_Pro } from "next/font/google";
+import { Onest } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
-const readexPro = Readex_Pro({
-  subsets: ["latin", "latin-ext"],
+const onest = Onest({
+  subsets: ["latin", "latin-ext", "cyrillic"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
@@ -32,7 +32,7 @@ export default async function LocaleLayout({
   if (!hasLocale(routing.locales, locale)) notFound();
 
   return (
-    <html lang={locale} className={readexPro.className}>
+    <html lang={locale} className={onest.className}>
       <body className="bg-black text-white antialiased min-h-screen">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>

@@ -25,13 +25,15 @@
 
 ## Типография
 
-**Шрифт:** [Readex Pro](https://fonts.google.com/specimen/Readex+Pro) — заобленa геометрична sans-serif. Чете се отлично и на кирилица, и на латиница.
+**Шрифт:** [Onest](https://fonts.google.com/specimen/Onest) — geometric, леко rounded sans-serif. Чете се отлично и на латиница, и на кирилица — което е критично, понеже BG е first-class locale за сайта.
+
+**Защо Onest, а не Readex Pro (първоначален избор):** Readex Pro няма cyrillic subset в Google Fonts (нито в source-а), което би значило system font fallback за BG страниците. Onest запазва същия geometric editorial feel, но с пълна cyrillic поддръжка.
 
 **Weights за зареждане:** 300, 400, 500, 600, 700
 
 **Правила за заглавия (`.hero-title`):**
 ```css
-font-family: 'Readex Pro', system-ui, sans-serif;
+font-family: 'Onest', system-ui, sans-serif;
 letter-spacing: -0.04em;
 line-height: 0.95;
 text-transform: lowercase;
@@ -91,7 +93,7 @@ ride         ← top-left       (left-4 md:left-10, top-[18%])
 с `.hero-title` CSS клас:
 ```css
 .hero-title {
-  font-family: 'Readex Pro', system-ui, sans-serif;
+  font-family: 'Onest', system-ui, sans-serif;
   letter-spacing: -0.04em;
   line-height: 0.95;
   text-transform: lowercase;
@@ -206,7 +208,7 @@ Framer Motion за скрол ефектите. `prefers-reduced-motion` се с
 Трябва ново лого за **RideWithAlex**. Варианти, които ще предложа:
 
 1. **Монограм "RWA"** — три преплетени букви, абстрактно като carve (следа от борд)
-2. **Wordmark "ridewithalex"** — lowercase, Readex Pro, с тънка линия под "ride" като следа от кант
+2. **Wordmark "ridewithalex"** — lowercase, Onest, с тънка линия под "ride" като следа от кант
 3. **Иконично** — минималистична геометрична форма (триъгълник = планина + хоризонтална линия = следа от борд)
 4. **Стрелка/chevron** — стилизирана като наклонен сноуборд отгоре, която насочва надолу/напред
 
