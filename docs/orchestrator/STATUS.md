@@ -2,7 +2,7 @@
 
 > Жив kanban на проекта. Обновява се при всяка сесия и при всеки завършен таск.
 
-**Последна актуализация:** 2026-04-23 · Сесия s10 (T019 accepted + Wave 2 готов)
+**Последна актуализация:** 2026-04-23 · Сесия s11 (T006 accepted + typo hotfix in flight)
 
 **Production URL:** [ridewithalex.vercel.app](https://ridewithalex.vercel.app) · auto-deploy on push to `main`
 
@@ -19,7 +19,8 @@
 | Hero секция | ✅ Завършено | T004 — video, staggered text, navbar, stats; live на Vercel |
 | Vercel deploy | ✅ Завършено | T005 — `ridewithalex.vercel.app`, 47s build, auto-deploy on push |
 | Shared page shell | ✅ Завършено | T019 — SiteNav/Footer/PageShell/PageHeader + footer messages |
-| Страници (lessons, pricing, about) | 🟢 Ready — Wave 2 parallel | T006/T007/T008 — всички с промпти готови |
+| `/lessons` страница | ✅ Завършено | T006 — 3 lesson type карти + CTA; live на /en/lessons + /bg/lessons |
+| `/pricing` + `/about` страници | 🟡 В ход — Wave 2 parallel | T007 + T008 — downstream агентите работят |
 | Booking + Stripe | ⚪ Чака | T009-T011 |
 | Launch | ⚪ Чака | T016-T017 |
 
@@ -34,15 +35,15 @@
 | T005 | Vercel deploy + preview URL | n/a (infra) | s06 | orchestrator via API · `ridewithalex.vercel.app` |
 | T004 | Hero секция | [`fe3d1c0`](https://github.com/Crypt0Ninja/RideWithAlex/commit/fe3d1c0) | s07 | agent 5 · zero deviations, ~15min |
 | T019 | Shared page shell | [`1763786`](https://github.com/Crypt0Ninja/RideWithAlex/commit/1763786) | s10 | agent 6 · zero deviations, ~15min |
+| T006 | `/lessons` страница | [`5938ec7`](https://github.com/Crypt0Ninja/RideWithAlex/commit/5938ec7) | s11 | agent 7 · ~10min + spec-typo hotfix |
 
 ## Активни задачи
 
 | ID | Заглавие | Статус | Агент | Блокира |
 |---|---|---|---|---|
 | QA-V1 | Визуална проверка на hero-то в Chrome/Safari | 🟢 Ready | **Alex (ръчно)** | финално одобрение (non-blocking за pipeline) |
-| **T006** | **`/lessons` страница** | 🟢 **Ready — Wave 2 parallel** | **downstream (pending)** | — |
-| **T007** | **`/pricing` страница** | 🟢 **Ready — Wave 2 parallel** | **downstream (pending)** | — |
-| **T008** | **`/about` страница** | 🟢 **Ready — Wave 2 parallel** | **downstream (pending)** | — |
+| **T007** | **`/pricing` страница** | 🟡 **В ход — Wave 2 parallel** | **downstream (running)** | — |
+| **T008** | **`/about` страница** | 🟡 **В ход — Wave 2 parallel** | **downstream (running)** | — |
 
 ## Pipeline (в план)
 
@@ -52,7 +53,7 @@
 | ~~T003~~ | ~~i18n setup (next-intl)~~ | ~~High~~ | ✅ **Done** (`fd93272`) с caveat → T018 |
 | ~~T004~~ | ~~Hero секция~~ | ~~Critical~~ | ✅ **Done** (`fe3d1c0`) |
 | ~~T005~~ | ~~Vercel deploy + preview URL~~ | ~~High~~ | ✅ **Done** s06 — `ridewithalex.vercel.app` |
-| ~~T006~~ | ~~`/lessons` страница~~ | ~~Medium — Wave 2 parallel~~ | ✅ спец готов |
+| ~~T006~~ | ~~`/lessons` страница~~ | ~~Medium — Wave 2 parallel~~ | ✅ **Done** (`5938ec7`) |
 | ~~T007~~ | ~~`/pricing` страница~~ | ~~Medium — Wave 2 parallel~~ | ✅ спец готов |
 | ~~T008~~ | ~~`/about` страница~~ | ~~Medium — Wave 2 parallel~~ | ✅ спец готов |
 | T009 | Stripe Checkout интеграция (test mode) | High | T001 |
@@ -80,9 +81,9 @@
 
 ## Последни 3 промени
 
-1. **2026-04-23 s10** — **T019 приет (`1763786`)** + Wave 2 задачите готови. Shared primitives (SiteNav/Footer/PageShell/PageHeader) shipped zero deviations за ~15 мин. T006/T007/T008 промптите написани в новия чист формат (task файл = self-contained промпт) и на български.
-2. **2026-04-23 s09** — **Wave planning + T019 спец**: дефинирана двуфазова стратегия за страниците — Wave 1 foundation, Wave 2 паралелно върху disjoint файлове.
-3. **2026-04-23 s08** — Session close + handoff: `STARTUP_PROMPT.md` създаден за clean resume; `feedback_orchestrator_mode` обновено с lessons.
+1. **2026-04-23 s11** — **T006 приет (`5938ec7`)** ~10 мин; `/lessons` е жив за двата locale-а. Spec-typo в BG-то (`chaeркинг` → `карвинг`) — hotfix в working tree, ще влезе с T007 commit. T007 + T008 в ход.
+2. **2026-04-23 s10** — **T019 приет (`1763786`)** + Wave 2 задачите готови. Shared primitives shipped zero deviations за ~15 мин.
+3. **2026-04-23 s09** — **Wave planning + T019 спец**: дефинирана двуфазова стратегия за страниците — Wave 1 foundation, Wave 2 паралелно.
 
 ## Легенда
 

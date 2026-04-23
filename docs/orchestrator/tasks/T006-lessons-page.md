@@ -384,4 +384,37 @@ export function LessonsCta() {
 
 ## Reports
 
-_(downstream агентът попълва след завършване)_
+### Report 1 — 2026-04-23 · agent 7 · ✅ completed
+
+**Commit:** `5938ec7` — `feat(T006): lessons page with three lesson type cards and cta`
+**Time:** ~10 минути
+
+#### Обобщение
+
+`/lessons` route-ът е жив за двата locale-а, увит в `PageShell`. PageHeader + 3-колонен grid с `LessonTypeCard` за private/kids/group + `LessonsCta` с 2 бутона (`see pricing` → `/pricing`, `book a lesson` → `/contact`). `lessons` namespace добавен в двата messages файла след `footer`; existing keys (`home`/`nav`/`stats`/`locale`/`footer`) байтово непипнати.
+
+#### Acceptance criteria — verified ✅
+
+| Criterion | Evidence |
+|---|---|
+| `pnpm build` | `✓ Compiled in 3.7s`, 7 static routes (2 нови: `/en/lessons`, `/bg/lessons`) |
+| `pnpm tsc --noEmit` | Exit 0 |
+| `pnpm lint` | `✔ No ESLint warnings or errors` |
+| `/en/lessons` + `/bg/lessons` рендерират | HTTP 200; private/kids/group EN + частен/деца/група BG в DOM |
+| PageShell обвива | ridewithalex (SiteNav) + all rights reserved (SiteFooter) |
+| 3 карти различно съдържание | Уникални title/description/includes/duration/level |
+| CTA линкове | `/en/pricing` × 6 + `/en/contact` × 8 в DOM |
+| Existing keys unchanged | Git diff — само додатъчен `lessons` блок след `footer` |
+| Pushed | `b31bc5b..5938ec7 main -> main` |
+
+#### Orchestrator verification
+
+Прочетени файлове: `app/[locale]/lessons/page.tsx`, `components/lessons/LessonTypeCard.tsx`, `components/lessons/LessonsCta.tsx`, `messages/bg.json`. Байтово съвпадение със спеца. Hero + shared компоненти не засегнати.
+
+#### Отклонения + hotfix
+
+**Typo в BG промпта (моя грешка като оркестратор, не на агента):** `lessons.private.description` съдържаше `"chaeркинг"` — печатна грешка в спецификацията. Агентът правилно следвал спеца буквално.
+
+**Hotfix:** `chaeркинг` → `карвинг` в `messages/bg.json`. Hotfix-ът е в работния tree, но **не е commit-нат отделно** защото `messages/bg.json` е modified паралелно от T007 downstream агент (добавя `pricing` блок). Typo fix-ът ще влезе с T007 commit — git archaeology не е идеално, но evidence-ът е документиран тук.
+
+**Вердикт:** T006 приет без revision.
