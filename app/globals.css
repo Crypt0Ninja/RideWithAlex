@@ -3,3 +3,25 @@
 @theme {
   --font-sans: "Readex Pro", system-ui, sans-serif;
 }
+
+@utility hero-title {
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  text-transform: lowercase;
+}
+
+@utility diagonal-divider-right {
+  display: block;
+  height: 1px;
+  width: 6rem;
+  background-color: rgb(255 255 255 / 0.4);
+  transform: rotate(20deg);
+}
+
+@utility diagonal-divider-left {
+  display: block;
+  height: 1px;
+  width: 6rem;
+  background-color: rgb(255 255 255 / 0.4);
+  transform: rotate(-20deg);
+}
