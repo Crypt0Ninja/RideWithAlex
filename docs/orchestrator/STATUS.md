@@ -2,7 +2,7 @@
 
 > Жив kanban на проекта. Обновява се при всяка сесия и при всеки завършен таск.
 
-**Последна актуализация:** 2026-04-23 · Сесия s11 (T008 accepted; T007 merged чака report)
+**Последна актуализация:** 2026-04-23 · Сесия s12 (T007 report получен; Wave 2 Complete)
 
 **Production URL:** [ridewithalex.vercel.app](https://ridewithalex.vercel.app) · auto-deploy on push to `main`
 
@@ -21,7 +21,8 @@
 | Shared page shell | ✅ Завършено | T019 — SiteNav/Footer/PageShell/PageHeader + footer messages |
 | `/lessons` страница | ✅ Завършено | T006 — 3 lesson type карти + CTA; live на /en/lessons + /bg/lessons |
 | `/about` страница | ✅ Завършено | T008 — bio, why-me, certifications, cta; live на /en/about + /bg/about |
-| `/pricing` страница | 🔵 Merged — чака report | T007 — `a3eb13a` в main, downstream report не е получен |
+| `/pricing` страница | ✅ Завършено (with deviations) | T007 — 4 pricing карти + note + CTA; scope creep + typo regression документирани |
+| **Wave 2** | **✅ Complete** | **lessons + pricing + about live на двата locale-а** |
 | Booking + Stripe | ⚪ Чака | T009-T011 |
 | Launch | ⚪ Чака | T016-T017 |
 
@@ -38,13 +39,13 @@
 | T019 | Shared page shell | [`1763786`](https://github.com/Crypt0Ninja/RideWithAlex/commit/1763786) | s10 | agent 6 · zero deviations, ~15min |
 | T006 | `/lessons` страница | [`5938ec7`](https://github.com/Crypt0Ninja/RideWithAlex/commit/5938ec7) | s11 | agent 7 · ~10min + spec-typo hotfix |
 | T008 | `/about` страница | [`8ea90ed`](https://github.com/Crypt0Ninja/RideWithAlex/commit/8ea90ed) | s11 | agent 9 · ~40min, messages/*.json в T007 commit (race condition) |
+| T007 | `/pricing` страница | [`a3eb13a`](https://github.com/Crypt0Ninja/RideWithAlex/commit/a3eb13a) | s12 | agent 8 · ~20min, 2 deviations (stats reformat + about scope creep) |
 
 ## Активни задачи
 
 | ID | Заглавие | Статус | Агент | Блокира |
 |---|---|---|---|---|
-| QA-V1 | Визуална проверка на hero-то в Chrome/Safari | 🟢 Ready | **Alex (ръчно)** | финално одобрение (non-blocking за pipeline) |
-| **T007** | **`/pricing` страница** | 🔵 **Merged — чака report** | downstream (code в `a3eb13a`) | — |
+| QA-V1 | Визуална проверка (hero + 3 страници) | 🟢 Ready | **Alex (ръчно)** | финално одобрение преди Wave 3 |
 
 ## Pipeline (в план)
 
@@ -55,7 +56,7 @@
 | ~~T004~~ | ~~Hero секция~~ | ~~Critical~~ | ✅ **Done** (`fe3d1c0`) |
 | ~~T005~~ | ~~Vercel deploy + preview URL~~ | ~~High~~ | ✅ **Done** s06 — `ridewithalex.vercel.app` |
 | ~~T006~~ | ~~`/lessons` страница~~ | ~~Medium — Wave 2 parallel~~ | ✅ **Done** (`5938ec7`) |
-| ~~T007~~ | ~~`/pricing` страница~~ | ~~Medium — Wave 2 parallel~~ | 🔵 merged в `a3eb13a`, чака report |
+| ~~T007~~ | ~~`/pricing` страница~~ | ~~Medium — Wave 2 parallel~~ | ✅ **Done** (`a3eb13a`) с documented deviations |
 | ~~T008~~ | ~~`/about` страница~~ | ~~Medium — Wave 2 parallel~~ | ✅ **Done** (`8ea90ed`) |
 | T009 | Stripe Checkout интеграция (test mode) | High | T001 |
 | T010 | Booking форма + календар | High | T009 |
@@ -82,9 +83,9 @@
 
 ## Последни 3 промени
 
-1. **2026-04-23 s11** — **T008 приет (`8ea90ed`)** ~40 мин; `/about` е жив за двата locale-а (bio / why-me / certifications / cta). T007 също е merged (`a3eb13a`) но downstream report не е получен. **Caveat:** race condition между T007/T008 върху `messages/*.json` — about namespace-а попадна в T007 commit, not in T008's. Функционално OK; workflow policy за shared files да се преразгледа преди Wave 3.
-2. **2026-04-23 s11** — **T006 приет (`5938ec7`)** ~10 мин; `/lessons` е жив за двата locale-а. Spec-typo в BG-то (`chaeркинг` → `карвинг`) — hotfix в working tree, влезна с T007 commit.
-3. **2026-04-23 s10** — **T019 приет (`1763786`)** + Wave 2 задачите готови. Shared primitives shipped zero deviations за ~15 мин.
+1. **2026-04-23 s12** — **T007 доклад получен → приет** (`a3eb13a`), ~20 мин; 2 документирани deviations (stats whitespace reformat + about scope creep поради race condition с T008). Typo hotfix `chaeркинг → карвинг` изгубен при downstream rebase, повторен в s12. **Wave 2 е Complete** — lessons + pricing + about живи на двата locale-а.
+2. **2026-04-23 s11** — **T008 приет (`8ea90ed`)** ~40 мин; `/about` е жив за двата locale-а (bio / why-me / certifications / cta). Chistý commit (messages непипнат, защото about вече беше в T007 commit).
+3. **2026-04-23 s11** — **T006 приет (`5938ec7`)** ~10 мин; `/lessons` е жив. Spec-typo в BG-то (`chaeркинг` → `карвинг`) първоначално в working tree.
 
 ## Легенда
 

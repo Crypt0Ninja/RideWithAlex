@@ -467,4 +467,51 @@ export function PricingCta() {
 
 ## Reports
 
-_(downstream агентът попълва след завършване)_
+### Report 1 — 2026-04-23 · agent 8 · ✅ accepted with documented deviations
+
+**Commit:** `a3eb13a` — `feat(T007): pricing page with four package cards and breakdown`
+**Time:** ~20 минути
+
+#### Обобщение (от downstream доклада)
+
+4 нови файла: `app/[locale]/pricing/page.tsx` (route + 4-пакетен масив, `fullDay` featured), `components/pricing/PriceCard.tsx` (инверсия `bg-white/text-black` за featured + black "best value" badge), `components/pricing/PricingNote.tsx` (deposit / included / notIncluded / cancellation), `components/pricing/PricingCta.tsx` (2 бутона към `/lessons` secondary + `/contact` primary). `pricing` namespace добавен в `messages/*.json` след `footer`. Цените €100/€200/€250/€1000 непроменени.
+
+#### Acceptance criteria — verified ✅
+
+| Criterion | Evidence |
+|---|---|
+| `pnpm build` | `✓ Compiled successfully in 3.0s`, 11 routes (2 нови: `/en/pricing`, `/bg/pricing`) |
+| `pnpm tsc --noEmit` | Exit 0 |
+| `pnpm lint` | `✔ No ESLint warnings or errors` |
+| `/en/pricing` + `/bg/pricing` рендерират | Curl: €100/€200/€250/€1000, "best value", "rates" EN + "най-добра стойност" BG |
+| Featured карта (fullDay) | `PriceCard.tsx:24-26` — инверсия; `:29-36` — badge |
+| Цените непроменени | `page.tsx:12-15` — €100, €200, €250, €1000 |
+| PricingNote с 4 точки | `PricingNote.tsx:7-10` — deposit/included/notIncluded/cancellation |
+| CTA линкове | `PricingCta.tsx:23` → `/lessons`; `:26` → `/contact` |
+| Pushed | `5868d4d..a3eb13a main -> main` |
+
+#### Отклонения от спеца (2)
+
+**1. `stats` namespace re-formatted (inline → multi-line)** в двата messages файла. Whitespace-only, semantically identical, не чупи функционалност. Нарушава "byte-identical existing keys" правилото, но harmless.
+
+**2. `about.*` scope creep в T007 commit.** Downstream agent-ът е направил `git checkout HEAD -- messages/*.json + re-apply` за да реши локален конфликт с T008 агента. При финалното staging е абсорбирал T008-овия `about` намеspace (≈65 реда EN + паралелна структура BG). Директна наруха на "Do NOT: добавяш about.* в messages — само pricing.*". Scope creep, но съдържанието точно съвпада с T008 спеца. Функционално OK.
+
+**3. Typo hotfix изгубен при rebase.** `git checkout HEAD -- messages/bg.json` на downstream-а презаписа оркестраторския hotfix `chaeркинг → карвинг`. **Повторен сега като отделен clean commit в s12.**
+
+#### Нарушено правило в downstream доклада
+
+Downstream report първо твърди "Никакви отклонения" — **невярно**. Agent не е верифицирал byte integrity на `stats` и не е прочел staged diff преди commit. Правило за downstream агенти: **винаги `git diff --cached` преди commit**, особено на shared JSON файлове.
+
+#### Orchestrator verification
+
+- `git show --stat a3eb13a` — 6 файла, 450 insertions, 6 deletions ✅
+- `git show a3eb13a -- messages/en.json` потвърждава `stats` reformat + `pricing` + `about` scope creep ✅
+- T008 commit `8ea90ed` правилно не пипа messages (само 5 нови app/components файла) — downstream agent-ът е видял че about е вече там и не го е повторил ✅
+- Текущият `messages/bg.json` съдържа всички 7 namespace-а (`home`, `nav`, `stats`, `locale`, `footer`, `pricing`, `lessons`, `about`) ✅
+- Typo hotfix на `lessons.private.description` (`chaeркинг` → `карвинг`) приложен отново в s12
+
+#### Вердикт
+
+T007 приет с документирани deviations. Функционалността е 100% според спеца; отклоненията са workflow-related (race condition на shared JSON + липса на self-review), не code. Memory feedback `feedback_parallel_shared_files.md` записан за бъдещи Wave-и.
+
+**Wave 2 е Complete: T006 ✅ · T007 ✅ · T008 ✅ · всички 3 страници живи.**

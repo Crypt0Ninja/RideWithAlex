@@ -10,7 +10,7 @@
 | T004 | Hero секция | ✅ Completed | T002 ✅, T003 ✅, T018 ✅ | [T004-hero-section.md](T004-hero-section.md) |
 | T005 | Vercel deploy + preview URL | 🟢 Ready (manual, Alex) | T001 ✅ | [T005-vercel-deploy.md](T005-vercel-deploy.md) |
 | T006 | `/lessons` страница | ✅ Completed | T019 ✅ | [T006-lessons-page.md](T006-lessons-page.md) |
-| T007 | `/pricing` страница | 🟢 Ready | T019 ✅ | [T007-pricing-page.md](T007-pricing-page.md) |
+| T007 | `/pricing` страница | ✅ Completed (with deviations) | T019 ✅ | [T007-pricing-page.md](T007-pricing-page.md) |
 | T008 | `/about` страница | 🟢 Ready | T019 ✅ | [T008-about-page.md](T008-about-page.md) |
 | T009 | Stripe Checkout (test mode) | ⚪ Pending | T001 | _(не е дефиниран)_ |
 | T010 | Booking форма + календар | ⚪ Pending | T009 | _(не е дефиниран)_ |
