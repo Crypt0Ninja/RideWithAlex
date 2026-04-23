@@ -27,7 +27,7 @@
 | T021 | Admin panel (view + block slots) | 🟡 Backlog (Wave 4) | T011, T020 | _(спец след Wave 4 foundation)_ |
 | T022 | `/terms` страница | ✅ Completed | T019 ✅ | [T022-terms-page.md](T022-terms-page.md) |
 | T023 | `/privacy` страница | ✅ Completed | T019 ✅ | [T023-privacy-page.md](T023-privacy-page.md) |
-| T024 | Pricing content hotfix (махане на Stripe/капаро references) | 🟡 Backlog (малка, 5 мин) | Wave 3 accept | _(спец след Wave 3)_ |
+| T024 | Pricing content hotfix (махане на Stripe/капаро references) | ✅ Completed | Wave 3 ✅ | s14 · `8b1766f` (orchestrator) |
 | T_DOMAIN | Custom домейн `ridewithalex.com` | 🔴 Blocked | Alex да купи домейна | — |
 
 ## Групи

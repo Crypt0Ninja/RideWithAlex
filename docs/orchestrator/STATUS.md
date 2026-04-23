@@ -17,7 +17,7 @@
 | **Wave 2** — lessons + pricing + about | ✅ Complete | T006 / T007 / T008 — 3 страници живи на двата locale-а |
 | **Wave 3** — contact + gallery + reviews + terms + privacy | ✅ **Complete** | T015 / T013 / T014 / T022 / T023 — всички 5 страници живи, изпълнени от orchestrator (not downstream) |
 | **Wave 4** — booking + календар + email + admin | 🟡 Backlog | T010 / T011 / T012 / T020 / T021 — чака creds от Alex |
-| Content hotfix (remove Stripe refs from pricing) | 🟡 Backlog (5 мин) | T024 — след Wave 3 |
+| Content hotfix (remove Stripe refs from pricing) | ✅ Завършено | T024 (`8b1766f`) — pricing + lessons copy aligned with cash-only model |
 | SEO + launch | ⚪ Pending | T016 + T017 + T_DOMAIN |
 
 ## Завършени задачи
@@ -45,7 +45,6 @@
 | ID | Заглавие | Статус | Агент | Блокира |
 |---|---|---|---|---|
 | QA-V2 | Визуална проверка (всички 9 страници × 2 locale-а) | 🟢 Ready | **Alex (ръчно)** | финално одобрение преди Wave 4 |
-| T024 | Pricing content hotfix (премахни Stripe refs) | 🟢 Ready (~5 мин) | orchestrator | — |
 
 **9 страници живи:** `/`, `/lessons`, `/pricing`, `/about`, `/contact`, `/gallery`, `/reviews`, `/terms`, `/privacy` — всички × `en` + `bg` = **18 routes total**. Всички build clean, tsc + lint pass.
 
@@ -64,7 +63,7 @@
 | T010 | Booking UI (календар + slot picker + phone форма) | High | T011 + T020 |
 | T012 | Email (Resend): confirmation към клиент + notify към Alex | Medium | T010 + RESEND_API_KEY |
 | T021 | Admin panel (view + block slots) | Medium | T011 + T020 |
-| T024 | Pricing content hotfix (махане на Stripe/капаро references) | Low (5 мин) | Wave 3 accept |
+| ~~T024~~ | ~~Pricing content hotfix~~ | ✅ **Done s14** (`8b1766f`) | — |
 | T016 | SEO (sitemap, robots, OG images, metadata) | Medium | All pages |
 | T017 | QA + launch prep | Critical | All previous |
 | T_DOMAIN | Custom домейн `ridewithalex.com` | Blocker за launch | Alex да купи |
@@ -87,7 +86,7 @@
 
 ## Последни 3 промени
 
-1. **2026-04-24 s14** — **Wave 3 Complete.** Orchestrator изпълни лично всичките 5 страници в последователни commit-ове: T015 `418bf81` (contact+FAQ+map) → T013 `11e897c` (gallery placeholder) → T014 `2afece5` (reviews placeholder) → T022 `3b4f745` (terms) → T023 `dfbad3f` (privacy). **18 routes live** на Vercel, всички build/tsc/lint pass. **Zero deviations, nula race conditions.**
+1. **2026-04-24 s14** — **Wave 3 Complete + T024 pricing hotfix.** Orchestrator изпълни лично всичките 5 страници: T015 `418bf81` → T013 `11e897c` → T014 `2afece5` → T022 `3b4f745` → T023 `dfbad3f`. Плюс T024 `8b1766f` — премахнати Stripe/caparo references, `pricing.note.deposit` → `payment` key renamed. **18 routes live.** Zero deviations, nula race conditions.
 2. **2026-04-24 s13** — **Wave 3 pivot**: Stripe премахнат (cash-only); Wave 3 пренасочен към 5 static страници; 5 специфики написани.
 3. **2026-04-23 s12** — **T007 приет** (`a3eb13a`), 2 documented deviations; Wave 2 Complete.
 

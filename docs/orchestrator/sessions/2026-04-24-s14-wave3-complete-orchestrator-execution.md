@@ -77,4 +77,26 @@ Sequential изпълнение от един оркестратор elimin-ни
 3. `2afece5` — `feat(T014): reviews page with 6 placeholder testimonials and stats`
 4. `3b4f745` — `feat(T022): terms of service page with 10 sections, en + bg`
 5. `dfbad3f` — `feat(T023): privacy policy page with 9 gdpr sections, en + bg`
-6. _(pending)_ — `docs(s14): wave 3 complete via orchestrator execution`
+6. `cd6e7fa` — `docs(s14): wave 3 complete via orchestrator execution`
+7. `8b1766f` — `fix(T024): remove Stripe/deposit refs from pricing + lessons copy`
+
+## T024 pricing hotfix — content alignment с cash-only
+
+След Wave 3, Alex помоли T024 веднага. Обхват:
+
+**Промени в `messages/*.json` (5 string-а всеки locale):**
+- `pricing.subtitle` — махнато "30% deposit online"
+- `pricing.note.deposit` → renamed на `pricing.note.payment` (key + label + value)
+- `pricing.note.cancellation.value` — "deposit is held" → "30% fee applies"
+- `pricing.cta.subtitle` — "stripe link for the deposit" → "lock in your date. payment on the day"
+- `lessons.cta.subtitle` — "30% deposit online, the rest in cash" → "payment in cash on the day of the lesson"
+
+**Промяна в код:** `components/pricing/PricingNote.tsx` — `t("deposit.*")` → `t("payment.*")`.
+
+**Остатъчни "deposit" references в terms/privacy** са умишлено запазени като anti-references — текстове като "no online deposit is required" / "не се изисква онлайн плащане или капаро" точно декларират отсъствието на deposit-а, което е правилно за cash-only бизнес модел.
+
+**Build/tsc/lint:** всички pass. 3 файла, 15 insertions / 15 deletions.
+
+## Финален статус
+
+**9 страници × 2 locale-а = 18 routes live** + всички content strings aligned с cash-only model. Wave 3 + T024 = напълно готов content layer на сайта. Остава само QA-V2 (Alex's визуална проверка) преди Wave 4 backlog може да започне.
