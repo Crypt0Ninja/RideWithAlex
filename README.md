@@ -31,6 +31,15 @@
 | 06 | [Чеклист за съдържание](docs/06-content-checklist.md) | Какво ми трябва от теб |
 | 07 | [Roadmap](docs/07-roadmap.md) | Седмичен план за 2–3 седмици |
 
+## Orchestrator система
+
+Работим по модел "Claude като оркестратор + downstream агенти като изпълнители":
+
+- 📋 [`docs/orchestrator/README.md`](docs/orchestrator/README.md) — как работи системата
+- 📊 [`docs/orchestrator/STATUS.md`](docs/orchestrator/STATUS.md) — жив kanban board
+- 📝 [`docs/orchestrator/tasks/`](docs/orchestrator/tasks/) — спецификации + промптове за downstream агенти
+- 📅 [`docs/orchestrator/sessions/`](docs/orchestrator/sessions/) — лог на сесиите
+
 ## Следваща стъпка
 
-Преди да напишем и един ред код — прочетваш документите, даваш обратна връзка и попълваш това, което е в `06-content-checklist.md`. След това започваме изграждане.
+Стартирай първата задача — [T001 · Next.js scaffold](docs/orchestrator/tasks/T001-nextjs-scaffold.md). Копирай промпта от файла и го пусни на нов агент.
