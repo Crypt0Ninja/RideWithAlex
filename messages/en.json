@@ -201,5 +201,86 @@
       "lessons": "see lessons",
       "book": "get in touch"
     }
+  },
+  "contact": {
+    "eyebrow": "get in touch",
+    "title": "contact",
+    "subtitle": "phone, whatsapp, email, instagram. pick whatever's quickest — i read everything and reply within the day.",
+    "open": "open →",
+    "tap": "tap to call →",
+    "info": {
+      "phone": {
+        "label": "phone · whatsapp",
+        "hint": "fastest for same-day questions and last-minute bookings."
+      },
+      "email": {
+        "label": "email",
+        "hint": "best for detailed questions, group requests, and travel planning."
+      },
+      "instagram": {
+        "label": "instagram",
+        "hint": "see recent sessions and message me there — dms are open."
+      }
+    },
+    "meeting": {
+      "eyebrow": "meeting point",
+      "title": "where we meet.",
+      "address": "пред гондолата, ул. пирин 1, банско 2770",
+      "directions": "exact spot: the benches by the gondola entrance. i'll be wearing a black jacket with a green carbon snowboard. we sort out lift pass and gear before riding up.",
+      "mapTitle": "bansko gondola station map"
+    },
+    "faq": {
+      "eyebrow": "faq",
+      "title": "frequently asked.",
+      "items": {
+        "equipment": {
+          "q": "do i need my own snowboard and boots?",
+          "a": "no. rentals are easy in bansko — plenty of shops near the gondola. tell me your level and i'll recommend a shop and the right board size."
+        },
+        "clothing": {
+          "q": "what should i wear for the first lesson?",
+          "a": "waterproof jacket and pants, thermal base layer, warm socks (just one pair, not two), gloves, helmet, and goggles. no cotton. rent or bring — both work."
+        },
+        "groupSize": {
+          "q": "how many people in a group lesson?",
+          "a": "max four riders, always at a similar level. i check the level over whatsapp before we meet so the pacing works for everyone."
+        },
+        "minAge": {
+          "q": "what's the youngest age for kids lessons?",
+          "a": "six years old. younger kids usually don't have the attention span for a full session. exceptions are possible — message me."
+        },
+        "language": {
+          "q": "what language is the lesson in?",
+          "a": "english or bulgarian, whichever you prefer. i switch mid-sentence if that helps — fluent in both."
+        },
+        "weather": {
+          "q": "what if there's no snow or bad weather?",
+          "a": "bansko has great snowmaking so conditions are usually rideable from december through april. severe storms: we reschedule at no cost."
+        },
+        "cancellation": {
+          "q": "can i cancel or reschedule?",
+          "a": "free cancellation up to 48 hours before the lesson. inside 48 hours, a 30% fee applies. rescheduling to another date is always free."
+        },
+        "location": {
+          "q": "where does the lesson start?",
+          "a": "at the gondola base in bansko town (not on the mountain). we ride the gondola up together and pick the slope that matches your level."
+        },
+        "liftPass": {
+          "q": "is the lift pass included?",
+          "a": "no. lift passes are bought at the cashier by the gondola — around €45 per day. i can help you pick the right duration."
+        },
+        "payment": {
+          "q": "how do i pay?",
+          "a": "cash in euros or bulgarian leva on the day of the first lesson. no online payment required."
+        }
+      }
+    },
+    "cta": {
+      "eyebrow": "ready to ride?",
+      "title": "let's get you on a board.",
+      "subtitle": "pick a lesson type, check the prices, drop me a message — we'll sort out a date that works.",
+      "lessons": "see lessons",
+      "pricing": "see pricing"
+    }
   }
 }
