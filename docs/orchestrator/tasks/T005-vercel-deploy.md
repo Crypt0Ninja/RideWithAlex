@@ -1,10 +1,10 @@
 # T005 · Vercel deploy + preview URL
 
-**Status:** 🟢 Ready
+**Status:** ✅ Done (s06, 2026-04-23)
 **Priority:** High
 **Depends on:** T001 ✅
-**Estimated effort:** ~5–10 минути ръчно от Alex
-**Assigned:** **Alex (не downstream агент)** — това е UI dashboard задача
+**Estimated effort:** ~5–10 минути (реално: ~90 сек от Alex + ~2 мин API work)
+**Assigned:** **Orchestrator (чрез Vercel API)** — замести оригиналния ръчен план
 
 ## Цел
 
@@ -77,4 +77,42 @@ T005 done:
 
 ## Reports
 
-_(празно — чака Alex да направи ръчното setup)_
+### s06 · 2026-04-23 · orchestrator via Vercel API
+
+**Резултат:** `https://ridewithalex.vercel.app` ✅ публичен, auto-deploy active.
+
+**Какво направи Alex ръчно (~90 сек):**
+1. Signed up на Vercel с GitHub OAuth (акаунт `crypt0ninja`)
+2. Install Vercel GitHub App → repo access за `RideWithAlex`
+3. Генерира Vercel API token → даде на orchestrator
+
+**Какво направи orchestrator чрез API (~2 мин):**
+1. `POST /v10/projects` — създаде проект `ridewithalex`, framework `nextjs`, linked към `Crypt0Ninja/RideWithAlex` @ `main`
+2. `POST /v13/deployments` — trigger-на първи production deploy (git ref `main`)
+3. Poll-ва статус на ~10s интервали: `INITIALIZING → BUILDING → READY` за **47.2 секунди**
+4. Забелязa HTTP 401 на public URL → Vercel default `ssoProtection` беше активен
+5. `PATCH /v9/projects/{id}` със `{"ssoProtection":null}` → публично достъпен
+6. Verify: `/` → 307 redirect → `/en` (next-intl middleware работи) → 200 OK
+7. Content check: HTML съдържа `ridewithalex` и `bansko` ✅
+
+**Detail-и:**
+- **Project ID:** `prj_FQHT8P5es39czydcV84kBCyRpAsj`
+- **Team:** `alexs-projects-76af74f4`
+- **Deploy ID:** `dpl_B9yqAKWFtb4N7c4WvbBEo9zJsLRM`
+- **Build time:** 47.2s
+- **Canonical URL:** `https://ridewithalex.vercel.app`
+- **Alternative aliases:**
+  - `ridewithalex-alexs-projects-76af74f4.vercel.app`
+  - `ridewithalex-git-main-alexs-projects-76af74f4.vercel.app`
+- **Framework auto-detected:** Next.js (pnpm lockfile → pnpm install + pnpm build)
+- **Production branch:** `main`
+- **Auto-deploy:** ✅ enabled (всеки push на `main` → нов deploy)
+- **Preview deploys:** ✅ enabled (всеки PR → preview URL)
+
+**Acceptance criteria:**
+- [x] Проектът е импортнат в Vercel под акаунта на Alex
+- [x] Auto-deploy на push към `main` е включен
+- [x] Preview URL е live и показва страницата правилно
+- [x] URL-ът е записан в `STATUS.md` на оркестратора
+
+**Next:** Когато T_DOMAIN (`ridewithalex.com`) е готов за изпълнение — orchestrator-ът може да добави custom домейна през API (`POST /v10/projects/{id}/domains`) + да върне DNS записите, които Alex да сложи при регистратора.

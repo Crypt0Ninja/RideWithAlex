@@ -2,7 +2,9 @@
 
 > Жив kanban на проекта. Обновява се при всяка сесия и при всеки завършен таск.
 
-**Последна актуализация:** 2026-04-23 · Сесия s04
+**Последна актуализация:** 2026-04-23 · Сесия s06
+
+**Production URL:** [ridewithalex.vercel.app](https://ridewithalex.vercel.app) · auto-deploy on push to `main`
 
 ## Общ прогрес
 
@@ -13,9 +15,10 @@
 | Dev scaffolding | ✅ Завършено | T001 — Next.js 15 + Tailwind v4 + Readex Pro |
 | Typography + design tokens | ✅ Завършено | T002 — cn, Button, NavPill, StatBlock, hero-title utility |
 | i18n (BG/EN) | ✅ Завършено | T003 — next-intl, `[locale]`, middleware, LocaleSwitcher |
-| Font swap (cyrillic fix) | ⚪ Чака | **T018** — Readex Pro няма cyrillic → Onest |
+| Font swap (cyrillic fix) | ✅ Завършено | T018 — Onest заменя Readex Pro; cyrillic поддържан |
+| Hero секция | ⚪ Чака | T004 — следващата задача |
 | Hero секция | ⚪ Чака | T004 |
-| Vercel deploy | ⚪ Чака | T005 (паралелно с T002/T003) |
+| Vercel deploy | ✅ Завършено | T005 — `ridewithalex.vercel.app`, 47s build |
 | Страници (lessons, pricing, about) | ⚪ Чака | T006-T008 |
 | Booking + Stripe | ⚪ Чака | T009-T011 |
 | Launch | ⚪ Чака | T016-T017 |
@@ -27,13 +30,14 @@
 | T001 | Next.js 15 scaffold | [`8d7133e`](https://github.com/Crypt0Ninja/RideWithAlex/commit/8d7133e) | s02 | agent 1 |
 | T002 | Design tokens + UI primitives | [`f105ef8`](https://github.com/Crypt0Ninja/RideWithAlex/commit/f105ef8) | s03 | agent 2 |
 | T003 | i18n (next-intl BG/EN) | [`fd93272`](https://github.com/Crypt0Ninja/RideWithAlex/commit/fd93272) | s04 | agent 3 · с caveat → T018 |
+| T018 | Font swap Readex Pro → Onest | [`b9faac6`](https://github.com/Crypt0Ninja/RideWithAlex/commit/b9faac6) | s05 | agent 4 · wider sweep, all valid |
+| T005 | Vercel deploy + preview URL | n/a (infra) | s06 | orchestrator via API · `ridewithalex.vercel.app` |
 
 ## Активни задачи
 
 | ID | Заглавие | Статус | Агент | Блокира |
 |---|---|---|---|---|
-| T018 | Font swap Readex Pro → Onest | 🟢 Ready | downstream | T004 hero |
-| T005 | Vercel deploy + preview URL | 🟢 Ready | **Alex (ръчно)** | launch flow |
+| T004 | Hero секция | 🟢 Ready | downstream | launch |
 
 ## Pipeline (в план)
 
@@ -41,8 +45,8 @@
 |---|---|---|---|
 | ~~T002~~ | ~~Typography + design tokens + UI primitives~~ | ~~High~~ | ✅ **Done** (`f105ef8`) |
 | ~~T003~~ | ~~i18n setup (next-intl)~~ | ~~High~~ | ✅ **Done** (`fd93272`) с caveat → T018 |
-| T004 | Hero секция (видео + staggered text + pill navbar + stat blocks) | **Critical** | T002 ✅, T003 ✅, T018 — чака font swap |
-| T005 | Vercel deploy + preview URL | High | T001 ✅ — **unblocked** |
+| ~~T004~~ | ~~Hero секция~~ | **Critical** | ✅ Unblocked — готов за изпълнение |
+| ~~T005~~ | ~~Vercel deploy + preview URL~~ | ~~High~~ | ✅ **Done** s06 — `ridewithalex.vercel.app` |
 | T006 | `/lessons` страница | Medium | T002 |
 | T007 | `/pricing` страница (4-те пакета) | Medium | T002 |
 | T008 | `/about` страница (био + сертификати) | Medium | T002 |
@@ -67,13 +71,13 @@
 | Q5 | Сертификати — кой точно? (ISIA/BASI/БСС + нива) | Alex | Medium (за T008) |
 | Q6 | Stripe — има ли ЕТ/ЕООД или самоосигуряване? | Alex | High (blocker за live launch, не за dev) |
 | Q7 | Домейн `ridewithalex.com` — купен ли е? | Alex | Medium (blocker за launch, не за dev) |
-| Q8 | Шрифт Onest OK ли е? (алтернативи: Manrope, IBM Plex Sans, Inter) | Alex | Medium — T018 върви с Onest по подразбиране, може да се смени в 1 файл |
+| ~~Q8~~ | ~~Шрифт Onest OK ли е?~~ | ✅ | **Resolved s05** — Onest shipped в T018, визуално потвърдено |
 
 ## Последни 3 промени
 
-1. **2026-04-23 s02** — T001 завършен (commit `8d7133e`) — Next.js 15, TS strict, Tailwind v4, Readex Pro 300-700, favicon, `/` рендерира `ridewithalex`. 5 приети отклонения (next/font self-host, gitignore extras, metadata.icons). Unlock-ва T002, T003, T005.
-2. **2026-04-23 s01** — Планиране приключи: 7 документа, brand assets, orchestrator система, git repo свързан (commits `abf74e3`, `a6bc1cd`)
-3. _—_
+1. **2026-04-23 s06** — T005 завършен изцяло чрез Vercel API от оркестратора (не ръчно) — проект `ridewithalex` създаден, git linked към `Crypt0Ninja/RideWithAlex`, първи production deploy за 47s, SSO Protection изключена → публично достъпно на [ridewithalex.vercel.app](https://ridewithalex.vercel.app). Auto-deploy на push към `main` активен.
+2. **2026-04-23 s05** — T018 завършен (commit `b9faac6`) — Onest замени Readex Pro навсякъде, кирилица работи.
+3. **2026-04-23 s02–s04** — T001/T002/T003 серия (scaffold → design tokens → i18n).
 
 ## Легенда
 

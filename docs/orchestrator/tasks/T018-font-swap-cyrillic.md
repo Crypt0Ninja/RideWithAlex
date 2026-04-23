@@ -1,10 +1,12 @@
 # T018 · Font swap (Readex Pro → Onest за cyrillic)
 
-**Status:** 🟢 Ready
+**Status:** ✅ Completed (2026-04-23)
 **Priority:** High (blocker за T004 hero на BG локала)
 **Depends on:** T003 ✅
 **Estimated effort:** ~15–20 минути за downstream агент
-**Assigned:** pending
+**Actual effort:** ~7 минути
+**Assigned:** downstream Claude Code агент (agent 4)
+**Commit:** [`b9faac6`](https://github.com/Crypt0Ninja/RideWithAlex/commit/b9faac6)
 
 ## Защо съществува тази задача
 
@@ -216,4 +218,66 @@ Search the repo for any remaining `Readex Pro` / `Readex_Pro` / `readexPro` refe
 
 ## Reports
 
-_(празно — чака downstream агента)_
+### Report 1 — 2026-04-23 · agent 4 · ✅ completed
+
+**Commit:** `b9faac6` — `refactor(T018): swap readex pro → onest for cyrillic support`
+**Time:** ~7 min
+
+#### Обобщение
+
+`app/[locale]/layout.tsx`: `Readex_Pro` → `Onest` import, rename `readexPro` → `onest`, subsets `["latin", "latin-ext"]` → `["latin", "latin-ext", "cyrillic"]`, `className={onest.className}` на `<html>`. `app/globals.css`: `--font-sans` value обновено до `"Onest"`; `@utility` блоковете незасегнати. `docs/03-design-direction.md`: Typography секция пренаписана + `.hero-title` CSS в Hero спеца + wordmark bullet в logo секцията.
+
+Grep sweep върху `app/`, `components/`, `lib/`: нула hits за `Readex\|readexPro\|Readex_Pro`.
+
+Manual dev test: `/bg` върна HTTP 200 с `<html lang="bg" class="__className_1942c7">` (нов Onest hash; предишен Readex hash беше `e554b7`). 4 нови `.woff2` файла в `.next/static/media/` покриващи latin/latin-ext/cyrillic subsets.
+
+#### Acceptance criteria — verified ✅
+
+| Criterion | Evidence |
+|---|---|
+| `pnpm build` succeeds | `✓ Compiled successfully in 3.6s`, 5/5 static pages (`/en`, `/bg` + error/notfound) |
+| `pnpm tsc --noEmit` passes | Exit 0, no output |
+| `pnpm lint` passes | `✔ No ESLint warnings or errors` |
+| `grep Readex` in app/components/lib | Zero hits (orchestrator re-verified) |
+| `grep readexPro` | Zero hits |
+| `--font-sans` е `"Onest"` | ✅ L4 на globals.css |
+| design-direction.md typography section updated | ✅ (orchestrator inspected) |
+| `/bg` с Onest (не system fallback) | ✅ new className hash + 4 нови .woff2 (cyrillic subset) |
+| Pushed to main | `59aee54..b9faac6 main -> main` |
+
+#### Deviations from spec — всички приети
+
+Агентът направи **по-широк sweep** от explicit-спецификацията. Всички допълнителни промени са валидни:
+
+1. **`README.md`** — имаше "Readex Pro · editorial" в таблицата-резюме. Корекция необходима (forward-looking документ, не historical record).
+2. **`docs/06-content-checklist.md`** — "шрифтове: монохром + Readex Pro" в checklist-а. Корекция необходима.
+3. **`assets/brand/logo-wordmark.svg`** — SVG-то имаше `font-family: 'Readex Pro'` в `<style>` тага. Ако не се обновеше, wordmark-ът би поискал Readex Pro шрифт при рендер. **Критично коректно е обновен.**
+4. **`docs/orchestrator/PROMPT_TEMPLATE.md`** — 2 референции в template-а, който бъдещи агенти ще копират. Ако не се обновеше, новите промпти биха казвали "Font: Readex Pro" → агентите биха го инсталирали наново. **Критично коректно е обновен.**
+5. **`docs/orchestrator/STATUS.md`** **НЕ** е пипнат — правилно (active kanban, orchestrator територия).
+6. **`docs/orchestrator/sessions/` и `tasks/T00X.md` reports** **НЕ** са пипнати — правилно (historical records).
+7. **`docs/03-design-direction.md` L30** задържа думата "Readex Pro" в рационалния параграф "Защо Onest, а не Readex Pro (първоначален избор)". **Правилно** — това е semantic explanation защо направихме swap-а, не brand directive.
+
+Agent demonstrated **excellent judgement** в разграничението между forward-looking docs (update) и historical records (don't touch).
+
+#### Blockers / questions
+
+Няма. Dev сървърът избра port 3002 защото 3000/3001 са заети от други dev процеси — не влияе на теста.
+
+#### Files changed (7)
+
+- `app/[locale]/layout.tsx` — modified (Onest, cyrillic subset)
+- `app/globals.css` — modified (--font-sans value)
+- `docs/03-design-direction.md` — modified (Typography + hero-title + wordmark bullet)
+- `docs/06-content-checklist.md` — modified (brand font line)
+- `README.md` — modified (design-posoka row)
+- `assets/brand/logo-wordmark.svg` — modified (SVG font-family)
+- `docs/orchestrator/PROMPT_TEMPLATE.md` — modified (2 template refs)
+
+#### Orchestrator verification
+
+- `app/[locale]/layout.tsx` прочетен — Onest със subsets `["latin", "latin-ext", "cyrillic"]` ✅
+- `app/globals.css` прочетен — `--font-sans: "Onest"` ✅
+- 3 × grep в `app/`, `components/`, `lib/` — zero hits ✅
+- Wider sweep files (README, checklist, SVG, PROMPT_TEMPLATE) потвърдени в system reminders
+
+**Вердикт:** T018 приет без revision. **Q8 (шрифт) resolved: Onest.** T004 (Hero) е напълно unblocked.
