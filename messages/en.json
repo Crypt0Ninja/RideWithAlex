@@ -308,5 +308,61 @@
       "lessons": "see lessons",
       "book": "get in touch"
     }
+  },
+  "reviews": {
+    "eyebrow": "reviews",
+    "title": "what riders say.",
+    "subtitle": "placeholder testimonials for now — real reviews from recent students are coming. the tone matches the feedback alex hears most often.",
+    "items": {
+      "r1": {
+        "quote": "alex adapts to your pace instead of drilling a generic curriculum. by day three i was linking turns on the red run.",
+        "name": "james w.",
+        "country": "manchester, uk",
+        "level": "beginner",
+        "date": "feb 2026"
+      },
+      "r2": {
+        "quote": "brought my two kids (7 and 9). patient, safety-first, fun. they asked to go back the next day.",
+        "name": "maria k.",
+        "country": "sofia, bg",
+        "level": "kids",
+        "date": "jan 2026"
+      },
+      "r3": {
+        "quote": "three of us friends at different levels. alex kept us together with routes that worked for everyone — not easy.",
+        "name": "daniel r.",
+        "country": "bucharest, ro",
+        "level": "group",
+        "date": "mar 2026"
+      },
+      "r4": {
+        "quote": "booked a full week to polish carving. finally feel the edge work on harder terrain. video review after each day was a game-changer.",
+        "name": "yoav b.",
+        "country": "tel aviv, il",
+        "level": "advanced",
+        "date": "feb 2026"
+      },
+      "r5": {
+        "quote": "first-time snowboarder, nervous. alex made it feel safe without babying me. left with real confidence, not just 'i survived'.",
+        "name": "elena p.",
+        "country": "plovdiv, bg",
+        "level": "beginner",
+        "date": "dec 2025"
+      },
+      "r6": {
+        "quote": "flexibility was huge. we changed start time twice because of weather and never felt like a hassle.",
+        "name": "tomás s.",
+        "country": "madrid, es",
+        "level": "intermediate",
+        "date": "jan 2026"
+      }
+    },
+    "cta": {
+      "eyebrow": "ready to join the list?",
+      "title": "your session next.",
+      "subtitle": "pick a package, send me a message — we'll lock in a date.",
+      "lessons": "see lessons",
+      "book": "get in touch"
+    }
   }
 }
