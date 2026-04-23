@@ -427,5 +427,63 @@
       "questions": "questions about these terms? drop alex a line:",
       "privacyLink": "read the privacy policy"
     }
+  },
+  "privacy": {
+    "eyebrow": "legal",
+    "title": "privacy policy",
+    "subtitle": "what data i collect, why i collect it, how long i keep it, and what rights you have over it. plain english, gdpr-compliant.",
+    "lastUpdatedLabel": "last updated",
+    "lastUpdated": "april 24, 2026",
+    "sections": {
+      "controller": {
+        "title": "who's responsible for your data",
+        "p1": "the data controller for this site is alex, operating as a sole snowboard instructor in bansko, bulgaria, under the brand ridewithalex. you can reach me at alex@ridewithalex.com or +359 88 513 7471.",
+        "p2": "this policy covers the ridewithalex.com website and any communication you have with alex by email, phone, whatsapp, or instagram in the context of booking or taking a snowboard lesson."
+      },
+      "dataCollected": {
+        "title": "what data i collect",
+        "p1": "for bookings i collect your name, phone number, and email address. optionally: the size and skill level of your group, any medical notes you volunteer, and your preferred meeting time.",
+        "p2": "the website itself runs on vercel and uses standard server logs (ip address, user agent, timestamps) for security and uptime. i do not use behavioral tracking, ad cookies, or third-party analytics."
+      },
+      "purposes": {
+        "title": "why i collect it",
+        "p1": "your contact details are used only to coordinate your lesson: confirmations, reschedules, meeting-point updates, and follow-up questions. the legal basis is the performance of the service you booked (gdpr art. 6(1)(b)).",
+        "p2": "server logs are retained for security and legal compliance under gdpr art. 6(1)(f) — legitimate interest in keeping the service running and protecting it from abuse."
+      },
+      "retention": {
+        "title": "how long i keep it",
+        "p1": "booking records (name, phone, email, date of lesson) are kept for 3 years after your last lesson, mainly for bookkeeping and in case you return for another session. after that they are deleted.",
+        "p2": "server logs are kept for up to 90 days and then rotated out. photos or videos from lessons, if used on the website or instagram, are kept until you request removal."
+      },
+      "sharing": {
+        "title": "who i share it with",
+        "p1": "your personal data is not sold, rented, or shared with advertisers. it stays with alex. the only third parties that technically process data on my behalf are: vercel (site hosting, eu region) and google workspace (email). both are gdpr-compliant processors.",
+        "p2": "in rare cases i may share minimal information with a medical professional or emergency services if an incident occurs during a lesson. this is only when necessary to protect vital interests (gdpr art. 6(1)(d))."
+      },
+      "rights": {
+        "title": "your rights",
+        "p1": "under gdpr you have the right to: access a copy of your data, correct inaccuracies, request deletion, restrict processing, port your data to another service, and object to processing. to exercise any of these, email alex@ridewithalex.com — i reply within 30 days.",
+        "p2": "if you believe your rights have been violated, you can lodge a complaint with the bulgarian commission for personal data protection (kzld) at cpdp.bg. i would appreciate a heads-up first so i can try to resolve it directly."
+      },
+      "cookies": {
+        "title": "cookies and analytics",
+        "p1": "the site uses only essential cookies — specifically, a language preference cookie so the site remembers if you chose english or bulgarian. no tracking, no advertising, no third-party scripts.",
+        "p2": "if analytics are ever added (to see which pages people actually read), it will be a privacy-first, cookieless option like plausible or vercel analytics — and this page will be updated before that happens."
+      },
+      "security": {
+        "title": "how i keep it safe",
+        "p1": "booking data is kept in access-controlled systems (google workspace and, in the future, a managed database). passwords use industry-standard hashing. the site is served over https only.",
+        "p2": "no system is perfectly secure. in the unlikely event of a breach affecting your personal data, i will notify you within 72 hours and report to kzld as required by gdpr art. 33."
+      },
+      "changes": {
+        "title": "changes and contact",
+        "p1": "this policy may be updated to reflect changes in how the service operates. the date at the top shows the latest revision. material changes will be announced via email to active clients.",
+        "p2": "for any privacy-related question, concern, or request, email alex@ridewithalex.com. i treat these seriously and reply personally."
+      }
+    },
+    "footer": {
+      "questions": "privacy questions? drop alex a line:",
+      "termsLink": "read the terms of service"
+    }
   }
 }
