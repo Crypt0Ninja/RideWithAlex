@@ -1,10 +1,13 @@
 # T003 · i18n setup (next-intl, BG + EN)
 
-**Status:** 🟢 Ready
+**Status:** ✅ Completed (2026-04-23) · с caveat (виж T018)
 **Priority:** High (блокер за T004 hero и всички страници)
 **Depends on:** T001 ✅
 **Estimated effort:** ~30–50 минути за downstream агент
-**Assigned:** pending
+**Actual effort:** ~25 минути
+**Assigned:** downstream Claude Code агент (agent 3)
+**Commit:** [`fd93272`](https://github.com/Crypt0Ninja/RideWithAlex/commit/fd93272)
+**Follow-up:** T018 (font swap Readex Pro → Onest за cyrillic поддръжка)
 
 ## Цел
 
@@ -433,3 +436,36 @@ Respond with exactly this markdown block, filled in:
 - `next.config.ts` — modified (wrapped with `createNextIntlPlugin`)
 - `package.json` — modified (+`next-intl@4.9.1`)
 - `pnpm-lock.yaml` — modified
+
+---
+
+### Orchestrator verification & decision
+
+**Verification (2026-04-23):**
+
+Всичките 12 файла прочетени и сравнени със спеца:
+- `i18n/routing.ts` — `defineRouting` + `createNavigation`, locales `["en", "bg"]`, default `"en"`, prefix `always` ✅
+- `i18n/request.ts` — `getRequestConfig` с `hasLocale` проверка + dynamic `messages/*` import ✅
+- `middleware.ts` — `createMiddleware(routing)` с правилен matcher ✅
+- `messages/en.json` + `bg.json` — `home`, `nav`, `locale` namespaces, всички lowercase, BG съдържа кирилица ✅
+- `next.config.ts` — wrapped с `createNextIntlPlugin("./i18n/request.ts")` ✅
+- `app/layout.tsx` — опростено до 7-редов passthrough ✅
+- `app/[locale]/layout.tsx` — `generateStaticParams` + `notFound` + `NextIntlClientProvider` + `lang={locale}` ✅
+- `app/[locale]/page.tsx` — `useTranslations("home")` + `t("title")` ✅
+- `app/page.tsx` — изтрит ✅
+- `components/LocaleSwitcher.tsx` — "use client" + `usePathname` от `@/i18n/routing` ✅
+- `components/ui/`, `lib/`, `app/globals.css` — НЕ са пипани ✅
+
+**Font deviation decision:**
+
+Agent 3 е прав: Readex Pro в Google Fonts поддържа само `latin`, `latin-ext`, `arabic`, `vietnamese`, `hebrew` — **няма cyrillic subset**. Option 3 (self-host с cyrillic) е **dead end**: Readex Pro source-ът не съдържа cyrillic глифове изобщо (typeface-ът е базиран на IBM Plex Arabic + Latin variants).
+
+**Решение:** Option 2 — смяна на шрифт на **Onest** (geometric rounded sans, близо до Readex Pro aesthetics, пълен cyrillic).
+
+- T003 **приет** (кодът е коректен, caveat-ът е очакван при дадените constraint-и)
+- Font swap е отделна задача → **T018** (follow-up)
+- `docs/03-design-direction.md` ще се обнови като част от T018 (с нов рационал за Onest)
+
+T003 отключва **T004 (Hero)**, но T004 трябва да изчака T018 да се завърши, за да не използва Readex Pro на места които трябва да работят с cyrillic.
+
+**Вердикт:** T003 completed with conditional acceptance (T018 required to resolve cyrillic font issue).

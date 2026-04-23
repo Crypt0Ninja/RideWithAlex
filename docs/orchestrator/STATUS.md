@@ -2,7 +2,7 @@
 
 > Жив kanban на проекта. Обновява се при всяка сесия и при всеки завършен таск.
 
-**Последна актуализация:** 2026-04-23 · Сесия s03
+**Последна актуализация:** 2026-04-23 · Сесия s04
 
 ## Общ прогрес
 
@@ -12,7 +12,8 @@
 | Orchestrator setup | ✅ Завършено | Система активна, s01 документирана |
 | Dev scaffolding | ✅ Завършено | T001 — Next.js 15 + Tailwind v4 + Readex Pro |
 | Typography + design tokens | ✅ Завършено | T002 — cn, Button, NavPill, StatBlock, hero-title utility |
-| i18n (BG/EN) | 🟡 В ход | T003 пуснат паралелно, чака доклад |
+| i18n (BG/EN) | ✅ Завършено | T003 — next-intl, `[locale]`, middleware, LocaleSwitcher |
+| Font swap (cyrillic fix) | ⚪ Чака | **T018** — Readex Pro няма cyrillic → Onest |
 | Hero секция | ⚪ Чака | T004 |
 | Vercel deploy | ⚪ Чака | T005 (паралелно с T002/T003) |
 | Страници (lessons, pricing, about) | ⚪ Чака | T006-T008 |
@@ -25,12 +26,13 @@
 |---|---|---|---|---|
 | T001 | Next.js 15 scaffold | [`8d7133e`](https://github.com/Crypt0Ninja/RideWithAlex/commit/8d7133e) | s02 | agent 1 |
 | T002 | Design tokens + UI primitives | [`f105ef8`](https://github.com/Crypt0Ninja/RideWithAlex/commit/f105ef8) | s03 | agent 2 |
+| T003 | i18n (next-intl BG/EN) | [`fd93272`](https://github.com/Crypt0Ninja/RideWithAlex/commit/fd93272) | s04 | agent 3 · с caveat → T018 |
 
 ## Активни задачи
 
 | ID | Заглавие | Статус | Агент | Блокира |
 |---|---|---|---|---|
-| T003 | i18n (next-intl BG/EN) | 🟡 In progress | downstream (паралелно с T002) | T004, всички страници |
+| T018 | Font swap Readex Pro → Onest | 🟢 Ready | downstream | T004 hero |
 | T005 | Vercel deploy + preview URL | 🟢 Ready | **Alex (ръчно)** | launch flow |
 
 ## Pipeline (в план)
@@ -38,8 +40,8 @@
 | ID | Заглавие | Приоритет | Зависи от |
 |---|---|---|---|
 | ~~T002~~ | ~~Typography + design tokens + UI primitives~~ | ~~High~~ | ✅ **Done** (`f105ef8`) |
-| T003 | i18n setup (next-intl, BG/EN routing, [locale] segment) | High | 🟡 **In progress** |
-| T004 | Hero секция (видео + staggered text + pill navbar + stat blocks) | **Critical** | T002 ✅, T003 🟡 — **½ unblocked** |
+| ~~T003~~ | ~~i18n setup (next-intl)~~ | ~~High~~ | ✅ **Done** (`fd93272`) с caveat → T018 |
+| T004 | Hero секция (видео + staggered text + pill navbar + stat blocks) | **Critical** | T002 ✅, T003 ✅, T018 — чака font swap |
 | T005 | Vercel deploy + preview URL | High | T001 ✅ — **unblocked** |
 | T006 | `/lessons` страница | Medium | T002 |
 | T007 | `/pricing` страница (4-те пакета) | Medium | T002 |
@@ -65,6 +67,7 @@
 | Q5 | Сертификати — кой точно? (ISIA/BASI/БСС + нива) | Alex | Medium (за T008) |
 | Q6 | Stripe — има ли ЕТ/ЕООД или самоосигуряване? | Alex | High (blocker за live launch, не за dev) |
 | Q7 | Домейн `ridewithalex.com` — купен ли е? | Alex | Medium (blocker за launch, не за dev) |
+| Q8 | Шрифт Onest OK ли е? (алтернативи: Manrope, IBM Plex Sans, Inter) | Alex | Medium — T018 върви с Onest по подразбиране, може да се смени в 1 файл |
 
 ## Последни 3 промени
 
