@@ -489,4 +489,50 @@ export function AboutCta() {
 
 ## Reports
 
-_(downstream агентът попълва след завършване)_
+### Report — T008 (s11, 2026-04-23)
+
+**Status:** completed
+**Commits:**
+- `8ea90ed` — `feat(T008): about page with bio, why-me, certifications, cta` (5 нови файла)
+- `a3eb13a` — `feat(T007): pricing page ...` — включва `about.*` namespace от `messages/en.json` и `messages/bg.json` заради race condition с паралелен T007 агент (виж "Merge конфликти" по-долу)
+
+**Time spent:** ~40 мин (≈25 диагностика на concurrent-work attribution)
+
+#### Какво направи агентът
+
+Създаде 5 нови файла за `/about` route: `app/[locale]/about/page.tsx` + 4 server компонента в `components/about/` (BioBlock split 5/7, WhyMe 4 точки, Certifications pending/active, AboutCta). Кодът е копиран буквално от спеца, без отклонения. Добави `about.*` i18n namespace в `messages/en.json` и `messages/bg.json`.
+
+#### Acceptance criteria
+
+- [x] `pnpm build` — `✓ Compiled successfully in 3.2s`, routes `/en/about` + `/bg/about` в output
+- [x] `pnpm tsc --noEmit` — exit 0
+- [x] `pnpm lint` — `✔ No ESLint warnings or errors`
+- [x] `/en/about` + `/bg/about` рендерират — HTTP 200 на prod билд, grep върху HTML намери всички очаквани текстови маркери (EN: `hi, i'm alex`, `what makes a lesson`, `certifications`, `ready when you are`, `isia/bss/basi/first aid`; BG: `здравей`, `какво прави`, `сертификати`, `инструктор`, `бсс`, `готов`)
+- [x] BioBlock split 5/7 — `md:col-span-5` (portrait) + `md:col-span-7` (3 параграфа)
+- [x] WhyMe 4 точки — `[pace, language, smallGroups, flexibility]`
+- [x] Certifications 4 реда — `[isia pending, bss pending, basi pending, firstAid active]`
+- [x] CTA линкове — `<Link href="/lessons">` + `<Link href="/contact">`
+- [x] Existing keys unchanged — `home/nav/stats/locale/footer/lessons/pricing` байтово непипнати
+- [x] Pushed — `8ea90ed` на `origin/main`
+
+#### Отклонения от спеца
+
+Само едно, **не-функционално**: `messages/*.json` промените са в T007-ия commit (`a3eb13a`), а не в T008-ия (`8ea90ed`) — resultat от concurrent staging. Съдържанието е идентично на спеца. T008 commit message body обяснява caveat-а.
+
+#### Блокери / въпроси
+
+Няма. Но downstream агентът вдигна workflow flag към оркестратора — при паралелни Wave-ове върху shared `messages/*.json`, auto-commit-after-agent policy обърква commit attribution. За Wave 3+ да се преразгледа: всеки агент сам да commit-ва своя namespace веднага след write, или да се въведе serialized pass за message файлове.
+
+#### Merge конфликти
+
+Няма текстови git merge конфликти. Имаше race condition по време на concurrent staging между T007 и T008 върху `messages/*.json`. Final HEAD съдържа `about`, `pricing`, `lessons` namespace-и плюс всички предишни — no data loss, verified с `git show HEAD:messages/en.json`.
+
+#### Променени файлове
+
+- `app/[locale]/about/page.tsx` — създаден (commit `8ea90ed`)
+- `components/about/BioBlock.tsx` — създаден (commit `8ea90ed`)
+- `components/about/WhyMe.tsx` — създаден (commit `8ea90ed`)
+- `components/about/Certifications.tsx` — създаден (commit `8ea90ed`)
+- `components/about/AboutCta.tsx` — създаден (commit `8ea90ed`)
+- `messages/en.json` — модифициран с `about` namespace (included в `a3eb13a`)
+- `messages/bg.json` — модифициран с `about` namespace (included в `a3eb13a`)
