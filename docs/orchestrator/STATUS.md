@@ -16,9 +16,8 @@
 | Typography + design tokens | ✅ Завършено | T002 — cn, Button, NavPill, StatBlock, hero-title utility |
 | i18n (BG/EN) | ✅ Завършено | T003 — next-intl, `[locale]`, middleware, LocaleSwitcher |
 | Font swap (cyrillic fix) | ✅ Завършено | T018 — Onest заменя Readex Pro; cyrillic поддържан |
-| Hero секция | ⚪ Чака | T004 — следващата задача |
-| Hero секция | ⚪ Чака | T004 |
-| Vercel deploy | ✅ Завършено | T005 — `ridewithalex.vercel.app`, 47s build |
+| Hero секция | ⚪ Чака | T004 — следващата задача (готов спец) |
+| Vercel deploy | ✅ Завършено | T005 — `ridewithalex.vercel.app`, 47s build, auto-deploy on push |
 | Страници (lessons, pricing, about) | ⚪ Чака | T006-T008 |
 | Booking + Stripe | ⚪ Чака | T009-T011 |
 | Launch | ⚪ Чака | T016-T017 |
