@@ -2,7 +2,7 @@
 
 > Жив kanban на проекта. Обновява се при всяка сесия и при всеки завършен таск.
 
-**Последна актуализация:** 2026-04-23 · Сесия s08 (handoff)
+**Последна актуализация:** 2026-04-23 · Сесия s09 (wave planning + T019 спец)
 
 **Production URL:** [ridewithalex.vercel.app](https://ridewithalex.vercel.app) · auto-deploy on push to `main`
 
@@ -37,7 +37,8 @@
 
 | ID | Заглавие | Статус | Агент | Блокира |
 |---|---|---|---|---|
-| QA-V1 | Визуална проверка на hero-то в Chrome/Safari | 🟢 Ready | **Alex (ръчно)** | подтвърждение за T006-T008 |
+| QA-V1 | Визуална проверка на hero-то в Chrome/Safari | 🟢 Ready | **Alex (ръчно)** | финално одобрение (non-blocking за pipeline) |
+| **T019** | **Shared page shell (SiteNav/Footer/Shell/Header)** | 🟢 **Ready — Wave 1** | **downstream (pending)** | **T006, T007, T008** |
 
 ## Pipeline (в план)
 
@@ -47,9 +48,9 @@
 | ~~T003~~ | ~~i18n setup (next-intl)~~ | ~~High~~ | ✅ **Done** (`fd93272`) с caveat → T018 |
 | ~~T004~~ | ~~Hero секция~~ | ~~Critical~~ | ✅ **Done** (`fe3d1c0`) |
 | ~~T005~~ | ~~Vercel deploy + preview URL~~ | ~~High~~ | ✅ **Done** s06 — `ridewithalex.vercel.app` |
-| T006 | `/lessons` страница | Medium | T002 |
-| T007 | `/pricing` страница (4-те пакета) | Medium | T002 |
-| T008 | `/about` страница (био + сертификати) | Medium | T002 |
+| T006 | `/lessons` страница | Medium — **Wave 2 parallel** | T019 |
+| T007 | `/pricing` страница (4-те пакета) | Medium — **Wave 2 parallel** | T019 |
+| T008 | `/about` страница (био + сертификати) | Medium — **Wave 2 parallel** | T019 |
 | T009 | Stripe Checkout интеграция (test mode) | High | T001 |
 | T010 | Booking форма + календар | High | T009 |
 | T011 | Neon Postgres + Drizzle schema | High | T010 |
@@ -75,9 +76,9 @@
 
 ## Последни 3 промени
 
-1. **2026-04-23 s08** — Session close + handoff: `STARTUP_PROMPT.md` създаден за clean resume в нова Claude Code сесия; `feedback_orchestrator_mode` обновено с lessons (detail-rich specs 4-6×, resume protocol); QA-V1 остава активна.
-2. **2026-04-23 s07** — **T004 завършен (`fe3d1c0`)** — Hero секцията е живa: видео + staggered text + 3-pill navbar + stats + full i18n. Zero deviations, 4-6× по-бързо от estimate.
-3. **2026-04-23 s06** — T005 завършен през Vercel API — сайтът live на `ridewithalex.vercel.app`, auto-deploy active.
+1. **2026-04-23 s09** — **Wave planning + T019 спец**: дефинирана двуфазова стратегия за `/lessons`+`/pricing`+`/about` — Wave 1 = T019 shared shell (sequential, foundation), Wave 2 = T006/T007/T008 паралелно върху disjoint файлове. T019 detail-rich промпт готов, чака downstream агент.
+2. **2026-04-23 s08** — Session close + handoff: `STARTUP_PROMPT.md` създаден за clean resume; `feedback_orchestrator_mode` обновено с lessons (detail-rich specs 4-6×, resume protocol).
+3. **2026-04-23 s07** — **T004 завършен (`fe3d1c0`)** — Hero секцията е живa: видео + staggered text + 3-pill navbar + stats + full i18n. Zero deviations, 4-6× по-бързо от estimate.
 
 ## Легенда
 
