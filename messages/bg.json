@@ -1,0 +1,18 @@
+{
+  "home": {
+    "title": "ridewithalex",
+    "tagline": "частни сноуборд уроци в банско"
+  },
+  "nav": {
+    "lessons": "уроци",
+    "pricing": "цени",
+    "gallery": "галерия",
+    "reviews": "отзиви",
+    "contact": "контакти",
+    "book": "резервирай"
+  },
+  "locale": {
+    "en": "en",
+    "bg": "bg"
+  }
+}

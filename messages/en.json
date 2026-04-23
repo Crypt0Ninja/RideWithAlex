@@ -1,0 +1,18 @@
+{
+  "home": {
+    "title": "ridewithalex",
+    "tagline": "private snowboard lessons in bansko"
+  },
+  "nav": {
+    "lessons": "lessons",
+    "pricing": "pricing",
+    "gallery": "gallery",
+    "reviews": "reviews",
+    "contact": "contact",
+    "book": "book now"
+  },
+  "locale": {
+    "en": "en",
+    "bg": "bg"
+  }
+}
