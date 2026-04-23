@@ -41,7 +41,7 @@
   "pricing": {
     "eyebrow": "rates",
     "title": "pricing",
-    "subtitle": "transparent per-session rates in euros. 30% deposit online when you book, the rest in cash on the day of the lesson.",
+    "subtitle": "transparent per-session rates in euros. pay in cash on the day of the lesson — no deposit required.",
     "bestValue": "best value",
     "packages": {
       "twoHours": {
@@ -67,9 +67,9 @@
     },
     "note": {
       "eyebrow": "what to know",
-      "deposit": {
-        "label": "deposit",
-        "value": "30% deposit at booking via stripe. the remaining 70% in cash on the day of the first lesson."
+      "payment": {
+        "label": "payment",
+        "value": "no online deposit. payment is made in full on the day of the first lesson, in euros or bulgarian leva."
       },
       "included": {
         "label": "included",
@@ -81,13 +81,13 @@
       },
       "cancellation": {
         "label": "cancellation",
-        "value": "free cancellation up to 48h before the lesson. inside 48h, the deposit is held; rescheduling is always free."
+        "value": "free cancellation up to 48h before the lesson. inside 48h, a 30% fee applies to cover the reserved time. rescheduling to another date is always free."
       }
     },
     "cta": {
       "eyebrow": "ready to book?",
       "title": "let's lock in a date.",
-      "subtitle": "drop me a line — i'll confirm availability and send a stripe link for the deposit.",
+      "subtitle": "drop me a line — i'll confirm availability and lock in your date. payment on the day.",
       "lessons": "see lessons",
       "book": "book now"
     }
@@ -132,7 +132,7 @@
     "cta": {
       "eyebrow": "ready to ride?",
       "title": "pick a package, book a date.",
-      "subtitle": "transparent prices. 30% deposit online, the rest in cash on the day.",
+      "subtitle": "transparent prices. payment in cash on the day of the lesson.",
       "pricing": "see pricing",
       "book": "book a lesson"
     }

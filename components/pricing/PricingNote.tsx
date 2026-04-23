@@ -4,7 +4,7 @@ export function PricingNote() {
   const t = useTranslations("pricing.note");
 
   const items = [
-    { label: t("deposit.label"), value: t("deposit.value") },
+    { label: t("payment.label"), value: t("payment.value") },
     { label: t("included.label"), value: t("included.value") },
     { label: t("notIncluded.label"), value: t("notIncluded.value") },
     { label: t("cancellation.label"), value: t("cancellation.value") },
