@@ -2,7 +2,7 @@
 
 > Жив kanban на проекта. Обновява се при всяка сесия и при всеки завършен таск.
 
-**Последна актуализация:** 2026-04-24 · Сесия s13 (Wave 3 pivot — 5 static pages; Stripe cancelled; Wave 4 backlog)
+**Последна актуализация:** 2026-04-24 · Сесия s14 (Wave 3 Complete — всички 5 статични страници живи, изпълнени от orchestrator)
 
 **Production URL:** [ridewithalex.vercel.app](https://ridewithalex.vercel.app) · auto-deploy on push to `main`
 
@@ -15,7 +15,7 @@
 | Vercel deploy | ✅ Завършено | T005 — `ridewithalex.vercel.app` |
 | Hero + shared page shell | ✅ Завършено | T004 (hero live) + T019 (SiteNav/Footer/PageShell/PageHeader) |
 | **Wave 2** — lessons + pricing + about | ✅ Complete | T006 / T007 / T008 — 3 страници живи на двата locale-а |
-| **Wave 3** — contact + gallery + reviews + terms + privacy | 🟢 **Ready** | T015 / T013 / T014 / T022 / T023 — 5 статични страници, sequential |
+| **Wave 3** — contact + gallery + reviews + terms + privacy | ✅ **Complete** | T015 / T013 / T014 / T022 / T023 — всички 5 страници живи, изпълнени от orchestrator (not downstream) |
 | **Wave 4** — booking + календар + email + admin | 🟡 Backlog | T010 / T011 / T012 / T020 / T021 — чака creds от Alex |
 | Content hotfix (remove Stripe refs from pricing) | 🟡 Backlog (5 мин) | T024 — след Wave 3 |
 | SEO + launch | ⚪ Pending | T016 + T017 + T_DOMAIN |
@@ -34,19 +34,20 @@
 | T006 | `/lessons` страница | [`5938ec7`](https://github.com/Crypt0Ninja/RideWithAlex/commit/5938ec7) | s11 | agent 7 |
 | T008 | `/about` страница | [`8ea90ed`](https://github.com/Crypt0Ninja/RideWithAlex/commit/8ea90ed) | s11 | agent 9 |
 | T007 | `/pricing` страница | [`a3eb13a`](https://github.com/Crypt0Ninja/RideWithAlex/commit/a3eb13a) | s12 | agent 8 · 2 deviations |
+| T015 | `/contact` + FAQ | [`418bf81`](https://github.com/Crypt0Ninja/RideWithAlex/commit/418bf81) | s14 | orchestrator (Alex request) |
+| T013 | `/gallery` страница | [`11e897c`](https://github.com/Crypt0Ninja/RideWithAlex/commit/11e897c) | s14 | orchestrator |
+| T014 | `/reviews` страница | [`2afece5`](https://github.com/Crypt0Ninja/RideWithAlex/commit/2afece5) | s14 | orchestrator |
+| T022 | `/terms` страница | [`3b4f745`](https://github.com/Crypt0Ninja/RideWithAlex/commit/3b4f745) | s14 | orchestrator |
+| T023 | `/privacy` страница | [`dfbad3f`](https://github.com/Crypt0Ninja/RideWithAlex/commit/dfbad3f) | s14 | orchestrator |
 
-## Активни задачи (Wave 3 — 5 статични страници, sequential)
+## Активни задачи
 
-| ID | Заглавие | Статус | Агент | Препоръчан ред |
+| ID | Заглавие | Статус | Агент | Блокира |
 |---|---|---|---|---|
-| **T015** | **`/contact` + FAQ** | 🟢 **Ready** | downstream (pending) | **1-ви** (най-полезен, бизнес value) |
-| **T013** | **`/gallery` страница** | 🟢 **Ready** | downstream (pending) | 2-ри (placeholder съдържание) |
-| **T014** | **`/reviews` страница** | 🟢 **Ready** | downstream (pending) | 3-ти (placeholder отзиви) |
-| **T022** | **`/terms` страница** | 🟢 **Ready** | downstream (pending) | 4-ти (legal boilerplate) |
-| **T023** | **`/privacy` страница** | 🟢 **Ready** | downstream (pending) | 5-ти (GDPR boilerplate) |
-| QA-V1 | Визуална проверка (hero + Wave 2 страници) | 🟢 Ready | **Alex (ръчно)** | паралелно, non-blocking |
+| QA-V2 | Визуална проверка (всички 9 страници × 2 locale-а) | 🟢 Ready | **Alex (ръчно)** | финално одобрение преди Wave 4 |
+| T024 | Pricing content hotfix (премахни Stripe refs) | 🟢 Ready (~5 мин) | orchestrator | — |
 
-> **Важно:** Sequential след Wave 2 race lessons — пусни 1 агент, прие доклад, обнови docs, пусни следващ.
+**9 страници живи:** `/`, `/lessons`, `/pricing`, `/about`, `/contact`, `/gallery`, `/reviews`, `/terms`, `/privacy` — всички × `en` + `bg` = **18 routes total**. Всички build clean, tsc + lint pass.
 
 ## Pipeline (Wave 4 — Backlog, нужни creds от Alex)
 
@@ -86,9 +87,9 @@
 
 ## Последни 3 промени
 
-1. **2026-04-24 s13** — **Wave 3 pivot**: Alex премахна Stripe от плана (cash-only бизнес модел); Wave 3 пренасочен към 5 статични страници (T015/T013/T014/T022/T023); Wave 4 backlog-ът (T010/T011/T012/T020/T021) чака creds за Google Cloud / Neon / Resend. 5 спецификации написани.
-2. **2026-04-23 s12** — **T007 приет** (`a3eb13a`), 2 documented deviations; Wave 2 Complete.
-3. **2026-04-23 s11** — **T006 + T008 приемане**; race condition на messages/*.json → feedback memory записано.
+1. **2026-04-24 s14** — **Wave 3 Complete.** Orchestrator изпълни лично всичките 5 страници в последователни commit-ове: T015 `418bf81` (contact+FAQ+map) → T013 `11e897c` (gallery placeholder) → T014 `2afece5` (reviews placeholder) → T022 `3b4f745` (terms) → T023 `dfbad3f` (privacy). **18 routes live** на Vercel, всички build/tsc/lint pass. **Zero deviations, nula race conditions.**
+2. **2026-04-24 s13** — **Wave 3 pivot**: Stripe премахнат (cash-only); Wave 3 пренасочен към 5 static страници; 5 специфики написани.
+3. **2026-04-23 s12** — **T007 приет** (`a3eb13a`), 2 documented deviations; Wave 2 Complete.
 
 ## За следваща сесия — reminder
 
