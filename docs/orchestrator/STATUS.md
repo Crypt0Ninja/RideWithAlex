@@ -27,7 +27,11 @@
 
 ## Активни задачи
 
-_(няма в момента — оркестраторът подготвя следващите)_
+| ID | Заглавие | Статус | Агент | Блокира |
+|---|---|---|---|---|
+| T002 | Design tokens + UI primitives | 🟢 Ready | downstream (паралелно) | T004 |
+| T003 | i18n (next-intl BG/EN) | 🟢 Ready | downstream (паралелно) | T004, всички страници |
+| T005 | Vercel deploy + preview URL | 🟢 Ready | **Alex (ръчно)** | launch flow |
 
 ## Pipeline (в план)
 
