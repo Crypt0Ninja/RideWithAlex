@@ -282,5 +282,31 @@
       "lessons": "see lessons",
       "pricing": "see pricing"
     }
+  },
+  "gallery": {
+    "eyebrow": "gallery",
+    "title": "on the mountain.",
+    "subtitle": "placeholder tiles for now — real photos from lessons, kids, and bansko landscapes are on the way.",
+    "filters": {
+      "all": "all",
+      "lessons": "lessons",
+      "kids": "kids",
+      "bansko": "bansko"
+    },
+    "tilePlaceholder": "photo coming soon",
+    "emptyState": "no photos in this category yet.",
+    "hint": {
+      "eyebrow": "for alex",
+      "title": "upload real photos here.",
+      "body": "send me 15–20 high-resolution action shots from recent lessons and a few landscape frames of bansko. i'll wire them into the grid. tagged by category: lessons, kids, bansko.",
+      "cta": "message alex"
+    },
+    "cta": {
+      "eyebrow": "like what you see?",
+      "title": "ride with me next.",
+      "subtitle": "pick a package, pick a date — see you on the mountain.",
+      "lessons": "see lessons",
+      "book": "get in touch"
+    }
   }
 }
