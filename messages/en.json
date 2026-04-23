@@ -19,5 +19,14 @@
   "locale": {
     "en": "en",
     "bg": "bg"
+  },
+  "footer": {
+    "tagline": "private snowboard lessons in bansko. your pace, your mountain, your progress.",
+    "explore": "explore",
+    "contact": "contact",
+    "meetingPoint": "meeting point: пред гондолата, ул. пирин 1, банско",
+    "rights": "all rights reserved.",
+    "terms": "terms",
+    "privacy": "privacy"
   }
 }
