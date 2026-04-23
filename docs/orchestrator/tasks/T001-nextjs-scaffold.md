@@ -1,10 +1,12 @@
 # T001 · Next.js 15 scaffold
 
-**Status:** 🟢 Ready
+**Status:** ✅ Completed (2026-04-23)
 **Priority:** Critical (blocker за всичко останало)
 **Depends on:** —
 **Estimated effort:** ~30–60 минути за downstream агент
-**Assigned:** pending (ще се изпълни от downstream Claude Code сесия)
+**Actual effort:** ~15 минути
+**Assigned:** downstream Claude Code агент (agent 1)
+**Commit:** [`8d7133e`](https://github.com/Crypt0Ninja/RideWithAlex/commit/8d7133e)
 
 ## Цел
 
@@ -154,4 +156,62 @@ Respond with exactly this markdown block, filled in:
 
 ## Reports
 
-_(празно — ще се попълни когато Alex донесе доклад от downstream агента)_
+### Report 1 — 2026-04-23 · agent 1 · ✅ completed
+
+**Commit:** `8d7133e` — `feat(T001): scaffold next.js 15 with tailwind v4 and readex pro`
+**Time:** ~15 min
+
+#### Обобщение
+
+Hand-wrote a minimal Next.js 15 scaffold (без `create-next-app`, за да избегне генерирания README/sample assets). Manifest: `packageManager: pnpm@10.27.0`, Next 15.5, React 19, Tailwind v4.2, TypeScript 5.9, ESLint 9 с flat config (`next/core-web-vitals` + `next/typescript`).
+
+`tsconfig.json` с `"strict": true` + `"noUncheckedIndexedAccess": true`. Tailwind v4 чрез `postcss.config.mjs` (`@tailwindcss/postcss`) с `app/globals.css` използващ `@import "tailwindcss"` и `@theme` блок (`--font-sans: "Readex Pro", system-ui, sans-serif`), никакъв `tailwind.config.js`. Readex Pro зареден чрез `next/font/google` в `app/layout.tsx` (weights 300-700) с className на `<html>`. `app/page.tsx` — центриран lowercase h1 `ridewithalex`.
+
+#### Acceptance criteria — verified ✅
+
+| Criterion | Evidence |
+|---|---|
+| `pnpm install` succeeds | +317 packages, exit 0, 18.5s |
+| `pnpm dev` at localhost:3000 | `✓ Ready in 3s`, HTTP 200 |
+| `pnpm build` succeeds | `✓ Compiled in 6.3s`, 4/4 static pages, `/` е 123 B + 102 kB shared JS |
+| `pnpm tsc --noEmit` passes | Zero output, exit 0 |
+| `pnpm lint` passes | `✔ No ESLint warnings or errors` |
+| `/` показва `ridewithalex` | Verified in `app/page.tsx` + HTTP response |
+| Readex Pro loaded 300-700 | 4 `.woff2` files в `.next/static/media/`, видими в Network tab (self-hosted от next/font) |
+| `public/favicon.svg` | 289 bytes, identical to source, served HTTP 200 |
+| All committed + pushed | `abf74e3..8d7133e main -> main` |
+
+#### Приети отклонения от спеца
+
+1. **Readex Pro self-hosted от next/font.** Спецът казваше "от Google Fonts". next/font е Next.js препоръчан pattern (privacy + no layout shift) — файловете ИДВАТ от Google Fonts при build, но се сервират от app domain. Все още работи с criterion-а и всъщност е best practice. **Accepted.**
+
+2. **`.gitignore` разширен** с `*.tsbuildinfo` + `next-env.d.ts` (auto-generated от tsc/next). Спецът позволяваше `.next/`, `out/`, `build/` — тези са в същата категория. **Accepted.**
+
+3. **`lint` остава `next lint`** (Next 16 ще го migrate към `eslint` CLI). Отбелязано за бъдеща задача, не блокер. **Accepted.**
+
+4. **Добавен `typecheck` npm script** (`tsc --noEmit`) — zero-cost convenience. **Accepted.**
+
+5. **Добавен `icons: { icon: "/favicon.svg" }` в Metadata.** Това всъщност е *необходимо*, за да може браузърът да референтира favicon-а. Без него файлът съществува, но не се извиква. Трябваше да е в спеца. **Accepted.** (Урок за бъдещи task specs — `metadata.icons` е explicit изискване за favicon да се изрендерира.)
+
+#### Блокери / забележки
+
+- **Remote е HTTPS, не SSH.** Агентът правилно отбелязва, че memory note-ът ми казваше SSH, но реалният remote (от s01) е HTTPS. **Memory обновена в тази сесия.**
+- **pnpm build scripts игнорирани** за `sharp@0.34.5` и `unrs-resolver@1.11.1` (безопасно по подразбиране в pnpm 10+). Ако `next/image` optimization потрябва по-късно → `pnpm approve-builds`. Не блокер за T001.
+
+#### Files changed (13)
+
+- `package.json`, `pnpm-lock.yaml`, `tsconfig.json`, `next.config.ts`, `postcss.config.mjs`, `eslint.config.mjs`
+- `app/layout.tsx`, `app/page.tsx`, `app/globals.css`
+- `components/.gitkeep`, `lib/.gitkeep`
+- `public/favicon.svg`
+- `.gitignore` (modified: + `*.tsbuildinfo`, + `next-env.d.ts`)
+
+#### Орсестраторска верификация
+
+- Проверих `app/layout.tsx`, `app/page.tsx`, `app/globals.css`, `package.json`, `tsconfig.json` директно в repo-то.
+- `git log` потвърждава commit `8d7133e` на `origin/main`.
+- Folder structure (`app/`, `components/`, `lib/`, `public/`) присъства с правилното съдържание.
+- `strict: true` + `noUncheckedIndexedAccess: true` в tsconfig — ✅
+- Tailwind v4 синтаксис (`@import "tailwindcss"` + `@theme`) без `tailwind.config.js` — ✅
+
+**Вердикт:** T001 е приет без revision. Отключва T002, T003, T005.

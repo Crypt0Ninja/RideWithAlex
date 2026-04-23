@@ -4,11 +4,11 @@
 
 | ID | Заглавие | Статус | Зависи от | Файл |
 |---|---|---|---|---|
-| T001 | Next.js 15 scaffold | 🟢 Ready | — | [T001-nextjs-scaffold.md](T001-nextjs-scaffold.md) |
-| T002 | Typography + design tokens | ⚪ Pending | T001 | _(не е дефиниран)_ |
-| T003 | i18n (next-intl, BG/EN) | ⚪ Pending | T001 | _(не е дефиниран)_ |
-| T004 | Hero секция | ⚪ Pending | T001, T002 | _(не е дефиниран)_ |
-| T005 | Vercel deploy + preview URL | ⚪ Pending | T001 | _(не е дефиниран)_ |
+| T001 | Next.js 15 scaffold | ✅ Completed | — | [T001-nextjs-scaffold.md](T001-nextjs-scaffold.md) |
+| T002 | Typography + design tokens + UI primitives | 🟢 Ready | T001 ✅ | _(в процес на спецификация)_ |
+| T003 | i18n (next-intl, BG/EN) | 🟢 Ready | T001 ✅ | _(в процес на спецификация)_ |
+| T004 | Hero секция | ⚪ Pending | T002, T003 | _(не е дефиниран)_ |
+| T005 | Vercel deploy + preview URL | 🟢 Ready | T001 ✅ | _(в процес на спецификация)_ |
 | T006 | `/lessons` страница | ⚪ Pending | T002 | _(не е дефиниран)_ |
 | T007 | `/pricing` страница | ⚪ Pending | T002 | _(не е дефиниран)_ |
 | T008 | `/about` страница | ⚪ Pending | T002 | _(не е дефиниран)_ |

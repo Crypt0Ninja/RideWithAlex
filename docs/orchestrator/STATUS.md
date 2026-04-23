@@ -2,34 +2,41 @@
 
 > Жив kanban на проекта. Обновява се при всяка сесия и при всеки завършен таск.
 
-**Последна актуализация:** 2026-04-23 · Сесия s01
+**Последна актуализация:** 2026-04-23 · Сесия s02
 
 ## Общ прогрес
 
 | Фаза | Състояние | Коментар |
 |---|---|---|
 | Планиране (docs) | ✅ Завършено | 7 документа + brand assets |
-| Orchestrator setup | 🟡 В ход | Този файл се създава сега |
-| Dev scaffolding | ⚪ Чака | T001 готов за стартиране |
+| Orchestrator setup | ✅ Завършено | Система активна, s01 документирана |
+| Dev scaffolding | ✅ Завършено | T001 — Next.js 15 + Tailwind v4 + Readex Pro |
+| Typography + design tokens | ⚪ Чака | T002 готов за спецификация |
+| i18n (BG/EN) | ⚪ Чака | T003 |
 | Hero секция | ⚪ Чака | T004 |
+| Vercel deploy | ⚪ Чака | T005 (паралелно с T002/T003) |
 | Страници (lessons, pricing, about) | ⚪ Чака | T006-T008 |
 | Booking + Stripe | ⚪ Чака | T009-T011 |
 | Launch | ⚪ Чака | T016-T017 |
 
+## Завършени задачи
+
+| ID | Заглавие | Commit | Сесия | Агент |
+|---|---|---|---|---|
+| T001 | Next.js 15 scaffold | [`8d7133e`](https://github.com/Crypt0Ninja/RideWithAlex/commit/8d7133e) | s02 | agent 1 |
+
 ## Активни задачи
 
-| ID | Заглавие | Статус | Агент | Блокира |
-|---|---|---|---|---|
-| T001 | Next.js 15 scaffold | 🟢 Ready | — (чака downstream) | T002-T017 |
+_(няма в момента — оркестраторът подготвя следващите)_
 
 ## Pipeline (в план)
 
 | ID | Заглавие | Приоритет | Зависи от |
 |---|---|---|---|
-| T002 | Typography + base design tokens (Readex Pro, Tailwind config) | High | T001 |
-| T003 | i18n setup (next-intl, BG/EN routing) | High | T001 |
-| T004 | Hero секция (видео + staggered text + pill navbar + stat blocks) | **Critical** | T001, T002 |
-| T005 | Vercel deploy + preview URL | High | T001 |
+| T002 | Typography + design tokens + UI primitives (Button, Pill, Stat) | High | T001 ✅ — **unblocked** |
+| T003 | i18n setup (next-intl, BG/EN routing, [locale] segment) | High | T001 ✅ — **unblocked** |
+| T004 | Hero секция (видео + staggered text + pill navbar + stat blocks) | **Critical** | T002, T003 |
+| T005 | Vercel deploy + preview URL | High | T001 ✅ — **unblocked** |
 | T006 | `/lessons` страница | Medium | T002 |
 | T007 | `/pricing` страница (4-те пакета) | Medium | T002 |
 | T008 | `/about` страница (био + сертификати) | Medium | T002 |
@@ -57,8 +64,8 @@
 
 ## Последни 3 промени
 
-1. **2026-04-23 s01** — Планиране приключи: 7 документа, brand assets, orchestrator система, git repo свързан
-2. _—_
+1. **2026-04-23 s02** — T001 завършен (commit `8d7133e`) — Next.js 15, TS strict, Tailwind v4, Readex Pro 300-700, favicon, `/` рендерира `ridewithalex`. 5 приети отклонения (next/font self-host, gitignore extras, metadata.icons). Unlock-ва T002, T003, T005.
+2. **2026-04-23 s01** — Планиране приключи: 7 документа, brand assets, orchestrator система, git repo свързан (commits `abf74e3`, `a6bc1cd`)
 3. _—_
 
 ## Легенда
