@@ -465,4 +465,39 @@ Add `footer` namespace (append, don't remove anything):
 
 ## Reports
 
-_(агентът ще попълни след завършване)_
+### Report 1 — 2026-04-23 · agent 6 · ✅ completed
+
+**Commit:** `1763786` — `feat(T019): shared site nav, footer, page shell, page header`
+**Time:** ~15 минути
+
+#### Обобщение
+
+4 server компонента под `components/shared/`: `SiteNav` (sticky `z-30` pill navbar с `bg-black/60 backdrop-blur-sm` и clickable logo към `/`), `SiteFooter` (3-колонен grid + bottom bar с © + terms/privacy), `PageShell` (flex-column wrapper над `bg-black min-h-screen`), `PageHeader` (eyebrow/title/subtitle с `hero-title` класа и `clamp(48px,8vw,120px)` размер). `footer` namespace добавен в двата messages файла с 7 keys; съществуващите keys (`home`/`nav`/`stats`/`locale`) байтово непипнати.
+
+#### Acceptance criteria — verified ✅
+
+| Criterion | Evidence |
+|---|---|
+| `pnpm build` | `✓ Compiled successfully in 3.3s`, 5 static pages, route count непроменен |
+| `pnpm tsc --noEmit` | Exit 0 |
+| `pnpm lint` | `✔ No ESLint warnings or errors` |
+| Home hero unchanged | `/en` + `/bg` 200; hero markers в DOM; няма `SiteNav`/`SiteFooter` в rendered markup (footer tagline се появява само в client JSON payload — очаквано при `NextIntlClientProvider` без scoped messages) |
+| 4 нови компонента | `components/shared/{SiteNav,SiteFooter,PageShell,PageHeader}.tsx` — всички server components |
+| `footer` namespace в двата locale-а | 7 keys всеки (tagline, explore, contact, meetingPoint, rights, terms, privacy) |
+| Existing keys unchanged | `git diff` показва само additive hunks — 9 insertions на файл, всички вътре в новия `footer` блок |
+| Pushed | `1047d59..1763786 main -> main` |
+
+#### Deviations from spec
+
+**Нула.** Имплементацията е байтово съвпадение със спеца.
+
+#### Orchestrator verification
+
+- `SiteNav.tsx:1-56` — всички import-и от правилните path aliases (`@/i18n/routing`, `@/components/ui/*`, `@/components/brand/Logo`, `@/components/LocaleSwitcher`) ✅
+- `SiteFooter.tsx:1-100` — 3 колони (brand / explore / contact) + bottom bar; контакти точно (`alex@ridewithalex.com`, `+359 88 513 7471`, `@ridewithalex`) ✅
+- `PageShell.tsx:1-17` — 17 реда flex-column wrapper, точно според спеца ✅
+- `PageHeader.tsx:1-32` — eyebrow е `uppercase tracking-[0.3em]` (правилно), title `hero-title` клас, subtitle optional ✅
+- `messages/en.json` + `bg.json` — JSON-ите валидни, `footer` блок в края, existing keys непипнати ✅
+- Hero files не са засегнати — `git show --stat 1763786` показва само 6 файла, нито един под `components/hero/*` ✅
+
+**Вердикт:** T019 приет без revision. Shared primitives са готови — T006/T007/T008 могат да бягат паралелно отгоре им.

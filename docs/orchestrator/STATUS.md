@@ -2,7 +2,7 @@
 
 > Жив kanban на проекта. Обновява се при всяка сесия и при всеки завършен таск.
 
-**Последна актуализация:** 2026-04-23 · Сесия s09 (wave planning + T019 спец)
+**Последна актуализация:** 2026-04-23 · Сесия s10 (T019 accepted + Wave 2 готов)
 
 **Production URL:** [ridewithalex.vercel.app](https://ridewithalex.vercel.app) · auto-deploy on push to `main`
 
@@ -18,7 +18,8 @@
 | Font swap (cyrillic fix) | ✅ Завършено | T018 — Onest заменя Readex Pro; cyrillic поддържан |
 | Hero секция | ✅ Завършено | T004 — video, staggered text, navbar, stats; live на Vercel |
 | Vercel deploy | ✅ Завършено | T005 — `ridewithalex.vercel.app`, 47s build, auto-deploy on push |
-| Страници (lessons, pricing, about) | ⚪ Чака | T006-T008 |
+| Shared page shell | ✅ Завършено | T019 — SiteNav/Footer/PageShell/PageHeader + footer messages |
+| Страници (lessons, pricing, about) | 🟢 Ready — Wave 2 parallel | T006/T007/T008 — всички с промпти готови |
 | Booking + Stripe | ⚪ Чака | T009-T011 |
 | Launch | ⚪ Чака | T016-T017 |
 
@@ -32,13 +33,16 @@
 | T018 | Font swap Readex Pro → Onest | [`b9faac6`](https://github.com/Crypt0Ninja/RideWithAlex/commit/b9faac6) | s05 | agent 4 · wider sweep, all valid |
 | T005 | Vercel deploy + preview URL | n/a (infra) | s06 | orchestrator via API · `ridewithalex.vercel.app` |
 | T004 | Hero секция | [`fe3d1c0`](https://github.com/Crypt0Ninja/RideWithAlex/commit/fe3d1c0) | s07 | agent 5 · zero deviations, ~15min |
+| T019 | Shared page shell | [`1763786`](https://github.com/Crypt0Ninja/RideWithAlex/commit/1763786) | s10 | agent 6 · zero deviations, ~15min |
 
 ## Активни задачи
 
 | ID | Заглавие | Статус | Агент | Блокира |
 |---|---|---|---|---|
 | QA-V1 | Визуална проверка на hero-то в Chrome/Safari | 🟢 Ready | **Alex (ръчно)** | финално одобрение (non-blocking за pipeline) |
-| **T019** | **Shared page shell (SiteNav/Footer/Shell/Header)** | 🟢 **Ready — Wave 1** | **downstream (pending)** | **T006, T007, T008** |
+| **T006** | **`/lessons` страница** | 🟢 **Ready — Wave 2 parallel** | **downstream (pending)** | — |
+| **T007** | **`/pricing` страница** | 🟢 **Ready — Wave 2 parallel** | **downstream (pending)** | — |
+| **T008** | **`/about` страница** | 🟢 **Ready — Wave 2 parallel** | **downstream (pending)** | — |
 
 ## Pipeline (в план)
 
@@ -48,9 +52,9 @@
 | ~~T003~~ | ~~i18n setup (next-intl)~~ | ~~High~~ | ✅ **Done** (`fd93272`) с caveat → T018 |
 | ~~T004~~ | ~~Hero секция~~ | ~~Critical~~ | ✅ **Done** (`fe3d1c0`) |
 | ~~T005~~ | ~~Vercel deploy + preview URL~~ | ~~High~~ | ✅ **Done** s06 — `ridewithalex.vercel.app` |
-| T006 | `/lessons` страница | Medium — **Wave 2 parallel** | T019 |
-| T007 | `/pricing` страница (4-те пакета) | Medium — **Wave 2 parallel** | T019 |
-| T008 | `/about` страница (био + сертификати) | Medium — **Wave 2 parallel** | T019 |
+| ~~T006~~ | ~~`/lessons` страница~~ | ~~Medium — Wave 2 parallel~~ | ✅ спец готов |
+| ~~T007~~ | ~~`/pricing` страница~~ | ~~Medium — Wave 2 parallel~~ | ✅ спец готов |
+| ~~T008~~ | ~~`/about` страница~~ | ~~Medium — Wave 2 parallel~~ | ✅ спец готов |
 | T009 | Stripe Checkout интеграция (test mode) | High | T001 |
 | T010 | Booking форма + календар | High | T009 |
 | T011 | Neon Postgres + Drizzle schema | High | T010 |
@@ -76,9 +80,9 @@
 
 ## Последни 3 промени
 
-1. **2026-04-23 s09** — **Wave planning + T019 спец**: дефинирана двуфазова стратегия за `/lessons`+`/pricing`+`/about` — Wave 1 = T019 shared shell (sequential, foundation), Wave 2 = T006/T007/T008 паралелно върху disjoint файлове. T019 detail-rich промпт готов, чака downstream агент.
-2. **2026-04-23 s08** — Session close + handoff: `STARTUP_PROMPT.md` създаден за clean resume; `feedback_orchestrator_mode` обновено с lessons (detail-rich specs 4-6×, resume protocol).
-3. **2026-04-23 s07** — **T004 завършен (`fe3d1c0`)** — Hero секцията е живa: видео + staggered text + 3-pill navbar + stats + full i18n. Zero deviations, 4-6× по-бързо от estimate.
+1. **2026-04-23 s10** — **T019 приет (`1763786`)** + Wave 2 задачите готови. Shared primitives (SiteNav/Footer/PageShell/PageHeader) shipped zero deviations за ~15 мин. T006/T007/T008 промптите написани в новия чист формат (task файл = self-contained промпт) и на български.
+2. **2026-04-23 s09** — **Wave planning + T019 спец**: дефинирана двуфазова стратегия за страниците — Wave 1 foundation, Wave 2 паралелно върху disjoint файлове.
+3. **2026-04-23 s08** — Session close + handoff: `STARTUP_PROMPT.md` създаден за clean resume; `feedback_orchestrator_mode` обновено с lessons.
 
 ## Легенда
 
