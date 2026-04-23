@@ -28,5 +28,50 @@
     "rights": "all rights reserved.",
     "terms": "terms",
     "privacy": "privacy"
+  },
+  "lessons": {
+    "eyebrow": "services",
+    "title": "lessons",
+    "subtitle": "three ways to ride with alex. each lesson is shaped around your pace, your line, and the conditions of the day — never a conveyor belt.",
+    "private": {
+      "title": "private",
+      "description": "one-on-one coaching for adults at any level. from first-timers strapping in for the first run to advanced riders refining carves.",
+      "includes": [
+        "personalized session plan before we meet",
+        "lift-line coaching and video review on request",
+        "flexible start time and meeting point"
+      ],
+      "duration": "2h · 4h · full day · week",
+      "level": "beginner → advanced"
+    },
+    "kids": {
+      "title": "kids",
+      "description": "patient, safety-first lessons for children from age 6. focus on balance, confidence, and fun before we chase speed.",
+      "includes": [
+        "age-appropriate drills and gear check",
+        "parents welcome to observe",
+        "shorter sessions available on request"
+      ],
+      "duration": "2h · 4h · custom",
+      "level": "age 6+"
+    },
+    "group": {
+      "title": "group",
+      "description": "small groups of friends or family riding at a similar level. lower cost per person without sacrificing attention.",
+      "includes": [
+        "max 4 riders per group",
+        "pre-lesson level check over whatsapp",
+        "custom routes for mixed abilities"
+      ],
+      "duration": "2h · 4h · full day",
+      "level": "beginner → intermediate"
+    },
+    "cta": {
+      "eyebrow": "ready to ride?",
+      "title": "pick a package, book a date.",
+      "subtitle": "transparent prices. 30% deposit online, the rest in cash on the day.",
+      "pricing": "see pricing",
+      "book": "book a lesson"
+    }
   }
 }
