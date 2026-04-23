@@ -100,3 +100,9 @@ Sequential изпълнение от един оркестратор elimin-ни
 ## Финален статус
 
 **9 страници × 2 locale-а = 18 routes live** + всички content strings aligned с cash-only model. Wave 3 + T024 = напълно готов content layer на сайта. Остава само QA-V2 (Alex's визуална проверка) преди Wave 4 backlog може да започне.
+
+## Session close
+
+Alex поиска да спрем за деня. `STARTUP_PROMPT.md` обновен с пълното текущо състояние (Wave 2 + 3 + T024 completed, Wave 4 backlog с creds блокери, новите memory правила). Следваща сесия: copy/paste STARTUP_PROMPT.md → orchestrator чете STATUS → продължаваме.
+
+**Финален commit в тази сесия:** `docs(handoff): refresh STARTUP_PROMPT for session resume after wave 3`
