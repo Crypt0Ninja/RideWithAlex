@@ -2,7 +2,7 @@
 
 > Жив kanban на проекта. Обновява се при всяка сесия и при всеки завършен таск.
 
-**Последна актуализация:** 2026-04-23 · Сесия s07
+**Последна актуализация:** 2026-04-23 · Сесия s08 (handoff)
 
 **Production URL:** [ridewithalex.vercel.app](https://ridewithalex.vercel.app) · auto-deploy on push to `main`
 
@@ -75,9 +75,9 @@
 
 ## Последни 3 промени
 
-1. **2026-04-23 s07** — **T004 завършен (commit `fe3d1c0`)** — Hero секцията е живa: fullscreen видео, 3-pill floating navbar, `ride · with · alex` staggered текст (0/120/240ms CSS анимация), описателен tagline, 3 stat блока с диагонални разделители, full BG/EN i18n. Zero deviations, ~15 мин agent work. **Visual QA нужен.**
-2. **2026-04-23 s06** — T005 завършен през Vercel API от orchestrator — `ridewithalex.vercel.app` публичен, auto-deploy active.
-3. **2026-04-23 s05** — T018 завършен (`b9faac6`) — Onest с cyrillic support, Q8 resolved.
+1. **2026-04-23 s08** — Session close + handoff: `STARTUP_PROMPT.md` създаден за clean resume в нова Claude Code сесия; `feedback_orchestrator_mode` обновено с lessons (detail-rich specs 4-6×, resume protocol); QA-V1 остава активна.
+2. **2026-04-23 s07** — **T004 завършен (`fe3d1c0`)** — Hero секцията е живa: видео + staggered text + 3-pill navbar + stats + full i18n. Zero deviations, 4-6× по-бързо от estimate.
+3. **2026-04-23 s06** — T005 завършен през Vercel API — сайтът live на `ridewithalex.vercel.app`, auto-deploy active.
 
 ## Легенда
 
