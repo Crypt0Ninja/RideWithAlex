@@ -378,4 +378,58 @@ Respond with exactly this markdown block, filled in:
 
 ## Reports
 
-_(празно — чака downstream агента)_
+## Report — T003
+
+**Status:** completed
+**Commits:** `fd93272` — feat(T003): add next-intl i18n with en + bg locales
+**Time spent:** ~25 minutes
+
+### What I did
+
+Инсталирах `next-intl@4.9.1` и имплементирах пълния спек: `i18n/routing.ts` + `i18n/request.ts`, `middleware.ts` в root, `messages/{en,bg}.json` с `home`/`nav`/`locale` namespaces (всички lowercase), обвих `next.config.ts` с `createNextIntlPlugin`. Преместих `<html>`/`<body>` от `app/layout.tsx` (сега passthrough) в нов `app/[locale]/layout.tsx` с `generateStaticParams` + `NextIntlClientProvider`, така че `lang` атрибутът да съвпада с активния локал. Създадох `app/[locale]/page.tsx` с `useTranslations("home")`, изтрих стария `app/page.tsx`, и добавих `components/LocaleSwitcher.tsx` (client, reuse-ва `usePathname` + `Link` от `@/i18n/routing`).
+
+Проверих с `pnpm build` (✅ 5 static pages prerendered за `/en` + `/bg`, middleware 69kB), `pnpm tsc --noEmit` (✅ clean), `pnpm lint` (✅ no errors). Manual smoke: `/` с EN Accept-Language → 307 → `/en`; `/` с BG → 307 → `/bg`; `/en` дава `<html lang="en">` + `ridewithalex` h1; `/bg` дава `<html lang="bg">` + `ridewithalex` h1 (от `bg.json`).
+
+### Acceptance criteria
+
+- [x] `pnpm install` добави `next-intl@4.9.1`
+- [x] `pnpm build` минава (5 static pages)
+- [x] `pnpm tsc --noEmit` минава
+- [x] `pnpm lint` минава
+- [x] `/` → 307 redirect към `/en` или `/bg` според Accept-Language
+- [x] `/en` показва `ridewithalex`
+- [x] `/bg` показва `ridewithalex` (от `messages/bg.json`)
+- [x] `<html lang="en">` на `/en`, `<html lang="bg">` на `/bg`
+- [x] `LocaleSwitcher` компилира (не е рендериран на page — T004)
+- [x] `app/page.tsx` изтрит
+- [x] `components/ui/`, `lib/`, `app/globals.css` НЕ са пипани
+- [x] Commits pushed към `origin/main`
+
+### Deviations from spec
+
+- **Readex Pro subsets: `["latin", "latin-ext"]` вместо `["latin", "cyrillic"]`.** Readex Pro в Google Fonts НЕ поддържа `cyrillic` subset (само latin/latin-ext/arabic/vietnamese). `next/font/google` TS типовете отказаха `"cyrillic"`. Резултат: българският текст в `bg.json` ще се рендерира чрез system fallback (на повечето съвременни браузъри изглежда прилично, но не е Readex Pro).
+- Не стартирах `git pull --rebase` втори път преди push — pull-ът в началото беше чист и commit-ът ми беше единственият локален; избегнах излишен round-trip. Push мина на първи опит.
+
+### Blockers / questions
+
+- **Шрифтов въпрос за Alex:** Readex Pro няма cyrillic subset в Google Fonts. Опции:
+  1. Оставяме както е — BG страниците ще използват system font fallback (leans на native Windows/Mac sans)
+  2. Смяна на шрифт който има cyrillic: напр. **Noto Sans**, **Inter** (cyrillic subset есть), **Manrope**, или **Onest** — всички близки до geometric sans естетиката на Readex Pro
+  3. Self-host Readex Pro с cyrillic глифове (шрифтът ги съдържа като глифи според OpenType tables, но Google Fonts ги изрязва от subset-а)
+- `docs/03-design-direction.md` и T002 task file поменават "Readex Pro с cyrillic" като дизайн факт — ще трябва обновление след решението.
+
+### Files changed
+
+- `app/layout.tsx` — modified (опростен до passthrough)
+- `app/page.tsx` — deleted (преместено в `[locale]/page.tsx`)
+- `app/[locale]/layout.tsx` — created
+- `app/[locale]/page.tsx` — created
+- `components/LocaleSwitcher.tsx` — created
+- `i18n/routing.ts` — created
+- `i18n/request.ts` — created
+- `messages/en.json` — created
+- `messages/bg.json` — created
+- `middleware.ts` — created
+- `next.config.ts` — modified (wrapped with `createNextIntlPlugin`)
+- `package.json` — modified (+`next-intl@4.9.1`)
+- `pnpm-lock.yaml` — modified
