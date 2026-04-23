@@ -6,3 +6,4 @@
 |---|---|---|---|---|
 | s01 | 2026-04-23 | Planning & setup | [2026-04-23-s01-planning.md](2026-04-23-s01-planning.md) | 7 планиращи документа, brand placeholder, orchestrator система, git repo свързан |
 | s02 | 2026-04-23 | T001 приемане | [2026-04-23-s02-t001-complete.md](2026-04-23-s02-t001-complete.md) | T001 завършен (commit `8d7133e`); Next.js + Tailwind + Readex Pro живи; T002/T003/T005 unlocked |
+| s03 | 2026-04-23 | T002 приемане | [2026-04-23-s03-t002-complete.md](2026-04-23-s03-t002-complete.md) | T002 завършен (commit `f105ef8`); design tokens + cn/Button/NavPill/StatBlock; zero deviations; T004 ½ unblocked (чака T003) |

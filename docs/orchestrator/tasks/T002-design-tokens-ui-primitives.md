@@ -1,10 +1,12 @@
 # T002 · Design tokens + UI primitives
 
-**Status:** 🟢 Ready
+**Status:** ✅ Completed (2026-04-23)
 **Priority:** High (blocker за T004 hero)
 **Depends on:** T001 ✅
 **Estimated effort:** ~20–40 минути за downstream агент
-**Assigned:** pending
+**Actual effort:** ~10 минути
+**Assigned:** downstream Claude Code агент (agent 2)
+**Commit:** [`f105ef8`](https://github.com/Crypt0Ninja/RideWithAlex/commit/f105ef8)
 
 ## Цел
 
@@ -282,4 +284,57 @@ Respond with exactly this markdown block, filled in:
 
 ## Reports
 
-_(празно — чака downstream агента)_
+### Report 1 — 2026-04-23 · agent 2 · ✅ completed
+
+**Commit:** `f105ef8` — `feat(T002): add design tokens + button/navpill/statblock primitives`
+**Time:** ~10 min
+
+#### Обобщение
+
+Добавен shared design-token слой и три UI примитива — буквално от спеца. `lib/cn.ts` е 3-редов hand-rolled classname joiner (без `clsx`/`tailwind-merge`). Изтрит `lib/.gitkeep` (lib/ вече има реално съдържание). Добавени 3 Tailwind v4 `@utility` правила в `app/globals.css` (`hero-title`, `diagonal-divider-right`, `diagonal-divider-left`) след `@theme` блока, без да се пипа `--font-sans`.
+
+Създадени: `Button.tsx` (primary/secondary, pill, lowercase, focus-visible ring), `NavPill.tsx` (polymorphic div|nav, backdrop-blur), `StatBlock.tsx` (value + label + diagonal divider с `align` + `dividerDirection` пропове, hidden md:block). Всички TypeScript, zero `any`. `app/layout.tsx` и `app/page.tsx` — непипнати.
+
+Pre-start `git pull --rebase` е взел orchestrator docs commits (`1f518aa`, `597bf54`). Commit-ът landed чисто върху `597bf54` без conflicts.
+
+#### Acceptance criteria — verified ✅
+
+| Criterion | Evidence |
+|---|---|
+| `pnpm build` succeeds | `✓ Compiled successfully in 3.0s`, 4/4 static pages |
+| `pnpm tsc --noEmit` passes | Exit 0, no output |
+| `pnpm lint` passes | `✔ No ESLint warnings or errors` |
+| `lib/cn.ts` exists and exports `cn` | ✅ (orchestrator inspected) |
+| `Button.tsx` с `variant: "primary" \| "secondary"` | ✅ (orchestrator inspected) |
+| `NavPill.tsx` с `as: "div" \| "nav"` | ✅ |
+| `StatBlock.tsx` с `align` + `dividerDirection` | ✅ |
+| 3 `@utility` декларации в globals.css | ✅ (orchestrator inspected — след `@theme` блока) |
+| Zero `any` types | ✅ |
+| `app/layout.tsx` + `app/page.tsx` untouched | ✅ (git diff empty) |
+| Committed + pushed | `597bf54..f105ef8 main -> main` |
+
+#### Deviations from spec
+
+**None.** Всички 5 файла са създадени/променени точно по спеца.
+
+Лек git history nuance: `pull --rebase` pre-start е взел 2 междинни docs commit-а (`1f518aa`, `597bf54`), така че `f105ef8` е наследник на `597bf54`, не на `8d7133e` — това е коректна rebase семантика.
+
+#### Orchestrator verification
+
+- `lib/cn.ts` — 3 реда, точно според спеца ✅
+- `components/ui/Button.tsx` — `ButtonVariant` type, Record mapping, всички classes верни ✅
+- `components/ui/NavPill.tsx` — polymorphic `as` prop, `Tag = as`, spread props ✅
+- `components/ui/StatBlock.tsx` — conditional rendering за left/right align с divider преди/след value ✅
+- `app/globals.css` — `@import` → `@theme` → 3× `@utility`, в правилен ред ✅
+- `git diff --stat` на `app/layout.tsx` + `app/page.tsx`: празно ✅
+
+**Вердикт:** T002 е приет без revision. Примитивите чакат T004 (hero) да ги използва.
+
+#### Files changed (6)
+
+- `lib/cn.ts` — created
+- `lib/.gitkeep` — deleted (вече не е нужен)
+- `components/ui/Button.tsx` — created
+- `components/ui/NavPill.tsx` — created
+- `components/ui/StatBlock.tsx` — created
+- `app/globals.css` — modified (3 × `@utility` блока добавени)

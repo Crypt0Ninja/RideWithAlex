@@ -2,7 +2,7 @@
 
 > Жив kanban на проекта. Обновява се при всяка сесия и при всеки завършен таск.
 
-**Последна актуализация:** 2026-04-23 · Сесия s02
+**Последна актуализация:** 2026-04-23 · Сесия s03
 
 ## Общ прогрес
 
@@ -11,8 +11,8 @@
 | Планиране (docs) | ✅ Завършено | 7 документа + brand assets |
 | Orchestrator setup | ✅ Завършено | Система активна, s01 документирана |
 | Dev scaffolding | ✅ Завършено | T001 — Next.js 15 + Tailwind v4 + Readex Pro |
-| Typography + design tokens | ⚪ Чака | T002 готов за спецификация |
-| i18n (BG/EN) | ⚪ Чака | T003 |
+| Typography + design tokens | ✅ Завършено | T002 — cn, Button, NavPill, StatBlock, hero-title utility |
+| i18n (BG/EN) | 🟡 В ход | T003 пуснат паралелно, чака доклад |
 | Hero секция | ⚪ Чака | T004 |
 | Vercel deploy | ⚪ Чака | T005 (паралелно с T002/T003) |
 | Страници (lessons, pricing, about) | ⚪ Чака | T006-T008 |
@@ -24,22 +24,22 @@
 | ID | Заглавие | Commit | Сесия | Агент |
 |---|---|---|---|---|
 | T001 | Next.js 15 scaffold | [`8d7133e`](https://github.com/Crypt0Ninja/RideWithAlex/commit/8d7133e) | s02 | agent 1 |
+| T002 | Design tokens + UI primitives | [`f105ef8`](https://github.com/Crypt0Ninja/RideWithAlex/commit/f105ef8) | s03 | agent 2 |
 
 ## Активни задачи
 
 | ID | Заглавие | Статус | Агент | Блокира |
 |---|---|---|---|---|
-| T002 | Design tokens + UI primitives | 🟢 Ready | downstream (паралелно) | T004 |
-| T003 | i18n (next-intl BG/EN) | 🟢 Ready | downstream (паралелно) | T004, всички страници |
+| T003 | i18n (next-intl BG/EN) | 🟡 In progress | downstream (паралелно с T002) | T004, всички страници |
 | T005 | Vercel deploy + preview URL | 🟢 Ready | **Alex (ръчно)** | launch flow |
 
 ## Pipeline (в план)
 
 | ID | Заглавие | Приоритет | Зависи от |
 |---|---|---|---|
-| T002 | Typography + design tokens + UI primitives (Button, Pill, Stat) | High | T001 ✅ — **unblocked** |
-| T003 | i18n setup (next-intl, BG/EN routing, [locale] segment) | High | T001 ✅ — **unblocked** |
-| T004 | Hero секция (видео + staggered text + pill navbar + stat blocks) | **Critical** | T002, T003 |
+| ~~T002~~ | ~~Typography + design tokens + UI primitives~~ | ~~High~~ | ✅ **Done** (`f105ef8`) |
+| T003 | i18n setup (next-intl, BG/EN routing, [locale] segment) | High | 🟡 **In progress** |
+| T004 | Hero секция (видео + staggered text + pill navbar + stat blocks) | **Critical** | T002 ✅, T003 🟡 — **½ unblocked** |
 | T005 | Vercel deploy + preview URL | High | T001 ✅ — **unblocked** |
 | T006 | `/lessons` страница | Medium | T002 |
 | T007 | `/pricing` страница (4-те пакета) | Medium | T002 |
