@@ -7,7 +7,7 @@
 | T001 | Next.js 15 scaffold | ✅ Completed | — | [T001-nextjs-scaffold.md](T001-nextjs-scaffold.md) |
 | T002 | Typography + design tokens + UI primitives | ✅ Completed | T001 ✅ | [T002-design-tokens-ui-primitives.md](T002-design-tokens-ui-primitives.md) |
 | T003 | i18n (next-intl, BG/EN) | ✅ Completed (с caveat) | T001 ✅ | [T003-i18n-next-intl.md](T003-i18n-next-intl.md) |
-| T004 | Hero секция | 🟢 Ready | T002 ✅, T003 ✅, T018 ✅ | [T004-hero-section.md](T004-hero-section.md) |
+| T004 | Hero секция | ✅ Completed | T002 ✅, T003 ✅, T018 ✅ | [T004-hero-section.md](T004-hero-section.md) |
 | T005 | Vercel deploy + preview URL | 🟢 Ready (manual, Alex) | T001 ✅ | [T005-vercel-deploy.md](T005-vercel-deploy.md) |
 | T006 | `/lessons` страница | ⚪ Pending | T002 | _(не е дефиниран)_ |
 | T007 | `/pricing` страница | ⚪ Pending | T002 | _(не е дефиниран)_ |

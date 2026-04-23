@@ -1,10 +1,12 @@
 # T004 · Hero секция
 
-**Status:** 🟢 Ready
+**Status:** ✅ Completed (2026-04-23)
 **Priority:** **Critical** (централна страница, първо впечатление)
 **Depends on:** T001 ✅, T002 ✅, T003 ✅, T018 ✅
 **Estimated effort:** ~60–90 минути за downstream агент
-**Assigned:** pending
+**Actual effort:** ~15 минути
+**Assigned:** downstream Claude Code агент (agent 5)
+**Commit:** [`fe3d1c0`](https://github.com/Crypt0Ninja/RideWithAlex/commit/fe3d1c0)
 
 ## Цел
 
@@ -483,4 +485,65 @@ Update to:
 
 ## Reports
 
-_(празно — чака downstream агента)_
+### Report 1 — 2026-04-23 · agent 5 · ✅ completed
+
+**Commit:** `fe3d1c0` — `feat(T004): hero section with video, staggered text, navbar, stats`
+**Time:** ~15 min (4× по-бързо от estimate-а от 60-90 min)
+
+#### Обобщение
+
+7 композирани компонента под `components/brand/` + `components/hero/`, свързани с T002 примитиви (Button, NavPill, StatBlock) и T003 i18n (Link, LocaleSwitcher, useTranslations). Top-level `Hero.tsx` е `h-screen` relative section, композиращ `HeroVideo` (CloudFront mp4 + черен 20% overlay + bottom gradient), `HeroNavbar` (3-pill layout), `HeroStaggeredText` + `HeroDescription` + `HeroStats` (в relative stage).
+
+Hero думите `ride`/`with`/`alex` и stat values (+8/+500/+12) остават hard-coded (brand typography). Всичко друго flow-ва през next-intl. `@keyframes hero-word-in` в `app/globals.css`. `motion-safe:animate-[hero-word-in_600ms_ease-out_forwards]` + `motion-reduce` variants + inline `animationDelay` 0/120/240ms. BG и EN tagline-ите разширени. `app/[locale]/page.tsx` колапсиран в 1-лайнер.
+
+#### Acceptance criteria — verified ✅
+
+| Criterion | Evidence |
+|---|---|
+| `pnpm build` | `✓ Compiled in 4.2s`, 5/5 pages, `/[locale]` 1.33 kB |
+| `pnpm tsc --noEmit` | Exit 0 |
+| `pnpm lint` | `✔ No warnings or errors` |
+| `/en` full hero (curl) | Contains `<video>`, CloudFront src, `>ride<` `>with<` `>alex<`, `book now`, `lessons`, `pricing`, `years teaching`, `riders taught`, `countries served` |
+| `/bg` with BG translations | `<html lang="bg"`, `уроци`, `цени`, `резервирай`, `години опит`, `ученика`, `държави`; hero words остават англ. |
+| Stagger анимация | `animationDelay: 0/120/240ms` inline + `@keyframes hero-word-in` |
+| Center nav `hidden md:flex` | `HeroNavbar.tsx:30` ✅ |
+| Video autoplay/loop/muted/playsInline | Четирите атрибута `HeroVideo.tsx:5-10` |
+| `<html lang={locale}>` | Both verified via curl |
+| 4× Onest woff2 | `.next/static/media/` (от T018) |
+| Pushed | `11cc623..fe3d1c0 main -> main` |
+
+#### Deviations from spec
+
+**Нула.** 11-те файла (7 създадени, 4 модифицирани) са буквално от спеца. Minor note: webpack benign cache-restore warnings на студен dev сървър (не засягат output-а, production `pnpm build` е clean).
+
+#### Blockers / questions
+
+**Non-blocker observation:** agent-ът не може да отвори браузър — само curl за smoke test. Markup-ът е коректен; видео playback и CSS анимация зависят от браузъра → **нужна е визуална проверка от Alex в Chrome/Safari**.
+
+#### Files changed (11)
+
+**Нови (7):**
+- `components/brand/Logo.tsx` — inline peak SVG, currentColor
+- `components/hero/Hero.tsx` — композиция wrapper
+- `components/hero/HeroVideo.tsx` — CloudFront video + overlay + gradient
+- `components/hero/HeroNavbar.tsx` — 3-pill floating nav
+- `components/hero/HeroStaggeredText.tsx` — 3 animated думи
+- `components/hero/HeroDescription.tsx` — tagline (md+ only)
+- `components/hero/HeroStats.tsx` — 3× StatBlock позиционирани
+
+**Модифицирани (4):**
+- `app/[locale]/page.tsx` — 1-liner `<Hero />`
+- `app/globals.css` — `@keyframes hero-word-in` добавен
+- `messages/en.json` — разширен tagline + `stats.*`
+- `messages/bg.json` — разширен tagline + `stats.*`
+
+#### Orchestrator verification
+
+- `Hero.tsx` композиция: section → HeroVideo → HeroNavbar → (HeroStaggeredText + HeroDescription + HeroStats) ✅
+- `HeroStaggeredText.tsx`: words array с text/className/delay, `motion-safe`/`motion-reduce` правилно ✅
+- `HeroNavbar.tsx`: 3-pill layout с правилни имports (`NavPill`, `Button`, `Logo`, `LocaleSwitcher`, `Link` от `@/i18n/routing`) ✅
+- `app/[locale]/page.tsx`: 1-liner ✅
+- `globals.css`: `@keyframes hero-word-in` след `@utility` блоковете ✅
+- `messages/bg.json`: лаконични BG labels (`години опит`, `ученика`, `държави`) + разширен BG tagline ✅
+
+**Вердикт:** T004 приет без revision. Site auto-deploys на [ridewithalex.vercel.app](https://ridewithalex.vercel.app) за ~1 минута след push. **Визуална проверка от Alex необходима.**
