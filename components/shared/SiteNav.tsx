@@ -9,6 +9,7 @@ export function SiteNav() {
   const t = useTranslations("nav");
   const navLinks = [
     { href: "/lessons", key: "lessons" as const },
+    { href: "/about", key: "about" as const },
     { href: "/pricing", key: "pricing" as const },
     { href: "/gallery", key: "gallery" as const },
     { href: "/reviews", key: "reviews" as const },
@@ -45,7 +46,7 @@ export function SiteNav() {
         <NavPill className="hidden sm:flex items-center px-4 py-2">
           <LocaleSwitcher />
         </NavPill>
-        <Link href="/contact">
+        <Link href="/book">
           <Button variant="primary" className="text-sm">
             {t("book")}
           </Button>

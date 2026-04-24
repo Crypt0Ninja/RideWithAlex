@@ -23,7 +23,7 @@ export function ReviewsCta() {
           <Link href="/lessons">
             <Button variant="secondary">{t("lessons")}</Button>
           </Link>
-          <Link href="/contact">
+          <Link href="/book">
             <Button variant="primary">{t("book")}</Button>
           </Link>
         </div>

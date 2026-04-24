@@ -23,7 +23,7 @@ export function LessonsCta() {
           <Link href="/pricing">
             <Button variant="secondary">{t("pricing")}</Button>
           </Link>
-          <Link href="/contact">
+          <Link href="/book">
             <Button variant="primary">{t("book")}</Button>
           </Link>
         </div>
