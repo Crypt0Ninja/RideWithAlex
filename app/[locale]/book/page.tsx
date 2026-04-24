@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { PageShell } from "@/components/shared/PageShell";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { LoopVideoBackground } from "@/components/shared/LoopVideoBackground";
 import { BookingFlow } from "@/components/book/BookingFlow";
 import { getAvailableSlots } from "@/lib/slots";
 import type { SerializedDay } from "@/components/book/SlotPicker";
@@ -42,10 +43,12 @@ function BookPageInner({ days }: { days: SerializedDay[] }) {
 
   return (
     <PageShell>
-      <PageHeader eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} />
-      <section className="px-6 md:px-10 py-16 md:py-24 max-w-4xl mx-auto">
-        <BookingFlow days={days} />
-      </section>
+      <LoopVideoBackground src="/videos/book/ambient.mp4">
+        <PageHeader eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} />
+        <section className="px-6 md:px-10 py-16 md:py-24 max-w-4xl mx-auto">
+          <BookingFlow days={days} />
+        </section>
+      </LoopVideoBackground>
     </PageShell>
   );
 }
