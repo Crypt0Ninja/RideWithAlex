@@ -4,6 +4,7 @@ import { NavPill } from "@/components/ui/NavPill";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/brand/Logo";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
+import { MobileMenu } from "@/components/shared/MobileMenu";
 
 export function HeroNavbar() {
   const t = useTranslations("nav");
@@ -41,14 +42,15 @@ export function HeroNavbar() {
       </NavPill>
 
       <div className="flex items-center gap-3">
-        <NavPill className="hidden sm:flex items-center px-4 py-2">
+        <NavPill className="hidden md:flex items-center px-4 py-2">
           <LocaleSwitcher />
         </NavPill>
-        <Link href="/book">
+        <Link href="/book" className="hidden sm:inline-flex">
           <Button variant="primary" className="text-sm">
             {t("book")}
           </Button>
         </Link>
+        <MobileMenu />
       </div>
     </nav>
   );
