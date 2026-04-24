@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { Link } from "@/i18n/routing";
@@ -26,8 +27,13 @@ type Props = {
 
 export function MobileMenu({ className }: Props) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const t = useTranslations("nav");
   const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -50,6 +56,69 @@ export function MobileMenu({ className }: Props) {
   const stripLocale = (path: string) => path.replace(/^\/(en|bg)(?=\/|$)/, "") || "/";
   const currentPath = stripLocale(pathname ?? "/");
 
+  const overlay = (
+    <div
+      className="fixed inset-0 z-[100] bg-black flex flex-col md:hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-label="site navigation"
+    >
+      <div className="flex items-center justify-between px-6 pt-6 pb-4">
+        <Link
+          href="/"
+          onClick={() => setOpen(false)}
+          aria-label="ridewithalex home"
+          className="flex items-center gap-2 text-white"
+        >
+          <Logo className="h-5 w-5" />
+          <span className="text-sm tracking-tight lowercase">ridewithalex</span>
+        </Link>
+
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          aria-label="close menu"
+          className="inline-flex items-center justify-center h-11 w-11 rounded-full border border-white/10 text-white hover:border-white/30 transition-colors"
+        >
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+            <line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" strokeWidth="1.5" />
+            <line x1="1" y1="13" x2="13" y2="1" stroke="currentColor" strokeWidth="1.5" />
+          </svg>
+        </button>
+      </div>
+
+      <nav className="flex-1 flex flex-col justify-center px-8 gap-2 overflow-y-auto">
+        {links.map(({ href, key }) => {
+          const active = currentPath === href;
+          return (
+            <Link
+              key={key}
+              href={href}
+              onClick={() => setOpen(false)}
+              className={cn(
+                "text-4xl font-medium lowercase tracking-tight py-3 transition-colors border-b border-white/5",
+                active ? "text-white" : "text-white/60 hover:text-white",
+              )}
+            >
+              {t(key)}
+            </Link>
+          );
+        })}
+      </nav>
+
+      <div className="px-6 pb-8 pt-6 border-t border-white/10 flex items-center justify-between gap-4">
+        <div className="text-white">
+          <LocaleSwitcher />
+        </div>
+        <Link href="/book" onClick={() => setOpen(false)}>
+          <Button variant="primary" className="text-sm">
+            {t("book")}
+          </Button>
+        </Link>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <button
@@ -62,80 +131,13 @@ export function MobileMenu({ className }: Props) {
           className,
         )}
       >
-        <svg
-          width="16"
-          height="14"
-          viewBox="0 0 16 14"
-          fill="none"
-          aria-hidden
-        >
+        <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden>
           <line x1="0" y1="2" x2="16" y2="2" stroke="currentColor" strokeWidth="1.5" />
           <line x1="0" y1="12" x2="16" y2="12" stroke="currentColor" strokeWidth="1.5" />
         </svg>
       </button>
 
-      {open && (
-        <div
-          className="fixed inset-0 z-50 bg-black flex flex-col md:hidden"
-          role="dialog"
-          aria-modal="true"
-          aria-label="site navigation"
-        >
-          <div className="flex items-center justify-between px-6 pt-6 pb-4">
-            <Link
-              href="/"
-              onClick={() => setOpen(false)}
-              aria-label="ridewithalex home"
-              className="flex items-center gap-2 text-white"
-            >
-              <Logo className="h-5 w-5" />
-              <span className="text-sm tracking-tight lowercase">ridewithalex</span>
-            </Link>
-
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              aria-label="close menu"
-              className="inline-flex items-center justify-center h-11 w-11 rounded-full border border-white/10 text-white hover:border-white/30 transition-colors"
-            >
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
-                <line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" strokeWidth="1.5" />
-                <line x1="1" y1="13" x2="13" y2="1" stroke="currentColor" strokeWidth="1.5" />
-              </svg>
-            </button>
-          </div>
-
-          <nav className="flex-1 flex flex-col justify-center px-8 gap-2 overflow-y-auto">
-            {links.map(({ href, key }) => {
-              const active = currentPath === href;
-              return (
-                <Link
-                  key={key}
-                  href={href}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    "text-4xl font-medium lowercase tracking-tight py-3 transition-colors border-b border-white/5",
-                    active ? "text-white" : "text-white/60 hover:text-white",
-                  )}
-                >
-                  {t(key)}
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="px-6 pb-8 pt-6 border-t border-white/10 flex items-center justify-between gap-4">
-            <div className="text-white">
-              <LocaleSwitcher />
-            </div>
-            <Link href="/book" onClick={() => setOpen(false)}>
-              <Button variant="primary" className="text-sm">
-                {t("book")}
-              </Button>
-            </Link>
-          </div>
-        </div>
-      )}
+      {mounted && open && createPortal(overlay, document.body)}
     </>
   );
 }
