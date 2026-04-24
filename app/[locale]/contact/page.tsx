@@ -7,6 +7,23 @@ import { ContactInfo } from "@/components/contact/ContactInfo";
 import { MeetingPoint } from "@/components/contact/MeetingPoint";
 import { FaqAccordion } from "@/components/contact/FaqAccordion";
 import { ContactCta } from "@/components/contact/ContactCta";
+import {
+  BreadcrumbListJsonLd,
+  FaqPageJsonLd,
+} from "@/components/seo/StructuredData";
+
+const FAQ_KEYS = [
+  "equipment",
+  "clothing",
+  "groupSize",
+  "minAge",
+  "language",
+  "weather",
+  "cancellation",
+  "location",
+  "liftPass",
+  "payment",
+] as const;
 
 type MetadataProps = {
   params: Promise<{ locale: string }>;
@@ -22,11 +39,39 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
   };
 }
 
-export default function ContactPage() {
+export default async function ContactPage({ params }: MetadataProps) {
+  const { locale } = await params;
+  const tFaq = await getTranslations({ locale, namespace: "contact.faq" });
+  const tn = await getTranslations({ locale, namespace: "nav" });
+
+  const faqItems = FAQ_KEYS.map((key) => ({
+    question: tFaq(`items.${key}.q`),
+    answer: tFaq(`items.${key}.a`),
+  }));
+
+  return <ContactPageInner locale={locale} faqItems={faqItems} navLabel={tn("contact")} />;
+}
+
+function ContactPageInner({
+  locale,
+  faqItems,
+  navLabel,
+}: {
+  locale: string;
+  faqItems: { question: string; answer: string }[];
+  navLabel: string;
+}) {
   const t = useTranslations("contact");
 
   return (
     <PageShell>
+      <BreadcrumbListJsonLd
+        items={[
+          { name: "home", href: `/${locale}` },
+          { name: navLabel, href: `/${locale}/contact` },
+        ]}
+      />
+      <FaqPageJsonLd items={faqItems} />
       <ScrollVideoSection
         frameCount={120}
         framePathPrefix="/videos/pricing/frame-"

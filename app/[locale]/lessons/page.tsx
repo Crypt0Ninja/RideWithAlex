@@ -5,6 +5,10 @@ import { PageShell } from "@/components/shared/PageShell";
 import { ScrollVideoSection } from "@/components/shared/ScrollVideoSection";
 import { LessonTypeCard } from "@/components/lessons/LessonTypeCard";
 import { LessonsCta } from "@/components/lessons/LessonsCta";
+import {
+  BreadcrumbListJsonLd,
+  SnowboardServiceJsonLd,
+} from "@/components/seo/StructuredData";
 
 type MetadataProps = {
   params: Promise<{ locale: string }>;
@@ -20,8 +24,14 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
   };
 }
 
-export default function LessonsPage() {
+export default async function LessonsPage({ params }: MetadataProps) {
+  const { locale } = await params;
+  return <LessonsPageInner locale={locale} />;
+}
+
+function LessonsPageInner({ locale }: { locale: string }) {
   const t = useTranslations("lessons");
+  const tn = useTranslations("nav");
 
   const lessonTypes = [
     {
@@ -43,6 +53,13 @@ export default function LessonsPage() {
 
   return (
     <PageShell>
+      <BreadcrumbListJsonLd
+        items={[
+          { name: "home", href: `/${locale}` },
+          { name: tn("lessons"), href: `/${locale}/lessons` },
+        ]}
+      />
+      <SnowboardServiceJsonLd locale={locale} />
       <ScrollVideoSection
         frameCount={90}
         framePathPrefix="/videos/lessons/frame-"
