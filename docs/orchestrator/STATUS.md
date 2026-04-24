@@ -2,9 +2,9 @@
 
 > Жив kanban на проекта. Обновява се при всяка сесия и при всеки завършен таск.
 
-**Последна актуализация:** 2026-04-24 · Сесия s15 (Wave 4 kickoff — Supabase pivot locked, T011 spec written, execute-self mode)
+**Последна актуализация:** 2026-04-24 · Сесия s16 (T_DOMAIN migration — ridewithalex.org live with full stack)
 
-**Production URL:** [ridewithalex.vercel.app](https://ridewithalex.vercel.app) · auto-deploy on push to `main`
+**Production URL:** [ridewithalex.org](https://ridewithalex.org) · auto-deploy on push to `main` (Cloudflare DNS-only, Vercel SSL, Resend verified domain)
 
 ## Общ прогрес
 
@@ -80,8 +80,8 @@ Supabase creds (получени s15):
 | ~~T024~~ | ~~Pricing content hotfix~~ | ✅ **Done s14** (`8b1766f`) | — |
 | T016 | SEO (sitemap, robots, OG images, metadata) | ✅ **Completed s15** (`26c3e33`) | All pages ✅ |
 | T017 | QA + launch prep | Critical | T_DOMAIN + T025 |
-| T_DOMAIN | Custom домейн `ridewithalex.com` | Blocker за launch + T025 | Alex да купи |
-| T025 | Resend domain verification (customer emails fix) | 🔴 Blocked | T_DOMAIN |
+| T_DOMAIN | Custom домейн `ridewithalex.org` (Cloudflare DNS-only → Vercel SSL) | ✅ **Completed s16** | — |
+| T025 | Resend domain verification (customer emails) | ✅ **Completed s16** | — |
 
 ## Блокери / Отворени въпроси
 
@@ -103,7 +103,8 @@ Supabase creds (получени s15):
 
 ## Последни 3 промени
 
-1. **2026-04-24 s15** — **Wave 4 COMPLETE в една сесия.** 10 commits + 5 задачи (T011 → T020 → T010 → T012 → T021) + 2 docs commits. Stack locked (Supabase + Drizzle + supabase-js + Google Calendar + Resend + Supabase Auth). 4 new DB tables (time_slots, bookings, google_tokens + RLS), 5 API routes, 2 admin pages, 1 booking page. OAuth verified (live Calendar API 200). Остава: Alex да създаде admin user + local smoke test + Vercel env vars setup.
+1. **2026-04-24 s16** — **T_DOMAIN + T025 migration COMPLETE.** Custom domain `ridewithalex.org` живее с Cloudflare DNS-only + Vercel SSL. API-driven migration ~20 мин active work: code `.com` → `.org` (9 files), Cloudflare A+CNAME records, Vercel domain + www redirect, Resend domain + 4 DNS records (DKIM+SPF+MX+DMARC) → status `verified`. Email-ите сега идват от `booking@ridewithalex.org`. Alex ръчно обнови Google OAuth redirect URIs. Resend sandbox limitation resolved.
+2. **2026-04-24 s15** — **Wave 4 COMPLETE в една сесия.** 10 commits + 5 задачи (T011 → T020 → T010 → T012 → T021) + 2 docs commits. Stack locked. 4 new DB tables + RLS, 5 API routes, 2 admin pages, 1 booking page. OAuth verified.
 2. **2026-04-24 s14** — **Wave 3 Complete + T024 pricing hotfix.** Orchestrator изпълни лично всичките 5 страници: T015 `418bf81` → T013 `11e897c` → T014 `2afece5` → T022 `3b4f745` → T023 `dfbad3f`. Плюс T024 `8b1766f` — премахнати Stripe/caparo references. **18 routes live.**
 3. **2026-04-24 s13** — **Wave 3 pivot**: Stripe премахнат (cash-only); Wave 3 пренасочен към 5 static страници.
 
