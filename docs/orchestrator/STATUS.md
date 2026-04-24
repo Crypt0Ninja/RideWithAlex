@@ -78,8 +78,8 @@ Supabase creds (получени s15):
 | T012 | Email (Resend): confirmation към клиент + notify към Alex | Medium | T010 + RESEND_API_KEY |
 | T021 | Admin panel (Supabase Auth + view + block slots) | Medium | T011 + T020 |
 | ~~T024~~ | ~~Pricing content hotfix~~ | ✅ **Done s14** (`8b1766f`) | — |
-| T016 | SEO (sitemap, robots, OG images, metadata) | Medium | All pages |
-| T017 | QA + launch prep | Critical | All previous |
+| T016 | SEO (sitemap, robots, OG images, metadata) | ✅ **Completed s15** (`26c3e33`) | All pages ✅ |
+| T017 | QA + launch prep | Critical | T_DOMAIN + T025 |
 | T_DOMAIN | Custom домейн `ridewithalex.com` | Blocker за launch + T025 | Alex да купи |
 | T025 | Resend domain verification (customer emails fix) | 🔴 Blocked | T_DOMAIN |
 

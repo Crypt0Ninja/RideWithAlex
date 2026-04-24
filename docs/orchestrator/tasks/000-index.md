@@ -19,7 +19,7 @@
 | T013 | `/gallery` страница | ✅ Completed | T019 ✅ | [T013-gallery-page.md](T013-gallery-page.md) |
 | T014 | `/reviews` страница | ✅ Completed | T019 ✅ | [T014-reviews-page.md](T014-reviews-page.md) |
 | T015 | `/contact` + FAQ | ✅ Completed | T019 ✅ | [T015-contact-faq-page.md](T015-contact-faq-page.md) |
-| T016 | SEO (sitemap, robots, OG images, metadata) | ⚪ Pending | all pages | _(не е дефиниран)_ |
+| T016 | SEO (sitemap, robots, OG images, metadata) | ✅ Completed s15 (`26c3e33`) | all pages ✅ | [T016-seo.md](T016-seo.md) |
 | T017 | QA + launch | ⚪ Pending | all | _(не е дефиниран)_ |
 | T018 | Font swap (Readex Pro → Onest за cyrillic) | ✅ Completed | T003 ✅ | [T018-font-swap-cyrillic.md](T018-font-swap-cyrillic.md) |
 | T019 | Shared page shell (SiteNav/Footer/Shell/Header) | ✅ Completed | T002 ✅, T003 ✅, T004 ✅, T018 ✅ | [T019-shared-page-shell.md](T019-shared-page-shell.md) |
