@@ -6,7 +6,7 @@ import { HeroStats } from "./HeroStats";
 
 export function Hero() {
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black">
+    <section className="relative h-[100svh] w-full overflow-hidden bg-black">
       <HeroVideo />
       <HeroNavbar />
       <div className="relative h-full w-full">
