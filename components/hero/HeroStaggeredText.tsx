@@ -2,7 +2,7 @@ import { cn } from "@/lib/cn";
 
 const words = [
   {
-    text: "ride",
+    text: "Ride",
     className: "left-4 md:left-10 top-[14%] md:top-[18%]",
     delay: 0,
   },
@@ -14,7 +14,7 @@ const words = [
     delay: 120,
   },
   {
-    text: "alex",
+    text: "Alex",
     className: "left-[18%] md:left-[28%] top-[54%] md:top-[58%]",
     delay: 240,
   },
