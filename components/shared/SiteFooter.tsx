@@ -54,10 +54,10 @@ export function SiteFooter() {
           <ul className="space-y-2 text-sm lowercase">
             <li>
               <a
-                href="mailto:alex@ridewithalex.com"
+                href="mailto:alex@ridewithalex.org"
                 className="text-white/70 hover:text-white transition-colors"
               >
-                alex@ridewithalex.com
+                alex@ridewithalex.org
               </a>
             </li>
             <li>

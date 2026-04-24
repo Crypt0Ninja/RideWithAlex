@@ -89,7 +89,7 @@ function renderCustomerHtml(b: BookingForEmail): string {
   <p><strong style="color:#fff;">what to bring:</strong> waterproof jacket + pants, thermal layer, gloves, helmet, goggles. no cotton. i can help you sort rentals + lift pass if needed.</p>
   <p><strong style="color:#fff;">payment:</strong> cash on the day — bulgarian leva or euros. no online deposit.</p>
   <p>i'll call or message you to confirm. questions? reply to this email or text +359 88 513 7471.</p>
-  <p class="footer">ridewithalex.com · bansko, bulgaria</p>
+  <p class="footer">ridewithalex.org · bansko, bulgaria</p>
 </div></body></html>`;
 }
 
@@ -112,7 +112,7 @@ function renderAlexHtml(b: BookingForEmail): string {
     <div class="row"><span class="label">ref</span><span class="value">${b.bookingId.slice(0, 8)}</span></div>
   </div>
   <p>calendar event was auto-created in your google calendar.</p>
-  <p class="footer">ridewithalex.com admin</p>
+  <p class="footer">ridewithalex.org admin</p>
 </div></body></html>`;
 }
 

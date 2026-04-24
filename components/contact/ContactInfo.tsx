@@ -9,7 +9,7 @@ type Channel = {
 
 const channels: Channel[] = [
   { key: "phone", href: "tel:+359885137471", value: "+359 88 513 7471", external: false },
-  { key: "email", href: "mailto:alex@ridewithalex.com", value: "alex@ridewithalex.com", external: false },
+  { key: "email", href: "mailto:alex@ridewithalex.org", value: "alex@ridewithalex.org", external: false },
   { key: "instagram", href: "https://instagram.com/ridewithalex", value: "@ridewithalex", external: true },
 ];
 

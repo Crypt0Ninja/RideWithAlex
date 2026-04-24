@@ -34,7 +34,7 @@ function buildEventBody(booking: BookingForCalendar) {
     booking.notes ? `notes: ${booking.notes}` : null,
     `booking id: ${booking.bookingId}`,
     "",
-    "auto-created by ridewithalex.com",
+    "auto-created by ridewithalex.org",
   ]
     .filter(Boolean)
     .join("\n");

@@ -438,8 +438,8 @@
     "sections": {
       "controller": {
         "title": "who's responsible for your data",
-        "p1": "the data controller for this site is alex, operating as a sole snowboard instructor in bansko, bulgaria, under the brand ridewithalex. you can reach me at alex@ridewithalex.com or +359 88 513 7471.",
-        "p2": "this policy covers the ridewithalex.com website and any communication you have with alex by email, phone, whatsapp, or instagram in the context of booking or taking a snowboard lesson."
+        "p1": "the data controller for this site is alex, operating as a sole snowboard instructor in bansko, bulgaria, under the brand ridewithalex. you can reach me at alex@ridewithalex.org or +359 88 513 7471.",
+        "p2": "this policy covers the ridewithalex.org website and any communication you have with alex by email, phone, whatsapp, or instagram in the context of booking or taking a snowboard lesson."
       },
       "dataCollected": {
         "title": "what data i collect",
@@ -463,7 +463,7 @@
       },
       "rights": {
         "title": "your rights",
-        "p1": "under gdpr you have the right to: access a copy of your data, correct inaccuracies, request deletion, restrict processing, port your data to another service, and object to processing. to exercise any of these, email alex@ridewithalex.com — i reply within 30 days.",
+        "p1": "under gdpr you have the right to: access a copy of your data, correct inaccuracies, request deletion, restrict processing, port your data to another service, and object to processing. to exercise any of these, email alex@ridewithalex.org — i reply within 30 days.",
         "p2": "if you believe your rights have been violated, you can lodge a complaint with the bulgarian commission for personal data protection (kzld) at cpdp.bg. i would appreciate a heads-up first so i can try to resolve it directly."
       },
       "cookies": {
@@ -479,7 +479,7 @@
       "changes": {
         "title": "changes and contact",
         "p1": "this policy may be updated to reflect changes in how the service operates. the date at the top shows the latest revision. material changes will be announced via email to active clients.",
-        "p2": "for any privacy-related question, concern, or request, email alex@ridewithalex.com. i treat these seriously and reply personally."
+        "p2": "for any privacy-related question, concern, or request, email alex@ridewithalex.org. i treat these seriously and reply personally."
       }
     },
     "footer": {

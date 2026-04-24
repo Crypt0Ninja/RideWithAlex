@@ -84,7 +84,7 @@ export default async function OpenGraphImage({ params }: Props) {
             color: "rgba(255,255,255,0.4)",
           }}
         >
-          <div style={{ display: "flex" }}>ridewithalex.com</div>
+          <div style={{ display: "flex" }}>ridewithalex.org</div>
           <div style={{ display: "flex" }}>{locale.toUpperCase()}</div>
         </div>
       </div>

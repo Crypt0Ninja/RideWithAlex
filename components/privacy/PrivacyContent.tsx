@@ -46,10 +46,10 @@ export function PrivacyContent() {
         <p>{t("footer.questions")}</p>
         <p>
           <a
-            href="mailto:alex@ridewithalex.com"
+            href="mailto:alex@ridewithalex.org"
             className="text-white/80 hover:text-white transition-colors"
           >
-            alex@ridewithalex.com
+            alex@ridewithalex.org
           </a>
         </p>
         <p>
