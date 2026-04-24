@@ -119,7 +119,7 @@
 |---|---|---|
 | T001–T003 | Scaffold + i18n + tokens | `8d7133e` / `f105ef8` / `fd93272` |
 | T018 | Font swap → Onest | `b9faac6` |
-| T005 | Vercel deploy | live на https://ridewithalex.vercel.app |
+| T005 | Vercel deploy | live на https://ridewithalex.vercel.app (staging) + **https://ridewithalex.org** (production, s16) |
 | T004 | Hero секция | `fe3d1c0` — видео + staggered text + stats |
 | T019 | Shared page shell | `1763786` — SiteNav / SiteFooter / PageShell / PageHeader |
 | **Wave 2** | lessons + pricing + about | `5938ec7` / `a3eb13a` / `8ea90ed` |

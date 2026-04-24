@@ -63,11 +63,11 @@
 | ID | Задача | Блокер |
 |---|---|---|
 | ~~T016~~ | ~~SEO (sitemap.xml, robots.txt, OG images, metadata)~~ | ✅ **Done s15** (`26c3e33`) |
-| T_DOMAIN | Свързване на `ridewithalex.com` с Vercel | Домейн да е купен (#6) |
-| **T025** | **Resend domain verification** (fix за customer confirmation emails) | **T_DOMAIN — blocked** |
+| ~~T_DOMAIN~~ | ~~Свързване на `ridewithalex.org` с Vercel~~ | ✅ **Done s16** (`741a3c6`) |
+| ~~**T025**~~ | ~~**Resend domain verification**~~ | ✅ **Done s16** — `booking@ridewithalex.org` active |
 | T017 | Final QA + launch checklist | Всички предходни |
 
-**⚠️ Customer emails** — в момента customer confirmation email-ите fail-ват с Resend sandbox 403 (only to account owner). Alex notification работи. Ще се fix-не с T025 след покупка на домейна. Детайли: `docs/orchestrator/tasks/T025-resend-domain-verify.md`.
+**✅ Customer emails live** — Resend domain `ridewithalex.org` verified, emails идват от `booking@ridewithalex.org`. Test email `db99bde1-f0f4-4b24-84c2-a2a198cac3fa` delivered в s16.
 
 ---
 
