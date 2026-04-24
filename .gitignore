@@ -45,3 +45,8 @@ coverage/
 # Raw source media (optimized assets ship to public/ instead)
 /vecteezy_*
 /photo_*
+/*.mp4
+/*.png
+/*.jpg
+/*.jpeg
+# (Above ignores project-root only; public/ assets stay tracked)
