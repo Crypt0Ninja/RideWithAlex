@@ -497,6 +497,10 @@
       "available": "свободен",
       "taken": "зает"
     },
+    "steps": {
+      "pickTime": "избери час",
+      "yourDetails": "твоите данни"
+    },
     "form": {
       "slotLabel": "избран slot",
       "name": "име",
@@ -508,7 +512,14 @@
       "notes": "бележки (по желание)",
       "notesHint": "ниво, предишен опит, нещо което да знам",
       "submit": "потвърди резервация",
-      "submitting": "резервирам..."
+      "submitting": "резервирам...",
+      "totalLabel": "приблизителна цена",
+      "totalHint": "плащане в брой в деня — лева или евро",
+      "sections": {
+        "details": "кой си ти",
+        "lesson": "тип урок",
+        "extras": "друго"
+      }
     },
     "lessonTypes": {
       "private": "частен",

@@ -6,7 +6,7 @@ export function ReviewsGrid() {
   const t = useTranslations("reviews");
 
   return (
-    <section className="px-6 md:px-10 pb-16 md:pb-24 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl">
+    <section className="px-6 md:px-10 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
       {reviewKeys.map((key) => (
         <article
           key={key}

@@ -497,6 +497,10 @@
       "available": "available",
       "taken": "taken"
     },
+    "steps": {
+      "pickTime": "pick your time",
+      "yourDetails": "your details"
+    },
     "form": {
       "slotLabel": "selected slot",
       "name": "your name",
@@ -508,7 +512,14 @@
       "notes": "notes (optional)",
       "notesHint": "level, previous experience, anything i should know",
       "submit": "confirm booking",
-      "submitting": "booking..."
+      "submitting": "booking...",
+      "totalLabel": "estimated total",
+      "totalHint": "paid in cash on the day — bgn or euros",
+      "sections": {
+        "details": "who you are",
+        "lesson": "lesson choice",
+        "extras": "anything else"
+      }
     },
     "lessonTypes": {
       "private": "private",
