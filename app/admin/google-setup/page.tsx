@@ -1,10 +1,14 @@
 import { getConnectedEmail } from "@/lib/google/oauth";
+import { requireAdmin } from "@/lib/auth/admin";
+
+export const dynamic = "force-dynamic";
 
 type Props = {
   searchParams: Promise<{ connected?: string; error?: string }>;
 };
 
 export default async function GoogleSetupPage({ searchParams }: Props) {
+  await requireAdmin();
   const params = await searchParams;
   const email = await getConnectedEmail();
 
