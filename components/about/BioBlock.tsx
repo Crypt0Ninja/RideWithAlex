@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 export function BioBlock() {
@@ -5,24 +6,24 @@ export function BioBlock() {
 
   return (
     <section className="px-6 md:px-10 py-24 md:py-32 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 max-w-6xl mx-auto">
-      {/* Portrait placeholder */}
+      {/* Portrait image — cinematic snowboarder silhouette (placeholder until Alex's own) */}
       <div className="md:col-span-5">
         <div
-          className="relative aspect-[3/4] w-full bg-neutral-900 rounded-3xl overflow-hidden border border-white/5 flex items-center justify-center"
-          aria-label="portrait placeholder"
+          className="relative aspect-[3/4] w-full rounded-3xl overflow-hidden border border-white/5 bg-neutral-900"
+          aria-label="portrait"
         >
-          <div className="text-center px-6">
-            <p className="text-white/30 text-[10px] uppercase tracking-[0.3em] mb-2">
-              portrait
-            </p>
-            <p className="text-white/50 text-sm lowercase">
-              {t("portraitPlaceholder")}
-            </p>
-          </div>
+          <Image
+            src="/about/portrait.webp"
+            alt={t("portraitPlaceholder")}
+            fill
+            sizes="(min-width: 768px) 40vw, 100vw"
+            priority
+            className="object-cover"
+          />
           {/* thin diagonal accent */}
           <span
             aria-hidden
-            className="absolute top-8 right-8 diagonal-divider-right"
+            className="absolute top-8 right-8 diagonal-divider-right z-10"
           />
         </div>
       </div>
