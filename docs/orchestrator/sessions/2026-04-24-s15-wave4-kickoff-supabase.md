@@ -56,16 +56,48 @@ Per `feedback_orchestrator_can_code.md`, приех execute-self mode за Wave 
 6. `docs/orchestrator/STARTUP_PROMPT.md` — Wave 4 section + open questions обновени
 7. `docs/orchestrator/tasks/T011-supabase-drizzle-schema.md` — self-contained spec написан (in T015-style format)
 
-### 6. T011 execution — pending
+### 6. T011 execution — ✅ completed
 
-Следващ стъпка в тази сесия: commit docs, после execute T011:
-- Install: `drizzle-orm`, `postgres`, `@supabase/supabase-js`, `@supabase/ssr`, `drizzle-kit`, `tsx`, `dotenv`
-- Schema: `db/schema.ts` (time_slots + bookings + 3 enums)
-- DB client: `db/index.ts` (postgres.js с `prepare: false`, `max: 1`)
-- Supabase clients: `lib/supabase/server.ts` + `lib/supabase/client.ts`
-- Drizzle config: `drizzle.config.ts` с dotenv
-- Migration: `drizzle-kit generate` → append RLS → `drizzle-kit migrate`
-- Verify: build/tsc/lint + Supabase Table Editor check
+Commit `d1f3ac6` — `feat(T011): supabase foundation with drizzle schema + rls`.
+
+**Packages installed:** 4 runtime (`drizzle-orm`, `postgres`, `@supabase/supabase-js`, `@supabase/ssr`) + 3 dev (`drizzle-kit`, `tsx`, `dotenv`).
+
+**Файлове създадени:**
+- `db/schema.ts` (79 lines) — 2 tables, 3 enums, 5 indexes, 4 TS types
+- `db/index.ts` (20 lines) — Drizzle + postgres.js client with `prepare: false`
+- `db/migrations/0000_tired_swordsman.sql` (39 lines) — DDL + RLS appended
+- `db/migrations/meta/*` — drizzle journal + snapshot
+- `db/rls.sql` (34 lines) — RLS policies reference copy
+- `drizzle.config.ts` — root config with dotenv
+- `lib/supabase/server.ts` (45 lines) — `createSupabaseServerClient` + `createSupabaseAdminClient`
+- `lib/supabase/client.ts` (12 lines) — `createSupabaseBrowserClient`
+
+**Applied to Supabase:** `pnpm db:migrate` приложи миграцията. Verification query потвърди:
+- 2 таблици (`time_slots`, `bookings`) с `rowsecurity = true`
+- 4 RLS policies (public select + service_role all за `time_slots`; public insert + service_role all за `bookings`)
+- 3 enums (`slot_status`, `lesson_type`, `booking_status`)
+- 17 columns, correct types
+
+**Build:** ✅ Compiled, no new routes (backend-only). **TSC:** ✅ exit 0. **Lint:** ✅ no warnings.
+
+### 7. Connection string troubleshoot (unplanned)
+
+Alex-овият direct URL (`db.jfccgssbodkqzivhxpzk.supabase.co:5432`) не работеше. DNS chek разкри че hostname-ът е **IPv6-only** (Supabase free tier политика). Windows dev machine няма IPv6 routing.
+
+Тествах множество Supavisor pooler регионално комбинации:
+- `aws-0-eu-central-1` — Tenant or user not found
+- `aws-0-us-*` / `aws-0-ap-*` — Tenant or user not found  
+- `aws-1-eu-central-2` → **✅ match!** Postgres 17.6 on aarch64
+
+Открих че Supabase има multiple pooler shards (`aws-0-*` older, `aws-1-*` newer) + региона **eu-central-2** (Zurich) който е relatively new. Проектът е на newer infrastructure.
+
+**Final pooler URLs** (в `.env.local`):
+- Session mode (5432): `postgresql://postgres.jfccgssbodkqzivhxpzk:PASSWORD@aws-1-eu-central-2.pooler.supabase.com:5432/postgres`
+- Transaction mode (6543): `postgresql://postgres.jfccgssbodkqzivhxpzk:PASSWORD@aws-1-eu-central-2.pooler.supabase.com:6543/postgres`
+
+Q13 (pooler URL) resolved чрез probing — Alex няма нужда повече да го търси в dashboard.
+
+Temporary probe scripts в `scripts/` (6 файла, съдържаха raw password) изтрити преди commit. Нищо чувствително в repo.
 
 ## Особености / notes
 
@@ -77,15 +109,23 @@ Per `feedback_orchestrator_can_code.md`, приех execute-self mode за Wave 
 
 **Open question Q13:** Alex не намери лесно Transaction pooler URL в Supabase dashboard. Direct URL (port 5432) работи за migrations + local dev. Pooler (port 6543) ще е необходим преди T010 deploys to Vercel. Не блокира T011.
 
-## Commits в тази сесия (pending)
+## Commits в тази сесия
 
-1. `docs(s15): wave 4 kickoff · supabase pivot · T011 spec` — всички doc updates
-2. `feat(T011): supabase foundation with drizzle schema + rls` — execution
+1. `edc1cd1` — `docs(s15): wave 4 kickoff · supabase pivot · T011 spec` (docs-first)
+2. `d1f3ac6` — `feat(T011): supabase foundation with drizzle schema + rls` (execution)
+3. (pending) `docs(s15): T011 complete · connection pooler discovery` — final doc update
 
 ## Следваща стъпка
 
-След T011 commit:
 - ⏳ Alex да предостави Google OAuth creds → T020 unblocks
 - ⏳ Alex да предостави Resend API key → T012 unblocks
-- ⏳ Alex да намери Transaction pooler URL → готов за T010 Vercel deploy
-- 🟢 T010 Booking UI spec може да се напише паралелно със събиране на creds (frontend-heavy, не зависи от external APIs директно)
+- ⏳ Alex да добави Supabase env vars в Vercel dashboard (Production + Preview environments) — преди T010 deploy към Vercel
+- 🟢 T010 Booking UI spec може да се напише паралелно със събиране на creds (frontend-heavy, не зависи от external APIs директно; използва готовия supabase-js client за data access)
+
+## Напомняне за rotation преди launch
+
+Supabase creds paste-нати в чат история (s15). Преди production launch:
+1. Supabase dashboard → Settings → Database → Reset database password
+2. Supabase dashboard → Settings → API Keys → Rotate `sb_secret_...` key
+3. Обнови `.env.local` + Vercel env vars
+4. Force re-deploy

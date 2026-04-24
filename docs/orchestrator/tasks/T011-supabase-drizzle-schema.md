@@ -380,4 +380,50 @@ CREATE POLICY "bookings_service_role_all"
 
 ## Reports
 
-_(попълва се след изпълнение)_
+### Report — T011 · 2026-04-24 (orchestrator execute-self mode)
+
+**Status:** ✅ Completed
+**Commit:** `d1f3ac6` — `feat(T011): supabase foundation with drizzle schema + rls`
+**Time spent:** ~40 мин (включително region discovery troubleshoot)
+
+**Какво направих:**
+
+Инсталирах 4 runtime packages (`drizzle-orm`, `postgres`, `@supabase/supabase-js`, `@supabase/ssr`) и 3 dev packages (`drizzle-kit`, `tsx`, `dotenv`). Написах Drizzle schema с 2 таблици + 3 enum-а + 5 индекса, Drizzle client (`db/index.ts` с `prepare: false` за Supavisor compatibility), 2 Supabase JS client wrappers (server с service_role + browser с anon), drizzle.config.ts с dotenv-зареждане. Генерирах миграция (`0000_tired_swordsman.sql`), append-нах RLS SQL към нея (2 enable-а + 4 policies), и приложих към Supabase.
+
+**Нестандартна част:** Alex-овият direct URL (`db.xxx.supabase.co:5432`) беше IPv6-only (Supabase free tier). Трябваше да открия правилния Supavisor pooler hostname чрез DNS + TCP probing — проектът беше на **aws-1-eu-central-2.pooler.supabase.com** (Zurich, pooler shard 1, Postgres 17.6), а не обичайния aws-0-eu-central-1. Написах временни probe scripts които изтрих след откриването (съдържаха raw password fragments).
+
+**Acceptance criteria:**
+
+- [x] Packages installed — evidence: `pnpm-lock.yaml` +1130 lines diff
+- [x] Drizzle schema + types — `timeSlots`, `bookings`, `slotStatusEnum`, `lessonTypeEnum`, `bookingStatusEnum`, 4 TS types
+- [x] DB clients — `db/index.ts`, `lib/supabase/server.ts`, `lib/supabase/client.ts`
+- [x] Migration applied — `pnpm db:migrate` exit 0; verification query показа 2 таблици (`rowsecurity = true`), 4 policies, 3 enums, 17 columns
+- [x] RLS enabled — `pg_tables.rowsecurity = true` за двете таблици
+- [x] Build pass — `✓ Compiled`, no new routes (backend-only)
+- [x] TSC pass — exit 0
+- [x] Lint pass — "No ESLint warnings or errors"
+- [x] `.env.local` НЕ е в commit-а — `git diff --cached` не го показа
+- [x] Pushed — `d1f3ac6` на origin/main
+
+**Отклонения от спеца:**
+
+- **Отклонение 1:** Connection string-ът в `.env.local` беше обновен от оригиналния direct URL (`db.xxx.supabase.co:5432`) на pooler URL (`aws-1-eu-central-2.pooler.supabase.com:5432` за session и `:6543` за transaction). Оригиналният direct URL не работеше защото Supabase free tier е IPv6-only за директен connection + Windows локалната среда няма IPv6 routing.
+- **Отклонение 2:** Temporary debug scripts създадени в `scripts/` по време на troubleshoot-а (6 файла). Всички изтрити преди commit — не попадат в repo.
+- **Отклонение 3:** `db/rls.sql` запазен като standalone файл в repo (спецификация предполагаше само append към migration). Запазен за reference + потенциално переиздаване.
+
+**Блокери:** няма. Wave 4 foundation е complete — T020 и T010 могат да започнат когато креденциалите за Google OAuth + Resend са на разположение.
+
+**Променени файлове:**
+
+- `db/schema.ts` — нов (79 lines)
+- `db/index.ts` — нов (20 lines)
+- `db/migrations/0000_tired_swordsman.sql` — нов (39 lines, включва RLS)
+- `db/migrations/meta/0000_snapshot.json` — нов (278 lines, drizzle snapshot)
+- `db/migrations/meta/_journal.json` — нов (13 lines)
+- `db/rls.sql` — нов (34 lines, reference копие)
+- `drizzle.config.ts` — нов (17 lines)
+- `lib/supabase/server.ts` — нов (45 lines)
+- `lib/supabase/client.ts` — нов (12 lines)
+- `package.json` — модифициран (+4 db:* scripts, +7 deps)
+- `pnpm-lock.yaml` — модифициран (+1130 lines)
+

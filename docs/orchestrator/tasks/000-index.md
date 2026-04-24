@@ -14,7 +14,7 @@
 | T008 | `/about` страница | ✅ Completed | T019 ✅ | [T008-about-page.md](T008-about-page.md) |
 | T009 | ~~Stripe Checkout~~ | ❌ **Cancelled** (s13 — cash-only bizmодел) | — | — |
 | T010 | Booking UI (календар + slot picker + phone форма) | 🟡 Backlog (Wave 4) | T011, T020 | _(спец след T011 + Google creds)_ |
-| T011 | **Supabase + Drizzle schema** (time_slots + bookings + RLS) | 🟡 In Progress (Wave 4) | ✅ Supabase creds (s15) | [T011-supabase-drizzle-schema.md](T011-supabase-drizzle-schema.md) |
+| T011 | **Supabase + Drizzle schema** (time_slots + bookings + RLS) | ✅ Completed | ✅ Supabase creds (s15) | [T011-supabase-drizzle-schema.md](T011-supabase-drizzle-schema.md) |
 | T012 | Email (Resend): confirmation + notification | 🟡 Backlog (Wave 4) | T010 | _(спец след RESEND_API_KEY от Alex)_ |
 | T013 | `/gallery` страница | ✅ Completed | T019 ✅ | [T013-gallery-page.md](T013-gallery-page.md) |
 | T014 | `/reviews` страница | ✅ Completed | T019 ✅ | [T014-reviews-page.md](T014-reviews-page.md) |

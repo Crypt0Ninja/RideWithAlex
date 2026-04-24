@@ -39,14 +39,17 @@
 | T014 | `/reviews` страница | [`2afece5`](https://github.com/Crypt0Ninja/RideWithAlex/commit/2afece5) | s14 | orchestrator |
 | T022 | `/terms` страница | [`3b4f745`](https://github.com/Crypt0Ninja/RideWithAlex/commit/3b4f745) | s14 | orchestrator |
 | T023 | `/privacy` страница | [`dfbad3f`](https://github.com/Crypt0Ninja/RideWithAlex/commit/dfbad3f) | s14 | orchestrator |
+| T011 | Supabase + Drizzle schema + RLS | [`d1f3ac6`](https://github.com/Crypt0Ninja/RideWithAlex/commit/d1f3ac6) | s15 | orchestrator · 3 deviations (pooler discovery, debug scripts, standalone rls.sql) |
 
 ## Активни задачи
 
 | ID | Заглавие | Статус | Агент | Блокира |
 |---|---|---|---|---|
-| QA-V2 | Визуална проверка (всички 9 страници × 2 locale-а) | 🟢 Ready | **Alex (ръчно)** | финално одобрение преди Wave 4 |
+| — | _Wave 4 foundation complete. Чакаме creds от Alex за T020 (Google OAuth) + T012 (Resend)._ | 🟡 Waiting | Alex | Wave 4 continuation |
 
 **9 страници живи:** `/`, `/lessons`, `/pricing`, `/about`, `/contact`, `/gallery`, `/reviews`, `/terms`, `/privacy` — всички × `en` + `bg` = **18 routes total**. Всички build clean, tsc + lint pass.
+
+**Wave 4 foundation live:** `time_slots` + `bookings` таблици в Supabase (Postgres 17.6, eu-central-2), RLS enabled, 4 policies, 3 enums. Drizzle schema + supabase-js clients готови за consumption от T010/T020/T021.
 
 ## Pipeline (Wave 4 — In Progress, Supabase foundation)
 
@@ -63,7 +66,7 @@ Supabase creds (получени s15):
 | ID | Заглавие | Приоритет | Зависи от |
 |---|---|---|---|
 | ~~T009~~ | ~~Stripe Checkout~~ | ❌ **Cancelled s13** (cash-only model) | — |
-| T011 | **Supabase + Drizzle schema** (time_slots + bookings + RLS) | 🟡 High (foundation, in progress s15) | ✅ Supabase creds |
+| T011 | **Supabase + Drizzle schema** (time_slots + bookings + RLS) | ✅ **Completed s15** (`d1f3ac6`) | ✅ Supabase creds |
 | T020 | Google Calendar sync (2-way OAuth) | High | T011 + Google OAuth creds |
 | T010 | Booking UI (календар + slot picker + phone форма) | High | T011 + T020 |
 | T012 | Email (Resend): confirmation към клиент + notify към Alex | Medium | T010 + RESEND_API_KEY |
@@ -89,11 +92,11 @@ Supabase creds (получени s15):
 | Q10 | Google Calendar OAuth creds — кога ще са готови? | Alex | High (T020 blocker) |
 | ~~Q11~~ | ~~Neon DB + Resend API keys~~ | ✅ | **Resolved s15** — Supabase вместо Neon (creds получени); Resend остава pending |
 | Q12 | Resend API key + verified domain — кога ще са готови? | Alex | Medium (T012 blocker) |
-| Q13 | Pooler DATABASE_URL (Transaction mode, port 6543) от Supabase dashboard | Alex | Medium (преди T010 Vercel deploy) |
+| ~~Q13~~ | ~~Pooler DATABASE_URL от Supabase dashboard~~ | ✅ | **Resolved s15** — открит чрез DNS probing: aws-1-eu-central-2 |
 
 ## Последни 3 промени
 
-1. **2026-04-24 s15** — **Wave 4 kickoff · Supabase pivot.** QA-V2 signed off. Alex избра Supabase вместо Neon. Creds получени в `.env.local`: URL + publishable + secret + DATABASE_URL (direct). Pooler URL pending. Hybrid architecture locked (Drizzle schema + Supabase JS runtime + Supabase Auth). Orchestrator в execute-self mode за Wave 4. `project_wave4_stack.md` memory записан. T011 spec в работа.
+1. **2026-04-24 s15** — **Wave 4 kickoff + T011 complete.** QA-V2 signed off; Supabase pivot locked; docs обновени (2 commits: `edc1cd1` docs + `d1f3ac6` T011). T011 foundation shipped — 2 таблици + RLS + 3 enums + Drizzle/supabase-js clients. Pooler URL открит чрез DNS probing (aws-1-eu-central-2, shard 1, Postgres 17.6) защото direct connection е IPv6-only. 3 документирани deviations. Wave 4 остава на pause за Google OAuth + Resend creds.
 2. **2026-04-24 s14** — **Wave 3 Complete + T024 pricing hotfix.** Orchestrator изпълни лично всичките 5 страници: T015 `418bf81` → T013 `11e897c` → T014 `2afece5` → T022 `3b4f745` → T023 `dfbad3f`. Плюс T024 `8b1766f` — премахнати Stripe/caparo references. **18 routes live.**
 3. **2026-04-24 s13** — **Wave 3 pivot**: Stripe премахнат (cash-only); Wave 3 пренасочен към 5 static страници.
 
@@ -109,7 +112,7 @@ Supabase creds (получени s15):
 **Остатъчни Wave 4 pre-reqs от Alex:**
 - Google Cloud OAuth: CLIENT_ID + CLIENT_SECRET (redirect URI `/api/auth/google/callback`)
 - Resend: API key + (eventually) verified domain
-- Supabase pooler URL (Transaction mode, port 6543) — преди T010 Vercel deploy
+- Vercel Environment Variables: добавяне на всички Supabase env vars (URL, anon, service_role, DATABASE_URL, DATABASE_POOL_URL) в Vercel Project Settings за production
 
 **Business правила за booking (записани в `memory/project_booking_model.md` + `project_wave4_stack.md`):**
 - Фиксирани 2ч slot-ове, клиентът може да избира последователни (2ч / 4ч / цял ден / седмица)
