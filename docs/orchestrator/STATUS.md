@@ -53,6 +53,8 @@
 
 **9 страници живи** (18 routes) + **1 booking page** (`/en/book`, `/bg/book`) + **5 admin/API routes** (`/admin`, `/admin/login`, `/admin/bookings`, `/admin/google-setup`, + 3 API). Всички build/tsc/lint pass.
 
+**⚠️ Known limitation (post-Wave 4):** Customer confirmation emails currently fail HTTP 403 — Resend sandbox ограничение преди domain verification. Tracking: **T025** (blocked by T_DOMAIN). Alex notification работи нормално (account owner scope). Детайли: `memory/project_resend_domain_pending.md`.
+
 **Wave 4 live DB:** `time_slots` + `bookings` + `google_tokens` — 3 таблици с RLS, 5 policies, 3 enums, 8 indexes. Drizzle schema + supabase-js clients + Google Calendar API + Resend SDK + Supabase Auth — пълен booking stack.
 
 ## Pipeline (Wave 4 — In Progress, Supabase foundation)
@@ -78,7 +80,8 @@ Supabase creds (получени s15):
 | ~~T024~~ | ~~Pricing content hotfix~~ | ✅ **Done s14** (`8b1766f`) | — |
 | T016 | SEO (sitemap, robots, OG images, metadata) | Medium | All pages |
 | T017 | QA + launch prep | Critical | All previous |
-| T_DOMAIN | Custom домейн `ridewithalex.com` | Blocker за launch | Alex да купи |
+| T_DOMAIN | Custom домейн `ridewithalex.com` | Blocker за launch + T025 | Alex да купи |
+| T025 | Resend domain verification (customer emails fix) | 🔴 Blocked | T_DOMAIN |
 
 ## Блокери / Отворени въпроси
 

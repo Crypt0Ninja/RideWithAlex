@@ -64,7 +64,10 @@
 |---|---|---|
 | T016 | SEO (sitemap.xml, robots.txt, OG images, metadata) | All pages ✅ |
 | T_DOMAIN | Свързване на `ridewithalex.com` с Vercel | Домейн да е купен (#6) |
+| **T025** | **Resend domain verification** (fix за customer confirmation emails) | **T_DOMAIN — blocked** |
 | T017 | Final QA + launch checklist | Всички предходни |
+
+**⚠️ Customer emails** — в момента customer confirmation email-ите fail-ват с Resend sandbox 403 (only to account owner). Alex notification работи. Ще се fix-не с T025 след покупка на домейна. Детайли: `docs/orchestrator/tasks/T025-resend-domain-verify.md`.
 
 ---
 

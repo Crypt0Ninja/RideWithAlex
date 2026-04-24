@@ -28,6 +28,7 @@
 | T022 | `/terms` страница | ✅ Completed | T019 ✅ | [T022-terms-page.md](T022-terms-page.md) |
 | T023 | `/privacy` страница | ✅ Completed | T019 ✅ | [T023-privacy-page.md](T023-privacy-page.md) |
 | T024 | Pricing content hotfix (махане на Stripe/капаро references) | ✅ Completed | Wave 3 ✅ | s14 · `8b1766f` (orchestrator) |
+| T025 | Resend domain verification (+ FROM email switch) | 🔴 Blocked | T_DOMAIN | [T025-resend-domain-verify.md](T025-resend-domain-verify.md) |
 | T_DOMAIN | Custom домейн `ridewithalex.com` | 🔴 Blocked | Alex да купи домейна | — |
 
 ## Групи
