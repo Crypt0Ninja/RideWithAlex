@@ -48,8 +48,8 @@
 
 | # | Какво | За какво | Статус | Инструкция |
 |---|---|---|---|---|
-| 1 | Google OAuth (CLIENT_ID + SECRET) | T020 Calendar | ⏳ В процес | Дадох 6-стъпка guide в чата |
-| 2 | Resend API key | T012 email | ⏳ Pending | 3-стъпка guide ще дам по искане |
+| 1 | Google OAuth (CLIENT_ID + SECRET) | T020 Calendar | ⏳ В процес | [CREDS-SETUP.md § 1](CREDS-SETUP.md#1-google-cloud-oauth--calendar-api) |
+| 2 | Resend API key | T012 email | ⏳ Pending | [CREDS-SETUP.md § 2](CREDS-SETUP.md#2-resend--email-notifications) |
 | 3 | Vercel env vars (всички Supabase keys) | T010+ deploy | ⏳ Pending | Копирай от `.env.local` в Vercel Project Settings |
 | 4 | Admin Gmail (за Supabase Auth) | T021 login | ⏳ Pending | Един email — този с който ще се логваш в admin panel |
 | 5 | Rotation на Supabase creds | Security | ⏳ Pending launch | Преди launch: Reset DB password + rotate `sb_secret_` |
