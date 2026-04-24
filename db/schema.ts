@@ -73,7 +73,24 @@ export const bookings = pgTable(
   })
 );
 
+export const googleTokens = pgTable("google_tokens", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userEmail: text("user_email").notNull().unique(),
+  accessToken: text("access_token").notNull(),
+  refreshToken: text("refresh_token").notNull(),
+  expiresAt: timestamp("expires_at", { withTimezone: true, mode: "date" }).notNull(),
+  scope: text("scope").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "date" })
+    .notNull()
+    .default(sql`now()`),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: "date" })
+    .notNull()
+    .default(sql`now()`),
+});
+
 export type TimeSlot = typeof timeSlots.$inferSelect;
 export type NewTimeSlot = typeof timeSlots.$inferInsert;
 export type Booking = typeof bookings.$inferSelect;
 export type NewBooking = typeof bookings.$inferInsert;
+export type GoogleToken = typeof googleTokens.$inferSelect;
+export type NewGoogleToken = typeof googleTokens.$inferInsert;
