@@ -27,7 +27,7 @@ export function HeroStaggeredText() {
         <h1
           key={text}
           className={cn(
-            "hero-title absolute text-white font-medium leading-none",
+            "absolute text-white font-medium leading-none tracking-[-0.04em]",
             "text-[clamp(56px,15vw,160px)] md:text-[clamp(96px,13vw,220px)]",
             "opacity-0 translate-y-3 motion-safe:animate-[hero-word-in_600ms_ease-out_forwards]",
             "motion-reduce:opacity-100 motion-reduce:translate-y-0",
