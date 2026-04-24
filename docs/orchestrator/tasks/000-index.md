@@ -23,7 +23,7 @@
 | T017 | QA + launch | ⚪ Pending | all | _(не е дефиниран)_ |
 | T018 | Font swap (Readex Pro → Onest за cyrillic) | ✅ Completed | T003 ✅ | [T018-font-swap-cyrillic.md](T018-font-swap-cyrillic.md) |
 | T019 | Shared page shell (SiteNav/Footer/Shell/Header) | ✅ Completed | T002 ✅, T003 ✅, T004 ✅, T018 ✅ | [T019-shared-page-shell.md](T019-shared-page-shell.md) |
-| T020 | Google Calendar sync (write-only OAuth + Calendar API) | 🔵 In Review (code done s15; manual OAuth smoke test pending) | T011 ✅ | [T020-google-calendar-sync.md](T020-google-calendar-sync.md) |
+| T020 | Google Calendar sync (write-only OAuth + Calendar API) | ✅ Completed (verified live API call s15) | T011 ✅ | [T020-google-calendar-sync.md](T020-google-calendar-sync.md) |
 | T021 | Admin panel (Supabase Auth + view + block slots) | 🟡 Backlog (Wave 4) | T011, T020 | _(спец след Wave 4 foundation)_ |
 | T022 | `/terms` страница | ✅ Completed | T019 ✅ | [T022-terms-page.md](T022-terms-page.md) |
 | T023 | `/privacy` страница | ✅ Completed | T019 ✅ | [T023-privacy-page.md](T023-privacy-page.md) |

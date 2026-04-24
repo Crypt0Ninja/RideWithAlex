@@ -485,5 +485,60 @@
       "questions": "privacy questions? drop alex a line:",
       "termsLink": "read the terms of service"
     }
+  },
+  "book": {
+    "eyebrow": "book a lesson",
+    "title": "book",
+    "subtitle": "pick a day, pick a 2-hour slot, leave your phone. no deposit — pay in cash on the day. for 4h / full-day / week packages, message me directly.",
+    "picker": {
+      "pickDay": "pick a day",
+      "pickSlot": "pick a time",
+      "available": "available",
+      "taken": "taken"
+    },
+    "form": {
+      "slotLabel": "selected slot",
+      "name": "your name",
+      "phone": "phone · whatsapp",
+      "email": "email (optional)",
+      "emailHint": "so i can send a confirmation",
+      "lessonType": "lesson type",
+      "headcount": "how many riders",
+      "notes": "notes (optional)",
+      "notesHint": "level, previous experience, anything i should know",
+      "submit": "confirm booking",
+      "submitting": "booking..."
+    },
+    "lessonTypes": {
+      "private": "private",
+      "group": "group",
+      "kids": "kids",
+      "freestyle": "freestyle",
+      "offpiste": "off-piste"
+    },
+    "errors": {
+      "prefix": "error",
+      "slotTaken": "this slot was just booked — pick another",
+      "validation": "please check the fields",
+      "generic": "something went wrong — try again or message me directly"
+    },
+    "confirmed": {
+      "eyebrow": "confirmed",
+      "title": "you're booked.",
+      "subtitle": "see you on the mountain. save this page or screenshot it — you'll also hear from me by email or phone.",
+      "date": "date",
+      "time": "time",
+      "name": "name",
+      "phone": "phone",
+      "email": "email",
+      "lessonType": "lesson",
+      "headcount": "riders",
+      "total": "total",
+      "notes": "notes",
+      "bookingId": "booking ref",
+      "nextEyebrow": "what happens next",
+      "nextTitle": "i'll call or message you to confirm.",
+      "nextBody": "meeting point is in front of the bansko gondola, 1 pirin street. bring waterproof clothing, thermal layer, gloves, helmet, goggles. i'll help sort rentals and lift pass if needed. payment is in cash on the day — bgn or euros."
+    }
   }
 }

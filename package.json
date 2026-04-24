@@ -22,7 +22,8 @@
     "next-intl": "^4.9.1",
     "postgres": "^3.4.9",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
