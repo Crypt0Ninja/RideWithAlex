@@ -2,7 +2,7 @@
 
 > Жив kanban на проекта. Обновява се при всяка сесия и при всеки завършен таск.
 
-**Последна актуализация:** 2026-04-24 · Сесия s14 (Wave 3 Complete — всички 5 статични страници живи, изпълнени от orchestrator)
+**Последна актуализация:** 2026-04-24 · Сесия s15 (Wave 4 kickoff — Supabase pivot locked, T011 spec written, execute-self mode)
 
 **Production URL:** [ridewithalex.vercel.app](https://ridewithalex.vercel.app) · auto-deploy on push to `main`
 
@@ -48,21 +48,26 @@
 
 **9 страници живи:** `/`, `/lessons`, `/pricing`, `/about`, `/contact`, `/gallery`, `/reviews`, `/terms`, `/privacy` — всички × `en` + `bg` = **18 routes total**. Всички build clean, tsc + lint pass.
 
-## Pipeline (Wave 4 — Backlog, нужни creds от Alex)
+## Pipeline (Wave 4 — In Progress, Supabase foundation)
 
-Преди да стартира Wave 4, Alex трябва да предостави:
-- **Google Cloud OAuth** (CLIENT_ID + CLIENT_SECRET) — за Calendar API
-- **Neon Postgres** (DATABASE_URL) — за persistence
-- **Resend** (RESEND_API_KEY) — за email notifications
+**DB pivot:** Използваме **Supabase** (не Neon) — повече ecosystem (Auth, Realtime, Storage, RLS) за нула допълнителна сложност. Решено s15.
+
+Все още нужни creds от Alex:
+- **Google Cloud OAuth** (CLIENT_ID + CLIENT_SECRET) — за Calendar API (T020)
+- **Resend** (RESEND_API_KEY) — за email notifications (T012)
+
+Supabase creds (получени s15):
+- ✅ `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` (sb_publishable_), `SUPABASE_SERVICE_ROLE_KEY` (sb_secret_), `DATABASE_URL` (direct, port 5432)
+- ⚠️ `DATABASE_POOL_URL` (Transaction pooler, port 6543) — временно = direct; замяна преди T010 Vercel deploy
 
 | ID | Заглавие | Приоритет | Зависи от |
 |---|---|---|---|
 | ~~T009~~ | ~~Stripe Checkout~~ | ❌ **Cancelled s13** (cash-only model) | — |
-| T011 | Neon Postgres + Drizzle schema (time_slots + bookings) | High (foundation) | DATABASE_URL от Alex |
-| T020 | Google Calendar sync (2-way) | High | T011 + OAuth creds |
+| T011 | **Supabase + Drizzle schema** (time_slots + bookings + RLS) | 🟡 High (foundation, in progress s15) | ✅ Supabase creds |
+| T020 | Google Calendar sync (2-way OAuth) | High | T011 + Google OAuth creds |
 | T010 | Booking UI (календар + slot picker + phone форма) | High | T011 + T020 |
 | T012 | Email (Resend): confirmation към клиент + notify към Alex | Medium | T010 + RESEND_API_KEY |
-| T021 | Admin panel (view + block slots) | Medium | T011 + T020 |
+| T021 | Admin panel (Supabase Auth + view + block slots) | Medium | T011 + T020 |
 | ~~T024~~ | ~~Pricing content hotfix~~ | ✅ **Done s14** (`8b1766f`) | — |
 | T016 | SEO (sitemap, robots, OG images, metadata) | Medium | All pages |
 | T017 | QA + launch prep | Critical | All previous |
@@ -81,37 +86,38 @@
 | Q7 | Домейн `ridewithalex.com` — купен ли е? | Alex | Medium |
 | ~~Q8~~ | ~~Шрифт Onest OK ли е?~~ | ✅ | **Resolved s05** |
 | Q9 | Terms & Privacy — има ли правен съветник или използваме boilerplate? | Alex | Medium (за T022/T023 launch) |
-| Q10 | Google Calendar OAuth creds — кога ще са готови? | Alex | High (Wave 4 blocker) |
-| Q11 | Neon DB + Resend API keys — кога ще са готови? | Alex | High (Wave 4 blocker) |
+| Q10 | Google Calendar OAuth creds — кога ще са готови? | Alex | High (T020 blocker) |
+| ~~Q11~~ | ~~Neon DB + Resend API keys~~ | ✅ | **Resolved s15** — Supabase вместо Neon (creds получени); Resend остава pending |
+| Q12 | Resend API key + verified domain — кога ще са готови? | Alex | Medium (T012 blocker) |
+| Q13 | Pooler DATABASE_URL (Transaction mode, port 6543) от Supabase dashboard | Alex | Medium (преди T010 Vercel deploy) |
 
 ## Последни 3 промени
 
-1. **2026-04-24 s14** — **Wave 3 Complete + T024 pricing hotfix.** Orchestrator изпълни лично всичките 5 страници: T015 `418bf81` → T013 `11e897c` → T014 `2afece5` → T022 `3b4f745` → T023 `dfbad3f`. Плюс T024 `8b1766f` — премахнати Stripe/caparo references, `pricing.note.deposit` → `payment` key renamed. **18 routes live.** Zero deviations, nula race conditions.
-2. **2026-04-24 s13** — **Wave 3 pivot**: Stripe премахнат (cash-only); Wave 3 пренасочен към 5 static страници; 5 специфики написани.
-3. **2026-04-23 s12** — **T007 приет** (`a3eb13a`), 2 documented deviations; Wave 2 Complete.
+1. **2026-04-24 s15** — **Wave 4 kickoff · Supabase pivot.** QA-V2 signed off. Alex избра Supabase вместо Neon. Creds получени в `.env.local`: URL + publishable + secret + DATABASE_URL (direct). Pooler URL pending. Hybrid architecture locked (Drizzle schema + Supabase JS runtime + Supabase Auth). Orchestrator в execute-self mode за Wave 4. `project_wave4_stack.md` memory записан. T011 spec в работа.
+2. **2026-04-24 s14** — **Wave 3 Complete + T024 pricing hotfix.** Orchestrator изпълни лично всичките 5 страници: T015 `418bf81` → T013 `11e897c` → T014 `2afece5` → T022 `3b4f745` → T023 `dfbad3f`. Плюс T024 `8b1766f` — премахнати Stripe/caparo references. **18 routes live.**
+3. **2026-04-24 s13** — **Wave 3 pivot**: Stripe премахнат (cash-only); Wave 3 пренасочен към 5 static страници.
 
 ## За следваща сесия — reminder
 
-**Booking/календар pipeline (Wave 4):**
-- T011 Neon Postgres + Drizzle schema (foundation)
-- T020 Google Calendar sync (2-way, OAuth)
+**Wave 4 pipeline (Supabase foundation):**
+- T011 **Supabase + Drizzle schema** (time_slots + bookings + RLS) — ✅ creds received, in progress s15
+- T020 Google Calendar sync (2-way, OAuth) — чака Google creds
 - T010 Booking UI (2ч slots, 9:00–17:00, име + телефон)
-- T012 Email (Resend — confirmation + notify)
-- T021 Admin panel (list + block часове)
+- T012 Email (Resend — confirmation + notify) — чака Resend creds
+- T021 Admin panel (Supabase Auth + list + block часове)
 
-**Пре-Wave 4 pre-reqs от Alex:**
+**Остатъчни Wave 4 pre-reqs от Alex:**
 - Google Cloud OAuth: CLIENT_ID + CLIENT_SECRET (redirect URI `/api/auth/google/callback`)
-- Neon: DATABASE_URL
-- Resend: API key
+- Resend: API key + (eventually) verified domain
+- Supabase pooler URL (Transaction mode, port 6543) — преди T010 Vercel deploy
 
-**Business правила за booking (записани в `memory/project_booking_model.md`):**
+**Business правила за booking (записани в `memory/project_booking_model.md` + `project_wave4_stack.md`):**
 - Фиксирани 2ч slot-ове, клиентът може да избира последователни (2ч / 4ч / цял ден / седмица)
 - Работни часове 9:00–17:00 всеки ден
 - Плащане: кеш на място (БЕЗ онлайн payment)
 - Клиентът оставя име + телефон
 - Alex получава email notification при нов booking
-
-**Content hotfix напомняне:** `messages/{en,bg}.json` имат Stripe references в pricing блока (`pricing.note.deposit`, `pricing.subtitle`, `pricing.cta.subtitle`) + `lessons.cta.subtitle`. Да се обновят в T024 след Wave 3 (или като част от T010).
+- Stack: Supabase (DB + Auth + RLS) + Drizzle (schema/migrations) + supabase-js (runtime)
 
 ## Легенда
 

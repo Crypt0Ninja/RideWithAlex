@@ -126,27 +126,32 @@
 | **Wave 3** | contact / gallery / reviews / terms / privacy | `418bf81` / `11e897c` / `2afece5` / `3b4f745` / `dfbad3f` |
 | T024 | Pricing content hotfix (cash-only) | `8b1766f` |
 
-**18 routes live** (9 страници × `en` + `bg`). Всички build/tsc/lint pass. Auto-deploy активен.
+**18 routes live** (9 страници × `en` + `bg`). Всички build/tsc/lint pass. Auto-deploy активен. QA-V2 signed off от Alex s15.
 
-### 🟢 Активно
-
-- **QA-V2** — Alex визуална проверка на 9-те страници × 2 locale-а на live сайта (Chrome/Safari, desktop + mobile)
-
-### 🟡 Wave 4 Backlog (чака creds от Alex)
+### 🟡 Wave 4 In Progress — Supabase foundation
 
 Бизнес моделът е **cash-only** — няма Stripe. Виж `memory/project_booking_model.md`.
 
-**Pre-reqs от Alex преди Wave 4 може да започне:**
-1. **Google Cloud OAuth** — CLIENT_ID + CLIENT_SECRET (redirect URI `/api/auth/google/callback`)
-2. **Neon Postgres** — DATABASE_URL (connection string)
-3. **Resend** — API key
+**Stack (s15 decision):** Supabase (**не Neon**) + Drizzle schema/migrations + `@supabase/supabase-js` runtime + Supabase Auth за admin + RLS policies. Виж `memory/project_wave4_stack.md`.
+
+**Supabase creds получени s15 (в `.env.local`):**
+- ✅ `NEXT_PUBLIC_SUPABASE_URL`
+- ✅ `NEXT_PUBLIC_SUPABASE_ANON_KEY` (sb_publishable_ format)
+- ✅ `SUPABASE_SERVICE_ROLE_KEY` (sb_secret_ format)
+- ✅ `DATABASE_URL` (direct, port 5432)
+- ⚠️ `DATABASE_POOL_URL` (Transaction pooler, port 6543) — temporary = direct; замяна преди T010 Vercel deploy
+- ⚠️ **Rotation needed** преди production launch — creds paste-нати в чат история
+
+**Остатъчни pre-reqs от Alex:**
+1. **Google Cloud OAuth** — CLIENT_ID + CLIENT_SECRET (redirect URI `/api/auth/google/callback`) — T020 blocker
+2. **Resend** — API key (+ verified domain when `ridewithalex.com` е купен) — T012 blocker
 
 **Задачи:**
-- T011 Neon DB schema (`time_slots` + `bookings`) — foundation
+- **T011 Supabase + Drizzle schema** (`time_slots` + `bookings` + RLS policies) — foundation, in progress s15
 - T020 Google Calendar sync (2-way, OAuth)
 - T010 Booking UI (фиксирани 2ч slots, 9:00–17:00 всеки ден, име + телефон, без payment)
 - T012 Email (Resend) — 2 шаблона: confirmation към клиент + notify към Alex
-- T021 Admin panel (list + block часове)
+- T021 Admin panel (Supabase Auth + list + block часове)
 
 ### ⚪ Launch (след Wave 4)
 
@@ -156,7 +161,7 @@
 
 ### Отворени въпроси (в STATUS.md)
 
-Q1 Peak/Carve лого · Q2 Детски цени · Q3 Групови цени · Q4 Соц. мрежи · Q5 Сертификати (за /about) · Q7 Домейн · Q9 Legal review · Q10 Google Cal creds · Q11 Neon + Resend keys
+Q1 Peak/Carve лого · Q2 Детски цени · Q3 Групови цени · Q4 Соц. мрежи · Q5 Сертификати (за /about) · Q7 Домейн · Q9 Legal review · Q10 Google Cal creds · Q12 Resend key + domain · Q13 Supabase pooler URL
 
 **Задължително прочети актуалния STATUS.md — той е source of truth, не този summary.**
 
