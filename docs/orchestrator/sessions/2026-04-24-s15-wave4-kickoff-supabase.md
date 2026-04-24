@@ -115,12 +115,61 @@ Temporary probe scripts в `scripts/` (6 файла, съдържаха raw pass
 2. `d1f3ac6` — `feat(T011): supabase foundation with drizzle schema + rls` (execution)
 3. (pending) `docs(s15): T011 complete · connection pooler discovery` — final doc update
 
-## Следваща стъпка
+## Wave 4 изпълнен в една сесия — обновен summary
 
-- ⏳ Alex да предостави Google OAuth creds → T020 unblocks
-- ⏳ Alex да предостави Resend API key → T012 unblocks
-- ⏳ Alex да добави Supabase env vars в Vercel dashboard (Production + Preview environments) — преди T010 deploy към Vercel
-- 🟢 T010 Booking UI spec може да се напише паралелно със събиране на creds (frontend-heavy, не зависи от external APIs директно; използва готовия supabase-js client за data access)
+Сесията продължи много по-нататък отколкото планирахме. След T011 + OAuth setup, Alex изпрати Resend + Google creds директно в чата, после заяви *"Държа да се придържаме по първоначалният план и да изпълним всички задачи!"*. Orchestrator влезе в execute-self режим и завърши целия Wave 4:
+
+### Commits в тази сесия (10 total)
+
+1. `edc1cd1` — `docs(s15): wave 4 kickoff · supabase pivot · T011 spec`
+2. `d1f3ac6` — `feat(T011): supabase foundation with drizzle schema + rls`
+3. `7efd8d5` — `docs(s15): T011 complete · connection pooler discovery`
+4. `4288a73` — `docs(plan): add condensed launch roadmap for Alex review`
+5. `023cd29` — `docs(creds): add step-by-step guide for Google OAuth + Resend setup`
+6. `b12868d` — `feat(T020): google calendar oauth flow + event write-only sync`
+7. `c6eb053` — `docs(s15): T020 code complete · manual OAuth test pending`
+8. `1e028af` — `feat(T010): booking flow with slot picker, form, api, confirmation`
+9. `df21d8c` — `feat(T012): resend email notifications for bookings`
+10. `47aaa18` — `feat(T021): admin panel with supabase auth + bookings list`
+
+### Verification
+
+- T011: 2 tables + RLS applied, migration pushed (aws-1-eu-central-2 pooler discovered)
+- T020: OAuth flow end-to-end verified — live Calendar API call 200 OK, scope includes `/auth/calendar`, token refresh cycle tested
+- T010: 2 нови routes (`/en/book`, `/bg/book`) + `/book/confirmed/[id]`, zod validation, virtual slot generator (9-17h × 2h × 14 days)
+- T012: 2 HTML email templates (customer + Alex), Promise.allSettled so failures don't rollback booking
+- T021: Supabase Auth + `requireAdmin` helper + bookings list page (sorted by created_at desc, 200 row limit) + logout route + login with optional `ADMIN_EMAIL` restriction
+
+All builds green: `pnpm build` + `pnpm tsc --noEmit` + `pnpm lint` passing at each commit.
+
+### Scope clarifications (deviations from plan)
+
+1. **T020: write-only вместо 2-way** — пълното 2-way изисква Vercel Cron polling или webhook push notifications (public URL). Write-only покрива MVP; ще се добави 2-way пост-MVP при нужда.
+2. **T010: само 2ч bookings** — multi-hour (4h / full day / week) е out-of-scope за MVP; Alex може да handle-ва ръчно.
+3. **T021: скрам-нат slot block/unblock UI** — Alex може да insert-не `time_slots` records с `status='blocked'` директно през Supabase Table Editor за MVP.
+
+## Следваща стъпка — Alex manual steps
+
+1. **Създай admin user в Supabase Auth:**
+   - Supabase dashboard → Authentication → Users → **+ Add user** → Create new user
+   - Email: твоят admin email (препоръка: crypt0ninja2@protonmail.com или твоят Gmail)
+   - Password: strong password
+   - Optional: в `.env.local` → `ADMIN_EMAIL=<същият email>` за да restrict-неш достъпа
+2. **End-to-end local smoke test (~5 min):**
+   - `pnpm dev`
+   - Отвори [localhost:3000/en/book](http://localhost:3000/en/book) → избери slot → попълни form → submit
+   - Очаквай redirect към `/book/confirmed/[id]` с детайли
+   - Провери Google Calendar за нов event
+   - Провери ProtonMail-а на `crypt0ninja2@protonmail.com` за 2 email-a (customer confirmation + Alex notification)
+   - Логни се в `/admin/login` → `/admin/bookings` показва новия booking
+3. **Vercel env vars** за production deploy:
+   - Всички Supabase vars (5 броя)
+   - Google vars (3 броя)
+   - Resend vars (3 броя)
+   - `TZ=Europe/Sofia`
+   - `NEXT_PUBLIC_SITE_URL=https://ridewithalex.vercel.app`
+
+След тези 3 стъпки → Wave 4 е fully operational на production. Остава: T016 SEO + T_DOMAIN + T017 launch prep.
 
 ## Напомняне за rotation преди launch
 

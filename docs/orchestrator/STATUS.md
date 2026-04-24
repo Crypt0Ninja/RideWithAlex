@@ -16,7 +16,7 @@
 | Hero + shared page shell | ✅ Завършено | T004 (hero live) + T019 (SiteNav/Footer/PageShell/PageHeader) |
 | **Wave 2** — lessons + pricing + about | ✅ Complete | T006 / T007 / T008 — 3 страници живи на двата locale-а |
 | **Wave 3** — contact + gallery + reviews + terms + privacy | ✅ **Complete** | T015 / T013 / T014 / T022 / T023 — всички 5 страници живи, изпълнени от orchestrator (not downstream) |
-| **Wave 4** — booking + календар + email + admin | 🟡 Backlog | T010 / T011 / T012 / T020 / T021 — чака creds от Alex |
+| **Wave 4** — booking + календар + email + admin | ✅ **Complete** | T011 / T020 / T010 / T012 / T021 — всички 5 shipped в s15 |
 | Content hotfix (remove Stripe refs from pricing) | ✅ Завършено | T024 (`8b1766f`) — pricing + lessons copy aligned with cash-only model |
 | SEO + launch | ⚪ Pending | T016 + T017 + T_DOMAIN |
 
@@ -40,17 +40,20 @@
 | T022 | `/terms` страница | [`3b4f745`](https://github.com/Crypt0Ninja/RideWithAlex/commit/3b4f745) | s14 | orchestrator |
 | T023 | `/privacy` страница | [`dfbad3f`](https://github.com/Crypt0Ninja/RideWithAlex/commit/dfbad3f) | s14 | orchestrator |
 | T011 | Supabase + Drizzle schema + RLS | [`d1f3ac6`](https://github.com/Crypt0Ninja/RideWithAlex/commit/d1f3ac6) | s15 | orchestrator · 3 deviations (pooler discovery, debug scripts, standalone rls.sql) |
-| T020 | Google Calendar OAuth + write-only sync | [`b12868d`](https://github.com/Crypt0Ninja/RideWithAlex/commit/b12868d) | s15 | orchestrator · 2 deviations (write-only scope clarification, next/link for admin nav) · 🔵 manual OAuth smoke test pending |
+| T020 | Google Calendar OAuth + write-only sync | [`b12868d`](https://github.com/Crypt0Ninja/RideWithAlex/commit/b12868d) | s15 | orchestrator · OAuth smoke test ✅ verified (live API 200) |
+| T010 | Booking UI + API + confirmation | [`1e028af`](https://github.com/Crypt0Ninja/RideWithAlex/commit/1e028af) | s15 | orchestrator · virtual slots (9-17h, 2h blocks × 14 days) · zod validation |
+| T012 | Resend email notifications | [`df21d8c`](https://github.com/Crypt0Ninja/RideWithAlex/commit/df21d8c) | s15 | orchestrator · plain HTML templates · non-blocking via Promise.allSettled |
+| T021 | Admin panel + Supabase Auth | [`47aaa18`](https://github.com/Crypt0Ninja/RideWithAlex/commit/47aaa18) | s15 | orchestrator · scope narrowed (bookings list only, slot block deferred) |
 
 ## Активни задачи
 
 | ID | Заглавие | Статус | Агент | Блокира |
 |---|---|---|---|---|
-| — | _Wave 4 foundation complete. Чакаме creds от Alex за T020 (Google OAuth) + T012 (Resend)._ | 🟡 Waiting | Alex | Wave 4 continuation |
+| ALEX-SETUP | Alex създава admin user + прави end-to-end smoke test + добавя Vercel env vars | 🟡 Waiting | **Alex (ръчно)** | Production launch |
 
-**9 страници живи:** `/`, `/lessons`, `/pricing`, `/about`, `/contact`, `/gallery`, `/reviews`, `/terms`, `/privacy` — всички × `en` + `bg` = **18 routes total**. Всички build clean, tsc + lint pass.
+**9 страници живи** (18 routes) + **1 booking page** (`/en/book`, `/bg/book`) + **5 admin/API routes** (`/admin`, `/admin/login`, `/admin/bookings`, `/admin/google-setup`, + 3 API). Всички build/tsc/lint pass.
 
-**Wave 4 foundation live:** `time_slots` + `bookings` таблици в Supabase (Postgres 17.6, eu-central-2), RLS enabled, 4 policies, 3 enums. Drizzle schema + supabase-js clients готови за consumption от T010/T020/T021.
+**Wave 4 live DB:** `time_slots` + `bookings` + `google_tokens` — 3 таблици с RLS, 5 policies, 3 enums, 8 indexes. Drizzle schema + supabase-js clients + Google Calendar API + Resend SDK + Supabase Auth — пълен booking stack.
 
 ## Pipeline (Wave 4 — In Progress, Supabase foundation)
 
@@ -97,7 +100,7 @@ Supabase creds (получени s15):
 
 ## Последни 3 промени
 
-1. **2026-04-24 s15** — **Wave 4 kickoff + T011 complete.** QA-V2 signed off; Supabase pivot locked; docs обновени (2 commits: `edc1cd1` docs + `d1f3ac6` T011). T011 foundation shipped — 2 таблици + RLS + 3 enums + Drizzle/supabase-js clients. Pooler URL открит чрез DNS probing (aws-1-eu-central-2, shard 1, Postgres 17.6) защото direct connection е IPv6-only. 3 документирани deviations. Wave 4 остава на pause за Google OAuth + Resend creds.
+1. **2026-04-24 s15** — **Wave 4 COMPLETE в една сесия.** 10 commits + 5 задачи (T011 → T020 → T010 → T012 → T021) + 2 docs commits. Stack locked (Supabase + Drizzle + supabase-js + Google Calendar + Resend + Supabase Auth). 4 new DB tables (time_slots, bookings, google_tokens + RLS), 5 API routes, 2 admin pages, 1 booking page. OAuth verified (live Calendar API 200). Остава: Alex да създаде admin user + local smoke test + Vercel env vars setup.
 2. **2026-04-24 s14** — **Wave 3 Complete + T024 pricing hotfix.** Orchestrator изпълни лично всичките 5 страници: T015 `418bf81` → T013 `11e897c` → T014 `2afece5` → T022 `3b4f745` → T023 `dfbad3f`. Плюс T024 `8b1766f` — премахнати Stripe/caparo references. **18 routes live.**
 3. **2026-04-24 s13** — **Wave 3 pivot**: Stripe премахнат (cash-only); Wave 3 пренасочен към 5 static страници.
 
