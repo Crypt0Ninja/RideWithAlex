@@ -41,6 +41,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         routing.locales.map((l) => [l, `/${l}`]),
       ),
     },
+    authors: [{ name: "Alex", url: BASE_URL }],
+    creator: "Alex",
+    keywords: [
+      "snowboard",
+      "snowboarding",
+      "bansko",
+      "lessons",
+      "private snowboard instructor",
+      "сноуборд",
+      "банско",
+      "уроци",
+      "instructor",
+      "bulgaria",
+      "pirin",
+      "ski resort",
+    ],
+    applicationName: "RideWithAlex",
+    referrer: "origin-when-cross-origin",
+    formatDetection: {
+      email: true,
+      telephone: true,
+      address: false,
+    },
+    verification: {
+      // google: "<google-site-verification>" — added via DNS TXT (runbook)
+      // other: { "msvalidate.01": "<bing>" }
+    },
     openGraph: {
       type: "website",
       locale: locale === "bg" ? "bg_BG" : "en_GB",
