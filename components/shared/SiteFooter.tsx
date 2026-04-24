@@ -35,7 +35,7 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-white/10 bg-black text-white mt-16 md:mt-24">
-      <div className="max-w-6xl mx-auto px-6 md:px-10 py-12 md:py-14">
+      <div className="px-6 md:px-10 py-12 md:py-14">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
           {/* Brand — 5 of 12 cols */}
           <div className="md:col-span-5 flex flex-col gap-3">
@@ -95,7 +95,7 @@ export function SiteFooter() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-6 md:px-10 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-[10px] text-white/40 uppercase tracking-[0.25em]">
+        <div className="px-6 md:px-10 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-[10px] text-white/40 uppercase tracking-[0.25em]">
           <p>© 2026 ridewithalex · {t("rights")}</p>
           <div className="flex gap-6">
             <Link href="/terms" className="hover:text-white transition-colors">
