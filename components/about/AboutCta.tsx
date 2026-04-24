@@ -6,7 +6,7 @@ export function AboutCta() {
   const t = useTranslations("about.cta");
 
   return (
-    <section className="px-6 md:px-10 py-24 md:py-32 border-t border-white/10 max-w-6xl">
+    <section className="px-6 md:px-10 py-24 md:py-32 border-t border-white/10 max-w-6xl mx-auto">
       <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div className="max-w-xl">
           <p className="text-white/40 text-xs uppercase tracking-[0.3em] mb-4">

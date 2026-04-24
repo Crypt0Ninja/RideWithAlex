@@ -4,7 +4,7 @@ export function BioBlock() {
   const t = useTranslations("about.bio");
 
   return (
-    <section className="px-6 md:px-10 pb-24 md:pb-32 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 max-w-6xl">
+    <section className="px-6 md:px-10 py-24 md:py-32 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 max-w-6xl mx-auto">
       {/* Portrait placeholder */}
       <div className="md:col-span-5">
         <div

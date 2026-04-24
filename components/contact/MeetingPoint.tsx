@@ -4,7 +4,7 @@ export function MeetingPoint() {
   const t = useTranslations("contact.meeting");
 
   return (
-    <section className="px-6 md:px-10 py-16 md:py-24 border-t border-white/10 max-w-6xl">
+    <section className="px-6 md:px-10 py-24 md:py-32 border-t border-white/10 max-w-6xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
         <div className="md:col-span-5 flex flex-col gap-4">
           <p className="text-white/40 text-xs uppercase tracking-[0.3em]">

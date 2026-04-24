@@ -24,7 +24,7 @@ export function FaqAccordion() {
   const [openKey, setOpenKey] = useState<FaqKey | null>(null);
 
   return (
-    <section className="px-6 md:px-10 py-16 md:py-24 border-t border-white/10 max-w-4xl">
+    <section className="px-6 md:px-10 py-24 md:py-32 border-t border-white/10 max-w-4xl mx-auto">
       <p className="text-white/40 text-xs uppercase tracking-[0.3em] mb-4">
         {t("eyebrow")}
       </p>

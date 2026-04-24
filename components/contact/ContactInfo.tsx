@@ -18,7 +18,7 @@ export function ContactInfo() {
   const tRoot = useTranslations("contact");
 
   return (
-    <section className="px-6 md:px-10 pb-16 md:pb-24 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl">
+    <section className="px-6 md:px-10 py-24 md:py-32 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
       {channels.map(({ key, href, value, external }) => (
         <a
           key={key}

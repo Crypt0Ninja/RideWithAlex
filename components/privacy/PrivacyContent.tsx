@@ -17,7 +17,7 @@ export function PrivacyContent() {
   const t = useTranslations("privacy");
 
   return (
-    <section className="px-6 md:px-10 pb-24 md:pb-32 max-w-3xl">
+    <section className="px-6 md:px-10 pb-24 md:pb-32 max-w-3xl mx-auto">
       <p className="text-white/40 text-xs uppercase tracking-[0.3em] mb-10">
         {t("lastUpdatedLabel")}: {t("lastUpdated")}
       </p>

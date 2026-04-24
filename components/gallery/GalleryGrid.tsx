@@ -35,7 +35,7 @@ export function GalleryGrid() {
   const visible = active === "all" ? tiles : tiles.filter((tile) => tile.category === active);
 
   return (
-    <section className="px-6 md:px-10 pb-16 md:pb-24 max-w-6xl">
+    <section className="px-6 md:px-10 py-24 md:py-32 max-w-6xl mx-auto">
       <div className="flex flex-wrap gap-2 mb-10">
         {filters.map((key) => (
           <button

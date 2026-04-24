@@ -43,7 +43,7 @@ function BookPageInner({ days }: { days: SerializedDay[] }) {
   return (
     <PageShell>
       <PageHeader eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} />
-      <section className="px-6 md:px-10 pb-24 md:pb-32 max-w-4xl">
+      <section className="px-6 md:px-10 py-16 md:py-24 max-w-4xl mx-auto">
         <BookingFlow days={days} />
       </section>
     </PageShell>
