@@ -2,13 +2,12 @@ export function HeroVideo() {
   return (
     <>
       <video
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover bg-black"
         autoPlay
         loop
         muted
         playsInline
         preload="auto"
-        poster="/favicon.svg"
         aria-hidden
       >
         <source
