@@ -16,7 +16,7 @@ export function GalleryUploadHint() {
       <p className="text-white/70 text-sm md:text-base leading-relaxed lowercase max-w-2xl mb-8">
         {t("body")}
       </p>
-      <Link href="/book">
+      <Link href="/contact">
         <Button variant="secondary">{t("cta")}</Button>
       </Link>
     </section>
