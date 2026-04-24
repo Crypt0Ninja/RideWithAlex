@@ -49,4 +49,5 @@ coverage/
 /*.png
 /*.jpg
 /*.jpeg
+/*.xml
 # (Above ignores project-root only; public/ assets stay tracked)

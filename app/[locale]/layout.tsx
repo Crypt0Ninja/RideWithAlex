@@ -65,8 +65,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       address: false,
     },
     verification: {
-      // google: "<google-site-verification>" — added via DNS TXT (runbook)
-      // other: { "msvalidate.01": "<bing>" }
+      // Google Search Console: verified via alternative method (not DNS TXT/meta)
+      other: {
+        "msvalidate.01": "F887B80F2552177510FEFE9EC938A775",
+      },
     },
     openGraph: {
       type: "website",
