@@ -126,6 +126,13 @@ export async function sendCustomerConfirmation(b: BookingForEmail): Promise<void
     html: renderCustomerHtml(b),
   });
   if (result.error) {
+    const message = result.error.message ?? "";
+    if (message.includes("testing emails")) {
+      console.warn(
+        `[resend] customer email skipped — sandbox mode (verify a domain at resend.com/domains to send to ${b.customerEmail})`,
+      );
+      return;
+    }
     throw new Error(`customer email failed: ${result.error.message}`);
   }
 }
