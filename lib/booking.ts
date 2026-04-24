@@ -3,6 +3,11 @@ import { eq } from "drizzle-orm";
 import { isSlotAvailable, SLOT_DURATION_HOURS } from "./slots";
 import { calculateTotalStotinki, type LessonType } from "./pricing";
 import { createCalendarEvent } from "@/lib/google/calendar";
+import {
+  sendCustomerConfirmation,
+  sendAlexNotification,
+  type BookingForEmail,
+} from "@/lib/email/client";
 
 export type CreateBookingInput = {
   startsAt: Date;
@@ -85,6 +90,31 @@ export async function createBooking(input: CreateBookingInput): Promise<CreateBo
     // Calendar failure shouldn't roll back the booking — Alex can
     // re-sync later. Log for visibility.
     console.error("Calendar event creation failed for booking", booking.id, err);
+  }
+
+  const emailPayload: BookingForEmail = {
+    bookingId: booking.id,
+    customerName: input.customerName,
+    customerPhone: input.customerPhone,
+    customerEmail: input.customerEmail,
+    lessonType: input.lessonType,
+    headcount: input.headcount,
+    totalStotinki,
+    startsAt: input.startsAt,
+    endsAt,
+    notes: input.notes,
+  };
+
+  // Email failures shouldn't roll back the booking — log + continue.
+  // Run in parallel; each failure isolated.
+  const emailResults = await Promise.allSettled([
+    sendCustomerConfirmation(emailPayload),
+    sendAlexNotification(emailPayload),
+  ]);
+  for (const result of emailResults) {
+    if (result.status === "rejected") {
+      console.error("Email send failed for booking", booking.id, result.reason);
+    }
   }
 
   return {
