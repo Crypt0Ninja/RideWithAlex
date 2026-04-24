@@ -7,18 +7,20 @@ type Props = {
   framePathPrefix: string;
   frameExtension?: string;
   framePathPad?: number;
-  /** Total scroll distance in vh. Default 200 = user scrolls 1 viewport height
-   *  through the entire frame range (wrapper is 200vh, 100vh is sticky). */
-  scrollRangeVh?: number;
   children: React.ReactNode;
 };
 
+/**
+ * Full-page scroll video background. Canvas sits in a sticky wrapper that
+ * spans the entire content height; the video scrubs as the user scrolls
+ * from the top to the bottom of the children. All children render over
+ * the video with a gradient overlay for contrast.
+ */
 export function ScrollVideoSection({
   frameCount,
   framePathPrefix,
   frameExtension = "webp",
   framePathPad = 3,
-  scrollRangeVh = 200,
   children,
 }: Props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -151,27 +153,24 @@ export function ScrollVideoSection({
   const progressPct = Math.round((loadedCount / frameCount) * 100);
 
   return (
-    <div
-      ref={wrapperRef}
-      className="relative"
-      style={{ height: `${scrollRangeVh}vh` }}
-    >
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-black">
+    <div ref={wrapperRef} className="relative min-h-screen">
+      <div className="sticky top-0 h-screen w-full overflow-hidden z-0">
         <canvas
           ref={canvasRef}
           className="absolute inset-0 h-full w-full"
           aria-hidden
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/70" aria-hidden />
-        <div className="relative z-10 flex h-full items-center justify-center px-6 md:px-10">
-          {children}
-        </div>
-        {!criticalLoaded && (
-          <div className="absolute bottom-8 right-8 text-[10px] uppercase tracking-[0.3em] text-white/40">
-            loading {progressPct}%
-          </div>
-        )}
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70"
+          aria-hidden
+        />
       </div>
+      <div className="relative z-10 -mt-[100vh]">{children}</div>
+      {!criticalLoaded && (
+        <div className="fixed bottom-6 right-6 z-20 text-[10px] uppercase tracking-[0.3em] text-white/40">
+          loading {progressPct}%
+        </div>
+      )}
     </div>
   );
 }
