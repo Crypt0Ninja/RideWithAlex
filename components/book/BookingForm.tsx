@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { cn } from "@/lib/cn";
-import { calculateTotalStotinki, formatBgn, type LessonType } from "@/lib/pricing";
+import { calculateTotalCents, formatEur, type LessonType } from "@/lib/pricing";
 
 type Props = {
   slotStartsAtIso: string;
@@ -35,8 +35,8 @@ export function BookingForm({ slotStartsAtIso, slotSummary }: Props) {
 
   const lessonOrder: LessonType[] = ["private", "kids", "group", "freestyle", "offpiste"];
 
-  const estimatedStotinki = useMemo(
-    () => calculateTotalStotinki(lessonType, SLOT_DURATION_HOURS, headcount),
+  const estimatedCents = useMemo(
+    () => calculateTotalCents(lessonType, SLOT_DURATION_HOURS, headcount),
     [lessonType, headcount],
   );
 
@@ -214,7 +214,7 @@ export function BookingForm({ slotStartsAtIso, slotSummary }: Props) {
           <div className="flex flex-col gap-1">
             <p className={sectionHeaderClass}>{t("totalLabel")}</p>
             <p className="text-white text-3xl md:text-4xl font-medium tracking-tight">
-              {formatBgn(estimatedStotinki)}
+              {formatEur(estimatedCents)}
             </p>
           </div>
           <p className="text-white/50 text-xs lowercase text-right max-w-[180px] md:max-w-none leading-relaxed">
@@ -236,7 +236,7 @@ export function BookingForm({ slotStartsAtIso, slotSummary }: Props) {
             disabled && "opacity-40 cursor-not-allowed hover:bg-white",
           )}
         >
-          {submitting ? t("submitting") : `${t("submit")} · ${formatBgn(estimatedStotinki)}`}
+          {submitting ? t("submitting") : `${t("submit")} · ${formatEur(estimatedCents)}`}
         </button>
       </div>
     </form>

@@ -59,7 +59,7 @@ export const bookings = pgTable(
     customerEmail: text("customer_email"),
     lessonType: lessonTypeEnum("lesson_type").notNull(),
     headcount: integer("headcount").notNull().default(1),
-    totalStotinki: integer("total_stotinki").notNull(),
+    totalCents: integer("total_cents").notNull(),
     status: bookingStatusEnum("status").notNull().default("pending"),
     notes: text("notes"),
     createdAt: timestamp("created_at", { withTimezone: true, mode: "date" })

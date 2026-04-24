@@ -4,7 +4,7 @@ import { db, bookings, timeSlots } from "@/db";
 import { eq } from "drizzle-orm";
 import { PageShell } from "@/components/shared/PageShell";
 import { PageHeader } from "@/components/shared/PageHeader";
-import { formatBgn } from "@/lib/pricing";
+import { formatEur } from "@/lib/pricing";
 
 type Props = {
   params: Promise<{ id: string; locale: string }>;
@@ -64,7 +64,7 @@ export default async function ConfirmedPage({ params }: Props) {
   return (
     <PageShell>
       <PageHeader eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} />
-      <section className="px-6 md:px-10 pb-24 md:pb-32 max-w-3xl">
+      <section className="px-6 md:px-10 pb-24 md:pb-32 max-w-3xl mx-auto">
         <div className="rounded-3xl border border-white/10 bg-neutral-900 px-6 md:px-8 py-4">
           {startsAt && detailRow(t("date"), dateFmt.format(startsAt).toLowerCase())}
           {startsAt &&
@@ -75,7 +75,7 @@ export default async function ConfirmedPage({ params }: Props) {
           {b.customerEmail && detailRow(t("email"), b.customerEmail)}
           {detailRow(t("lessonType"), tTypes(b.lessonType))}
           {b.headcount > 1 && detailRow(t("headcount"), String(b.headcount))}
-          {detailRow(t("total"), formatBgn(b.totalStotinki))}
+          {detailRow(t("total"), formatEur(b.totalCents))}
           {b.notes && detailRow(t("notes"), b.notes)}
           {detailRow(t("bookingId"), b.id.slice(0, 8))}
         </div>

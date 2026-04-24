@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { formatBgn } from "@/lib/pricing";
+import { formatEur } from "@/lib/pricing";
 
 export type BookingForEmail = {
   bookingId: string;
@@ -8,7 +8,7 @@ export type BookingForEmail = {
   customerEmail: string | null;
   lessonType: string;
   headcount: number;
-  totalStotinki: number;
+  totalCents: number;
   startsAt: Date;
   endsAt: Date;
   notes: string | null;
@@ -82,12 +82,12 @@ function renderCustomerHtml(b: BookingForEmail): string {
     <div class="row"><span class="label">when</span><span class="value">${dateRange}</span></div>
     <div class="row"><span class="label">lesson</span><span class="value">${b.lessonType}</span></div>
     ${b.headcount > 1 ? `<div class="row"><span class="label">riders</span><span class="value">${b.headcount}</span></div>` : ""}
-    <div class="row"><span class="label">total</span><span class="value">${formatBgn(b.totalStotinki)}</span></div>
+    <div class="row"><span class="label">total</span><span class="value">${formatEur(b.totalCents)}</span></div>
     <div class="row"><span class="label">booking ref</span><span class="value">${b.bookingId.slice(0, 8)}</span></div>
   </div>
   <p><strong style="color:#fff;">where to meet:</strong> in front of the bansko gondola, 1 pirin street. i'll be in a black jacket with a green carbon snowboard.</p>
   <p><strong style="color:#fff;">what to bring:</strong> waterproof jacket + pants, thermal layer, gloves, helmet, goggles. no cotton. i can help you sort rentals + lift pass if needed.</p>
-  <p><strong style="color:#fff;">payment:</strong> cash on the day — bulgarian leva or euros. no online deposit.</p>
+  <p><strong style="color:#fff;">payment:</strong> cash on the day — euros. no online deposit.</p>
   <p>i'll call or message you to confirm. questions? reply to this email or text +359 88 513 7471.</p>
   <p class="footer">ridewithalex.org · bansko, bulgaria</p>
 </div></body></html>`;
@@ -107,7 +107,7 @@ function renderAlexHtml(b: BookingForEmail): string {
     ${b.customerEmail ? `<div class="row"><span class="label">email</span><span class="value"><a href="mailto:${b.customerEmail}">${b.customerEmail}</a></span></div>` : ""}
     <div class="row"><span class="label">lesson</span><span class="value">${b.lessonType}</span></div>
     <div class="row"><span class="label">riders</span><span class="value">${b.headcount}</span></div>
-    <div class="row"><span class="label">total</span><span class="value">${formatBgn(b.totalStotinki)}</span></div>
+    <div class="row"><span class="label">total</span><span class="value">${formatEur(b.totalCents)}</span></div>
     ${b.notes ? `<div class="row"><span class="label">notes</span><span class="value">${b.notes}</span></div>` : ""}
     <div class="row"><span class="label">ref</span><span class="value">${b.bookingId.slice(0, 8)}</span></div>
   </div>

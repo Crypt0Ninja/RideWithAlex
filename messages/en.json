@@ -514,7 +514,7 @@
       "submit": "confirm booking",
       "submitting": "booking...",
       "totalLabel": "estimated total",
-      "totalHint": "paid in cash on the day — bgn or euros",
+      "totalHint": "paid in cash on the day — in euros",
       "sections": {
         "details": "who you are",
         "lesson": "lesson choice",
@@ -550,7 +550,7 @@
       "bookingId": "booking ref",
       "nextEyebrow": "what happens next",
       "nextTitle": "i'll call or message you to confirm.",
-      "nextBody": "meeting point is in front of the bansko gondola, 1 pirin street. bring waterproof clothing, thermal layer, gloves, helmet, goggles. i'll help sort rentals and lift pass if needed. payment is in cash on the day — bgn or euros."
+      "nextBody": "meeting point is in front of the bansko gondola, 1 pirin street. bring waterproof clothing, thermal layer, gloves, helmet, goggles. i'll help sort rentals and lift pass if needed. payment is in cash on the day — in euros."
     }
   }
 }

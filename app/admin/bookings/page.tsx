@@ -1,7 +1,7 @@
 import { db, bookings, timeSlots } from "@/db";
 import { desc, eq } from "drizzle-orm";
 import { requireAdmin } from "@/lib/auth/admin";
-import { formatBgn } from "@/lib/pricing";
+import { formatEur } from "@/lib/pricing";
 
 export const dynamic = "force-dynamic";
 
@@ -70,7 +70,7 @@ export default async function BookingsPage() {
                 <p className="text-white text-sm lowercase">
                   {booking.lessonType} · {booking.headcount}p
                 </p>
-                <p className="text-white/60 text-xs lowercase">{formatBgn(booking.totalStotinki)}</p>
+                <p className="text-white/60 text-xs lowercase">{formatEur(booking.totalCents)}</p>
               </div>
               <div className="flex flex-col gap-1">
                 <p className="text-white/40 text-xs uppercase tracking-[0.3em]">status</p>

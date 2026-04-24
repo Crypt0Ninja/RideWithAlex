@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json(
-      { bookingId: result.bookingId, totalStotinki: result.totalStotinki },
+      { bookingId: result.bookingId, totalCents: result.totalCents },
       { status: 201 },
     );
   } catch (err) {

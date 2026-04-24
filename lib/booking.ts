@@ -1,7 +1,7 @@
 import { db, timeSlots, bookings } from "@/db";
 import { eq } from "drizzle-orm";
 import { isSlotAvailable, SLOT_DURATION_HOURS } from "./slots";
-import { calculateTotalStotinki, type LessonType } from "./pricing";
+import { calculateTotalCents, type LessonType } from "./pricing";
 import { createCalendarEvent } from "@/lib/google/calendar";
 import {
   sendCustomerConfirmation,
@@ -23,7 +23,7 @@ export type CreateBookingResult = {
   bookingId: string;
   slotId: string;
   calendarEventId: string | null;
-  totalStotinki: number;
+  totalCents: number;
 };
 
 export async function createBooking(input: CreateBookingInput): Promise<CreateBookingResult> {
@@ -33,7 +33,7 @@ export async function createBooking(input: CreateBookingInput): Promise<CreateBo
   }
 
   const endsAt = new Date(input.startsAt.getTime() + SLOT_DURATION_HOURS * 60 * 60 * 1000);
-  const totalStotinki = calculateTotalStotinki(
+  const totalCents = calculateTotalCents(
     input.lessonType,
     SLOT_DURATION_HOURS,
     input.headcount,
@@ -60,7 +60,7 @@ export async function createBooking(input: CreateBookingInput): Promise<CreateBo
       customerEmail: input.customerEmail,
       lessonType: input.lessonType,
       headcount: input.headcount,
-      totalStotinki,
+      totalCents,
       status: "confirmed",
       notes: input.notes,
     })
@@ -99,7 +99,7 @@ export async function createBooking(input: CreateBookingInput): Promise<CreateBo
     customerEmail: input.customerEmail,
     lessonType: input.lessonType,
     headcount: input.headcount,
-    totalStotinki,
+    totalCents,
     startsAt: input.startsAt,
     endsAt,
     notes: input.notes,
@@ -121,6 +121,6 @@ export async function createBooking(input: CreateBookingInput): Promise<CreateBo
     bookingId: booking.id,
     slotId: slot.id,
     calendarEventId,
-    totalStotinki,
+    totalCents,
   };
 }
