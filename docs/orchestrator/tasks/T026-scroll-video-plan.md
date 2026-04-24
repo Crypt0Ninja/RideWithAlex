@@ -262,4 +262,76 @@ Alex спомена *"скучните вътрешни страници"* (мн
 
 ## Reports
 
-_(попълва се след execute, ако Alex одобри plan-а)_
+### Report — T026 · 2026-04-24 (orchestrator execute-self)
+
+**Status:** ✅ Completed
+**Commit:** (following this doc update)
+**Time spent:** ~45 мин включително video prep
+
+**Решения които взех** (Alex каза "постъпи както би било най добре"):
+
+- **Approach: Опция B (frame sequence + canvas)** — buttery smooth scrub, iOS-safe, no video codec quirks
+- **UX: Подход 3 (cinematic entrance)** — 200vh wrapper + sticky 100vh viewport; hero content центрирано върху видеото; lesson cards остават на solid black bg след video section
+- **Scope: само `/lessons`** — обшият `ScrollVideoSection` е reusable за следващи страници (T027+)
+- **Audio:** Премахнато (`-an` в ffmpeg) — scrubbing не ползва
+- **Freeze behavior:** Последният frame остава показан когато scroll излезе от range
+
+**Video prep** (ffmpeg):
+- Source: 26 MB, 1920×1080, 24fps, 8s, 26 Mbps bitrate
+- Output: 90 WebP frames @ 1280×720, quality 55, 12fps extraction
+- Total: **5.9 MB** за целия sequence (progressive load + Vercel CDN cache)
+- Per-frame: 30-72 KB (зависи от motion density)
+- Команда:
+  ```
+  ffmpeg -i source.mp4 -vf "fps=12,scale=1280:720" \
+    -c:v libwebp -quality 55 -an -frames:v 90 \
+    public/videos/lessons/frame-%03d.webp
+  ```
+
+**Component: `components/shared/ScrollVideoSection.tsx`**
+
+Key features:
+- `frameCount` + `framePathPrefix` props — reusable за всеки frame sequence
+- Preloader: async `Image` decoding; UI ready at 8 critical frames loaded; background `loading X%` indicator
+- Canvas sizing with DPR (max ×2) + cover-style crop math — responsive без stretching
+- `rAF`-throttled scroll listener + `resize` handler — no performance hits
+- `prefers-reduced-motion` → pins to frame 1 (static first-frame fallback)
+- Gradient overlay (`from-black/30 via-black/20 to-black/70`) — depth + text contrast
+- SiteNav sticky с `bg-black/60 backdrop-blur-sm` overlap-ва красиво върху видеото
+
+**Integration in `/lessons`:**
+
+- Page структура: `<PageShell> → <ScrollVideoSection> (hero) → <lesson cards grid> → <LessonsCta>`
+- Hero eyebrow/title/subtitle центрирани върху видеото, `clamp(56px,10vw,140px)` title scaling
+- Lesson cards секция се появява на solid black след video (cards запазват readability)
+
+**Acceptance verified:**
+
+- [x] 5.9 MB total frame assets (target было <10 MB)
+- [x] Next.js build passes — no new routes, но `/[locale]/lessons` вече е dynamic заради client component
+- [x] `pnpm tsc --noEmit` exit 0
+- [x] `pnpm lint` no warnings
+- [x] Dev server: `/bg/lessons` → HTTP 200, 134KB HTML, ScrollVideoSection markup present
+- [x] Frame asset `/videos/lessons/frame-001.webp` → HTTP 200, 29KB
+- [x] `prefers-reduced-motion` handled (pins to frame 1)
+- [x] Source media (vecteezy_*.mp4 + photo_*.jpg) excluded from repo via `.gitignore`
+
+**Manual QA — Alex да провери:**
+
+1. Desktop Chrome: scroll на `/bg/lessons` → видеото scrub-ва плавно, lesson cards идват след
+2. Mobile Safari (iOS): същото — frames трябва да рендерират без judder
+3. Throttle на Slow 3G в DevTools → loading indicator показва %
+4. System prefs → Reduce Motion → видеото е замразено на frame 1
+
+**Отклонения от план:**
+- Използвах 1280×720 вместо 1920×1080 (plan казваше 1920) — 1920 беше 13MB total, прекалено тежко. 1280p е perfect за mobile и acceptable за desktop (canvas scaling handles upscale).
+
+**Future work (T027):**
+- Prop до `/about` + `/contact` (plan Q3) — трябват отделни video assets
+- Multi-resolution frame sets (srcset-style) за optimal mobile перф ако 5.9 MB стане проблем
+
+**Променени файлове:**
+- `.gitignore` — нов exclude pattern за source media
+- `app/[locale]/lessons/page.tsx` — ScrollVideoSection wrap + generateMetadata
+- `components/shared/ScrollVideoSection.tsx` — нов (150 lines)
+- `public/videos/lessons/frame-001..090.webp` — 90 нови assets
