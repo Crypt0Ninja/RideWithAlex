@@ -40,6 +40,7 @@
 | T022 | `/terms` страница | [`3b4f745`](https://github.com/Crypt0Ninja/RideWithAlex/commit/3b4f745) | s14 | orchestrator |
 | T023 | `/privacy` страница | [`dfbad3f`](https://github.com/Crypt0Ninja/RideWithAlex/commit/dfbad3f) | s14 | orchestrator |
 | T011 | Supabase + Drizzle schema + RLS | [`d1f3ac6`](https://github.com/Crypt0Ninja/RideWithAlex/commit/d1f3ac6) | s15 | orchestrator · 3 deviations (pooler discovery, debug scripts, standalone rls.sql) |
+| T020 | Google Calendar OAuth + write-only sync | [`b12868d`](https://github.com/Crypt0Ninja/RideWithAlex/commit/b12868d) | s15 | orchestrator · 2 deviations (write-only scope clarification, next/link for admin nav) · 🔵 manual OAuth smoke test pending |
 
 ## Активни задачи
 
@@ -67,7 +68,7 @@ Supabase creds (получени s15):
 |---|---|---|---|
 | ~~T009~~ | ~~Stripe Checkout~~ | ❌ **Cancelled s13** (cash-only model) | — |
 | T011 | **Supabase + Drizzle schema** (time_slots + bookings + RLS) | ✅ **Completed s15** (`d1f3ac6`) | ✅ Supabase creds |
-| T020 | Google Calendar sync (2-way OAuth) | High | T011 + Google OAuth creds |
+| T020 | Google Calendar sync (write-only, OAuth) | 🔵 **Code done s15** (`b12868d`), manual test pending | ✅ Google OAuth creds |
 | T010 | Booking UI (календар + slot picker + phone форма) | High | T011 + T020 |
 | T012 | Email (Resend): confirmation към клиент + notify към Alex | Medium | T010 + RESEND_API_KEY |
 | T021 | Admin panel (Supabase Auth + view + block slots) | Medium | T011 + T020 |

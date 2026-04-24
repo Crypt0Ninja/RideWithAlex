@@ -636,4 +636,57 @@ Alex да extends:
 
 ## Reports
 
-_(попълва се след изпълнение)_
+### Report — T020 · 2026-04-24 (orchestrator execute-self)
+
+**Status:** ✅ Code completed (manual OAuth smoke test pending от Alex)
+**Commit:** `b12868d` — `feat(T020): google calendar oauth flow + event write-only sync`
+**Time spent:** ~35 мин
+
+**Какво направих:**
+
+Добавих `googleTokens` Drizzle table + миграция (`0001_free_gorgon.sql`) + RLS service_role-only policy. Обнових `middleware.ts` matcher за да exclude-ва `/admin` от locale redirection. Написах `lib/google/oauth.ts` (165 lines) с token exchange, refresh, storage, валидиране + `lib/google/calendar.ts` (120 lines) с `createCalendarEvent` / `deleteCalendarEvent` / `listUpcomingEvents` — native fetch, без `googleapis` npm package. Добавих 2 API routes (`/api/auth/google/init` с state cookie anti-CSRF + `/api/auth/google/callback`) и 3 admin pages (`/admin`, `/admin/google-setup`, layout).
+
+**Acceptance criteria:**
+
+- [x] `google_tokens` table с unique(user_email) + `rowsecurity = true` — applied via `pnpm db:migrate`
+- [x] middleware.ts matcher excludes `/admin` — `"/((?!api|_next|_vercel|admin|.*\\..*).*)"`
+- [x] `lib/google/oauth.ts` exports всички 6 функции (`buildAuthUrl`, `exchangeCodeForTokens`, `refreshAccessToken`, `storeTokensFromCode`, `getValidAccessToken`, `getConnectedEmail`)
+- [x] `lib/google/calendar.ts` exports `createCalendarEvent`, `deleteCalendarEvent`, `listUpcomingEvents` + type `BookingForCalendar`
+- [x] `/api/auth/google/init` redirect-ва към Google consent screen с state cookie
+- [x] `/api/auth/google/callback` обработва code + state validation + stores tokens
+- [x] `/admin/google-setup` показва status + connect/reconnect button
+- [x] Build pass — 4 нови routes: `/admin`, `/admin/google-setup` (dynamic), `/api/auth/google/init` (dynamic), `/api/auth/google/callback` (dynamic)
+- [x] TSC exit 0
+- [x] Lint no warnings
+- [x] Pushed — `b12868d` на origin/main
+
+**Отклонения от спеца:**
+
+- **Отклонение 1:** Scope clarification в спеца → write-only sync вместо 2-way. Документирано в "Scope clarification" секцията на спеца. Причина: истинското 2-way изисква Vercel Cron (polling) или Google webhook push notifications (public URL) — добавя се в следващ task при нужда. Write-only покрива 80% от value-то за MVP.
+- **Отклонение 2:** Admin layout + page използват `next/link` вместо plain `<a>` (Next.js ESLint правило `@next/next/no-html-link-for-pages` го налага). Не променя функционалност.
+
+**Блокери:** няма.
+
+**Manual smoke test — ⏳ Alex да изпълни:**
+
+1. В project root → `pnpm dev`
+2. Отвори [http://localhost:3000/admin/google-setup](http://localhost:3000/admin/google-setup)
+3. Кликни **"connect google calendar →"**
+4. Redirect към Google → консент екран (ще каже "This app isn't verified" — натисни **Advanced** → **Go to RideWithAlex (unsafe)** — нормално за test user)
+5. Авторизация → auto redirect към `/admin/google-setup?connected=твоят-gmail@gmail.com`
+6. Page показва "connected · account: твоят@gmail.com"
+7. Кажи "T020 test OK" ако всичко работи, или paste error-а ако има проблем
+
+**Променени файлове:**
+
+- `db/schema.ts` — добавена `googleTokens` table + types
+- `db/migrations/0001_free_gorgon.sql` — google_tokens DDL + RLS
+- `db/migrations/meta/_journal.json` + `0001_snapshot.json` — drizzle metadata
+- `middleware.ts` — matcher update
+- `lib/google/oauth.ts` — нов
+- `lib/google/calendar.ts` — нов
+- `app/api/auth/google/init/route.ts` — нов
+- `app/api/auth/google/callback/route.ts` — нов
+- `app/admin/layout.tsx` — нов
+- `app/admin/page.tsx` — нов
+- `app/admin/google-setup/page.tsx` — нов
