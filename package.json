@@ -18,13 +18,13 @@
     "@supabase/ssr": "^0.10.2",
     "@supabase/supabase-js": "^2.104.1",
     "drizzle-orm": "^0.45.2",
-    "next": "^15.5.0",
-    "next-intl": "^4.9.1",
+    "next": "^15.5.28",
+    "next-intl": "^4.9.2",
     "postgres": "^3.4.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resend": "^6.12.2",
-    "zod": "^4.3.6"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
